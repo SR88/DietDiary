@@ -28,7 +28,24 @@ public class FoodType {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String toString() {
+        return "FoodType{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

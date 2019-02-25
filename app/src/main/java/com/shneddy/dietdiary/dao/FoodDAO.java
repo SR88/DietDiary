@@ -25,10 +25,12 @@ public interface FoodDAO {
     void delete(Food food);
 
     @Query("DELETE FROM food")
-    void deleteAllFoodTypes();
+    void deleteAllFoods();
 
     @Query("SELECT * FROM food")
     LiveData<List<Food>> getAllFoods();
 
+    @Query("SELECT * FROM food")
+    List<Food> getAllFoodsList();
 
 }

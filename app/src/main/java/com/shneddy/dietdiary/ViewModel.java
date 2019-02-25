@@ -2,14 +2,13 @@ package com.shneddy.dietdiary;
 
 import android.app.Application;
 
+import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.Food;
-import com.shneddy.dietdiary.entity.FoodDiary;
 import com.shneddy.dietdiary.entity.FoodType;
-import com.shneddy.dietdiary.entity.Phase;
-import com.shneddy.dietdiary.repository.FoodDiaryRepository;
+import com.shneddy.dietdiary.repository.DiaryEntryRepository;
 import com.shneddy.dietdiary.repository.FoodRepository;
 import com.shneddy.dietdiary.repository.FoodTypeRepository;
-import com.shneddy.dietdiary.repository.PhaseRepository;
+
 import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -18,29 +17,28 @@ import androidx.lifecycle.LiveData;
 public class ViewModel extends AndroidViewModel {
 
     private FoodRepository foodRepository;
-    private FoodDiaryRepository foodDiaryRepository;
+    private DiaryEntryRepository diaryEntryRepository;
     private FoodTypeRepository foodTypeRepository;
-    private PhaseRepository phaseRepository;
+
 
     private LiveData<List<Food>> allFoods;
-    private LiveData<List<Phase>> allPhases;
-    private LiveData<List<FoodDiary>> allFoodDiaries;
+    private LiveData<List<DiaryEntry>> allFoodDiaries;
     private LiveData<List<FoodType>> allFoodTypes;
+    private List<FoodType> allFoodTypesList;
 
     /*
         constructor
      */
     public ViewModel(@NonNull Application application) {
         super(application);
-        foodDiaryRepository = new FoodDiaryRepository(application);
+        diaryEntryRepository = new DiaryEntryRepository(application);
         foodRepository = new FoodRepository(application);
         foodTypeRepository = new FoodTypeRepository(application);
-        phaseRepository = new PhaseRepository(application);
 
         allFoods = foodRepository.getAllFoods();
-        allFoodDiaries = foodDiaryRepository.getAllFoodDiaries();
-        allPhases = phaseRepository.getAllPhases();
+        allFoodDiaries = diaryEntryRepository.getAllFoodEntries();
         allFoodTypes = foodTypeRepository.getAllFoodTypes();
+        allFoodTypesList = foodTypeRepository.getAllFoodTypesList();
     }
 
 
@@ -67,30 +65,32 @@ public class ViewModel extends AndroidViewModel {
         return allFoods;
     }
 
+    // todo list
 
     /*
-        Food Diary Methods
+        Diary Entry Methods
      */
-    public void insertFoodDiary(FoodDiary foodDiary){
-        foodDiaryRepository.insert(foodDiary);
+    public void insertFoodDiary(DiaryEntry diaryEntry){
+        diaryEntryRepository.insert(diaryEntry);
     }
 
-    public void updateFoodDiary(FoodDiary foodDiary){
-        foodDiaryRepository.update(foodDiary);
+    public void updateFoodDiary(DiaryEntry diaryEntry){
+        diaryEntryRepository.update(diaryEntry);
     }
 
-    public void deleteFoodDiary(FoodDiary foodDiary){
-        foodDiaryRepository.delete(foodDiary);
+    public void deleteFoodDiary(DiaryEntry diaryEntry){
+        diaryEntryRepository.delete(diaryEntry);
     }
 
     public void deleteAllFoodDiary(){
-        foodDiaryRepository.deleteAll();
+        diaryEntryRepository.deleteAll();
     }
 
-    public LiveData<List<FoodDiary>> getAllFoodDiarys(){
+    public LiveData<List<DiaryEntry>> getAllFoodDiarys(){
         return allFoodDiaries;
     }
 
+    // todo list
 
     /*
         Food Type Methods
@@ -115,28 +115,7 @@ public class ViewModel extends AndroidViewModel {
         return allFoodTypes;
     }
 
+    public List<FoodType> getAllFoodTypesList() {return allFoodTypesList; }
 
-    /*
-        Phase Methods
-    */
-    public void insertPhase(Phase phase){
-        phaseRepository.insert(phase);
-    }
-
-    public void updatePhase(Phase phase){
-        phaseRepository.update(phase);
-    }
-
-    public void deletePhase(Phase phase){
-        phaseRepository.delete(phase);
-    }
-
-    public void deleteAllPhases(){
-        phaseRepository.deleteAll();
-    }
-
-    public LiveData<List<Phase>> getAllPhases(){
-        return allPhases;
-    }
 
 }

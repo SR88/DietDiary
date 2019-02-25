@@ -15,12 +15,13 @@ public class FoodTypeRepository {
 
     private FoodTypeDAO foodTypeDAO;
     private LiveData<List<FoodType>> allFoodTypes;
+    private List<FoodType> allFoodTypesList;
 
     public FoodTypeRepository(Application application) {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
         foodTypeDAO = database.foodTypeDAO();
         allFoodTypes = foodTypeDAO.getAllFoodTypes();
-        
+        allFoodTypesList = foodTypeDAO.getAllFoodTypesList();
     }
 
     public void insert(FoodType foodType){
@@ -42,6 +43,8 @@ public class FoodTypeRepository {
     public LiveData<List<FoodType>> getAllFoodTypes(){
         return allFoodTypes;
     }
+
+    public List<FoodType> getAllFoodTypesList() {return allFoodTypesList; }
 
     private static class InsertFoodTypesAsyncTask extends AsyncTask<FoodType, Void, Void> {
 

@@ -4,41 +4,36 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import com.shneddy.dietdiary.dao.FoodDAO;
-import com.shneddy.dietdiary.dao.FoodDiaryDAO;
+import com.shneddy.dietdiary.dao.DiaryEntryDAO;
 import com.shneddy.dietdiary.dao.FoodTypeDAO;
-import com.shneddy.dietdiary.dao.PhaseDAO;
 import com.shneddy.dietdiary.database.FoodDiaryDatabase;
 import com.shneddy.dietdiary.entity.Food;
-import com.shneddy.dietdiary.entity.FoodDiary;
+import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.FoodType;
-import com.shneddy.dietdiary.entity.Phase;
+
 import java.util.List;
 import androidx.lifecycle.LiveData;
 
 public class FoodRepository {
 
     private FoodDAO foodDAO;
-    private FoodDiaryDAO foodDiaryDAO;
+    private DiaryEntryDAO diaryEntryDAO;
     private FoodTypeDAO foodTypeDAO;
-    private PhaseDAO phaseDAO;
-    private LiveData<List<Phase>> allPhases;
     private LiveData<List<FoodType>> allFoodTypes;
     private LiveData<List<Food>> allFoods;
-    private LiveData<List<FoodDiary>> allFoodDiary;
+    private LiveData<List<DiaryEntry>> allFoodDiary;
 
     public FoodRepository(Application application) {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
         foodDAO = database.foodDAO();
         allFoods = foodDAO.getAllFoods();
 
-        foodDiaryDAO = database.foodDiaryDAO();
-        allFoodDiary = foodDiaryDAO.getAllDiaryEntries();
+        diaryEntryDAO = database.entryDAO();
+        allFoodDiary = diaryEntryDAO.getAllDiaryEntries();
 
         foodTypeDAO = database.foodTypeDAO();
         allFoodTypes = foodTypeDAO.getAllFoodTypes();
 
-        phaseDAO = database.phaseDAO();
-        allPhases = phaseDAO.getAllPhaseTypes();
     }
 
     public void insert(Food food){
@@ -113,7 +108,7 @@ public class FoodRepository {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            foodDAO.deleteAllFoodTypes();
+            foodDAO.deleteAllFoods();
             return null;
         }
     }

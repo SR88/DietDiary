@@ -29,4 +29,7 @@ public interface FoodTypeDAO {
     @Query("SELECT * FROM food_type")
     LiveData<List<FoodType>> getAllFoodTypes();
 
+    @Query("SELECT * FROM food_type")
+    List<FoodType> getAllFoodTypesList();
+
 }

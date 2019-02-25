@@ -5,31 +5,47 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(
-        foreignKeys = {
+        foreignKeys =
                 @ForeignKey(entity = FoodType.class,
                         parentColumns = "id",
                         childColumns = "foodTypeId"
-                ),
-                @ForeignKey(entity = Phase.class,
-                        parentColumns = "id",
-                        childColumns = "foodPhaseId"
-                )})
+                ))
 public class Food {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
+    private double gramsSugar;
     private int foodTypeId;
-    private int foodPhaseId;
 
-    public Food(String name, int foodTypeId, int foodPhaseId) {
+    public Food(String name, double gramsSugar, int foodTypeId) {
         this.name = name;
+        this.gramsSugar = gramsSugar;
         this.foodTypeId = foodTypeId;
-        this.foodPhaseId = foodPhaseId;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getGramsSugar() {
+        return gramsSugar;
+    }
+
+    public void setGramsSugar(double gramsSugar) {
+        this.gramsSugar = gramsSugar;
+    }
+
+    public void setFoodTypeId(int foodTypeId) {
+        this.foodTypeId = foodTypeId;
     }
 
     public String getName() {
@@ -40,7 +56,14 @@ public class Food {
         return foodTypeId;
     }
 
-    public int getFoodPhaseId() {
-        return foodPhaseId;
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gramsSugar=" + gramsSugar +
+                ", foodTypeId=" + foodTypeId +
+                '}';
     }
 }
