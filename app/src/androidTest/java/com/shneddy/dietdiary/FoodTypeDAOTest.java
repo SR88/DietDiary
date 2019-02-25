@@ -19,6 +19,10 @@ import androidx.lifecycle.Observer;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
 
+/**
+ *  This test class is the first class in our QA regimen.  All further test classes build on
+ *  the fact that these tests verify that FoodTypeDAO works and that the database is responsive.
+ */
 @SuppressWarnings({"unchecked"})
 @RunWith(JUnit4.class)
 public class FoodTypeDAOTest {

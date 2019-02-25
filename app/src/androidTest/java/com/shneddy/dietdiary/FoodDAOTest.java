@@ -18,6 +18,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
 
+
+/**
+ *  This test class builds on the FoodTypeDAOTest class.  This class further fulfills our QA needs.
+ */
 @SuppressWarnings({"unchecked"})
 @RunWith(JUnit4.class)
 public class FoodDAOTest {

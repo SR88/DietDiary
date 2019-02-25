@@ -18,16 +18,18 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-
 import java.util.Date;
-
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
 
+/**
+ *  The final class in our QA regimen.  All DAO test classes before have verified that all DAOs
+ *  work and that the database is fully functional.
+ */
 @SuppressWarnings({"unchecked"})
 @RunWith(JUnit4.class)
-public class DiaryEntryTest {
+public class DiaryEntryDAOTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -81,6 +83,71 @@ public class DiaryEntryTest {
         Assert.assertTrue(.5 == entryDAO.getAllEntriesList().get(0).getPortionSize()); // verify right fk for food
     }
 
+    @Test
+    public void update(){
+        // inserting food & type first as it is needed as a fk
+        FoodType testFoodType = new FoodType("type", "insertFoodTypeTestDescrip");
+        foodTypeDAO.insert(testFoodType);
+
+        Food food = new Food("Cupcake",25.9,
+                foodTypeDAO.getAllFoodTypesList().get(0).getId());
+        foodDAO.insert(food);
+
+        Date date = new Date();
+        Log.d("Diary Entry Test", date.toString() + " current date");
+        DiaryEntry entry = new DiaryEntry(
+                foodDAO.getAllFoodsList().get(0).getId(),
+                .5,
+                date.toString()
+        );
+
+        entryDAO.insert(entry);
+
+        String newDate = "11/05/2019";
+        double newPortion = 1.5;
+
+        DiaryEntry updatedEntry = entryDAO.getAllEntriesList().get(0);
+        updatedEntry.setDate(newDate);
+        updatedEntry.setPortionSize(newPortion);
+
+        entryDAO.update(updatedEntry);
+
+        Assert.assertTrue(newPortion == entryDAO.getAllEntriesList().get(0)
+                .getPortionSize()); // test to see if update worked on portion
+        Assert.assertTrue(newDate.equals(entryDAO.getAllEntriesList().get(0).getDate())); // test date change
+    }
+
+    @Test
+    public void delete(){
+        // inserting food & type first as it is needed as a fk
+        FoodType testFoodType = new FoodType("type", "insertFoodTypeTestDescrip");
+        foodTypeDAO.insert(testFoodType);
+
+        Food food = new Food("Cupcake",25.9,
+                foodTypeDAO.getAllFoodTypesList().get(0).getId());
+        foodDAO.insert(food);
+
+        Assert.assertEquals(0, entryDAO.getAllEntriesList().size()); // make sure our table is empty
+
+        Date date = new Date();
+        Log.d("Diary Entry Test", date.toString() + " current date");
+        DiaryEntry entry = new DiaryEntry(
+                foodDAO.getAllFoodsList().get(0).getId(),
+                .5,
+                date.toString()
+        );
+
+        entryDAO.insert(entry);
+
+        Assert.assertEquals(1, entryDAO.getAllEntriesList().size()); // make sure table has 1 row
+
+        DiaryEntry deletionCandidate = entryDAO.getAllEntriesList().get(0);
+
+        entryDAO.delete(deletionCandidate);
+
+        Assert.assertEquals(0, entryDAO.getAllEntriesList().size()); // test deletion, 0 rows in table
+
+    }
 
     @After
     public void tearDown(){
