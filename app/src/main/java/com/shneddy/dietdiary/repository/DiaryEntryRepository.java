@@ -21,7 +21,6 @@ public class DiaryEntryRepository {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
         diaryEntryDAO = database.entryDAO();
         allFoodDiary = diaryEntryDAO.getAllDiaryEntries();
-        entryList = diaryEntryDAO.getAllEntriesList();
     }
 
     public void insert(DiaryEntry diaryEntry){

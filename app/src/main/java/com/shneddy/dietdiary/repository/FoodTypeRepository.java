@@ -21,7 +21,6 @@ public class FoodTypeRepository {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
         foodTypeDAO = database.foodTypeDAO();
         allFoodTypes = foodTypeDAO.getAllFoodTypes();
-        allFoodTypesList = foodTypeDAO.getAllFoodTypesList();
     }
 
     public void insert(FoodType foodType){

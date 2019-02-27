@@ -29,13 +29,15 @@ dependencies {
     // alternately - if using Java8, use the following instead of lifecycle-compiler
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     // optional - Test helpers for LiveData
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
-
 
     // for room and test of room
     def room_version = "2.1.0-alpha04"
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 
@@ -57,7 +59,6 @@ dependencies {
 //    testImplementation(project(":arch:core-testing"))
 //    testImplementation "androidx.test.runner.AndroidJUnit4"
 //    testImplementation(MOCKITO_CORE)
-
 
 
     implementation 'com.google.android.material:material:1.0.0-rc01'
