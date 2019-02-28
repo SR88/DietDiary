@@ -2,9 +2,12 @@ package com.shneddy.dietdiary.activity;
 
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,13 +31,19 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class Overview extends AppCompatActivity {
 
+    public static final String FOODTYPE_ID = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_ID";
+    public static final String FOODTYPE_NAME = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_NAME";
+    public static final String FOODTYPE_DESCRIPTION = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_DESCRIPTION";
     public static final int ADD_FOODTYPE_REQUEST = 1;
+    public static final int EDIT_FOODTYPE_REQUEST = 2;
     private ViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+
+        setTitle("Food Types/Categories");
 
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -73,11 +82,25 @@ public class Overview extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                viewModel.deleteFoodType(foodTypeAdapter
-                        .getFoodTypeAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(Overview.this, "Food Type was deleted.",
-                        Toast.LENGTH_SHORT).show();
+                if (direction == ItemTouchHelper.LEFT){
+                    viewModel.deleteFoodType(foodTypeAdapter
+                            .getFoodTypeAt(viewHolder.getAdapterPosition()));
+                    Toast.makeText(Overview.this, "Food Type was deleted.",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                if (direction == ItemTouchHelper.RIGHT) {
+                    FoodType editedFood = foodTypeAdapter.getFoodTypeAt(viewHolder.getAdapterPosition());
+                    Intent intent = new Intent(Overview.this, EditorFoodType.class);
+                    intent.putExtra(FOODTYPE_ID, editedFood.getId());
+                    intent.putExtra(FOODTYPE_NAME, editedFood.getType());
+                    intent.putExtra(FOODTYPE_DESCRIPTION, editedFood.getDescription());
+                    startActivityForResult(intent, EDIT_FOODTYPE_REQUEST);
+                }
+
             }
+
+
 
             @Override
             public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
@@ -105,6 +128,29 @@ public class Overview extends AppCompatActivity {
                 final View foregroundView = ((FoodTypeAdapter.FoodTypeHolder) viewHolder)
                         .viewForeground;
 
+                View backgroundView = ((FoodTypeAdapter.FoodTypeHolder) viewHolder)
+                        .viewBackground;
+
+                TextView textViewDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_delete);
+                TextView textViewEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_edit);
+                ImageView iconDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_delete);
+                ImageView iconEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_edit);
+
+                if (dX > 0) {
+                    backgroundView.setBackgroundColor(Color.parseColor("#f7af42"));
+                    iconDelete.setVisibility(View.INVISIBLE);
+                    textViewDelete.setVisibility(View.INVISIBLE);
+                    iconEdit.setVisibility(View.VISIBLE);
+                    textViewEdit.setVisibility(View.VISIBLE);
+
+                } else {
+                    backgroundView.setBackgroundColor(Color.parseColor("#f74242"));
+                    iconEdit.setVisibility(View.INVISIBLE);
+                    textViewEdit.setVisibility(View.INVISIBLE);
+                    iconDelete.setVisibility(View.VISIBLE);
+                    textViewDelete.setVisibility(View.VISIBLE);
+                }
+
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState,
                         isCurrentlyActive);
             }
@@ -116,13 +162,26 @@ public class Overview extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
-            String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
-            String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
 
-            FoodType foodType = new FoodType(foodTypeName, foodTypeDescription);
-            viewModel.insertFoodType(foodType);
+            int id = data.getIntExtra(EditorFoodType.EXTRA_FOODTYPE_ID, -1);
+            if (id != -1){
+                String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
+                String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
 
-            Toast.makeText(this, "Food Type saved.", Toast.LENGTH_SHORT).show();
+
+                FoodType updateFood = new FoodType(foodTypeName, foodTypeDescription);
+                updateFood.setId(id);
+                viewModel.updateFoodType(updateFood);
+            } else {
+
+                String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
+                String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
+
+                FoodType foodType = new FoodType(foodTypeName, foodTypeDescription);
+                viewModel.insertFoodType(foodType);
+
+                Toast.makeText(this, "Food Type saved.", Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(this, "Food Type canceled.", Toast.LENGTH_SHORT).show();
         }
