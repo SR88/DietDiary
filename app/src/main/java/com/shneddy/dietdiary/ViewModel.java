@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.Food;
+import com.shneddy.dietdiary.entity.FoodAndTypeData;
 import com.shneddy.dietdiary.entity.FoodType;
 import com.shneddy.dietdiary.repository.DiaryEntryRepository;
 import com.shneddy.dietdiary.repository.FoodRepository;
@@ -20,11 +21,11 @@ public class ViewModel extends AndroidViewModel {
     private DiaryEntryRepository diaryEntryRepository;
     private FoodTypeRepository foodTypeRepository;
 
-
     private LiveData<List<Food>> allFoods;
     private LiveData<List<DiaryEntry>> allFoodDiaries;
     private LiveData<List<FoodType>> allFoodTypes;
     private List<FoodType> allFoodTypesList;
+    private LiveData<List<FoodAndTypeData>> allFoodsAndType;
 
     /*
         constructor
@@ -35,10 +36,13 @@ public class ViewModel extends AndroidViewModel {
         foodRepository = new FoodRepository(application);
         foodTypeRepository = new FoodTypeRepository(application);
 
+
         allFoods = foodRepository.getAllFoods();
+        allFoodsAndType = foodRepository.getAllFoodsAndTypes();
         allFoodDiaries = diaryEntryRepository.getAllFoodEntries();
         allFoodTypes = foodTypeRepository.getAllFoodTypes();
         allFoodTypesList = foodTypeRepository.getAllFoodTypesList();
+
     }
 
 
@@ -65,7 +69,9 @@ public class ViewModel extends AndroidViewModel {
         return allFoods;
     }
 
-    // todo list
+    public LiveData<List<FoodAndTypeData>> getAllFoodsAndTypes() {
+        return allFoodsAndType;
+    }
 
     /*
         Diary Entry Methods
@@ -89,8 +95,6 @@ public class ViewModel extends AndroidViewModel {
     public LiveData<List<DiaryEntry>> getAllFoodDiarys(){
         return allFoodDiaries;
     }
-
-    // todo list
 
     /*
         Food Type Methods

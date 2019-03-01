@@ -17,8 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.EditorFoodType"
-            android:parentActivityName=".activity.Overview"></activity>
+        <activity
+            android:name=".activity.EditorFoodType"
+            android:parentActivityName=".activity.Overview" />
+        <activity android:name=".activity.EditorFood" />
+        <activity android:name=".activity.AllFoods"></activity>
     </application>
 
 </manifest>
