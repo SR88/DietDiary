@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.Overview">
+        <!--<activity android:name=".activity.Overview">-->
+        <activity android:name=".activity.AllFoods">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +22,7 @@
             android:name=".activity.EditorFoodType"
             android:parentActivityName=".activity.Overview" />
         <activity android:name=".activity.EditorFood" />
-        <activity android:name=".activity.AllFoods"></activity>
+        <!--<activity android:name=".activity.AllFoods"></activity>-->
     </application>
 
 </manifest>

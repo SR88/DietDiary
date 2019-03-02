@@ -35,7 +35,6 @@ public interface FoodDAO {
     @Query("SELECT * FROM food")
     List<Food> getAllFoodsList();
 
-
     @Query("SELECT FOOD.id, FOOD.name, FOOD.gramsSugar, FOOD.foodTypeId, FOOD_TYPE.id, " +
             "FOOD_TYPE.type FROM FOOD LEFT OUTER JOIN FOOD_TYPE ON FOOD.foodTypeId = FOOD_TYPE.id")
     LiveData<List<FoodAndTypeData>> foodsAndTypesList();

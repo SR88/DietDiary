@@ -2,42 +2,42 @@ package com.shneddy.dietdiary.entity;
 
 public class FoodAndTypeData {
 
-    public int foodId;
-    public String foodName;
-    public double sugars;
-    public String foodType;
+    public int id;
+    public String name;
+    public double gramsSugar;
+    public String type;
     public int foodTypeId;
 
-    public String getFoodName() {
-        return foodName;
+    public int getId() {
+        return id;
     }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public double getSugars() {
-        return sugars;
+    public String getName() {
+        return name;
     }
 
-    public void setSugars(double sugars) {
-        this.sugars = sugars;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFoodType() {
-        return foodType;
+    public double getGramsSugar() {
+        return gramsSugar;
     }
 
-    public void setFoodType(String foodType) {
-        this.foodType = foodType;
+    public void setGramsSugar(double gramsSugar) {
+        this.gramsSugar = gramsSugar;
     }
 
-    public int getFoodId() {
-        return foodId;
+    public String getType() {
+        return type;
     }
 
-    public void setFoodId(int foodId) {
-        this.foodId = foodId;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getFoodTypeId() {
