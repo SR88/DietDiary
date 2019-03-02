@@ -1,6 +1,7 @@
 package com.shneddy.dietdiary.dao;
 
 import com.shneddy.dietdiary.entity.Food;
+import com.shneddy.dietdiary.entity.FoodAndTypeData;
 
 import java.util.List;
 
@@ -10,10 +11,11 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
+import com.shneddy.dietdiary.entity.FoodType;
 @Dao
 public interface FoodDAO {
 
+    FoodType foodtype = null;
 
     @Insert
     void insert(Food food);
@@ -33,4 +35,8 @@ public interface FoodDAO {
     @Query("SELECT * FROM food")
     List<Food> getAllFoodsList();
 
+
+    @Query("SELECT FOOD.id, FOOD.name, FOOD.gramsSugar, FOOD.foodTypeId, FOOD_TYPE.id, " +
+            "FOOD_TYPE.type FROM FOOD LEFT OUTER JOIN FOOD_TYPE ON FOOD.foodTypeId = FOOD_TYPE.id")
+    LiveData<List<FoodAndTypeData>> foodsAndTypesList();
 }

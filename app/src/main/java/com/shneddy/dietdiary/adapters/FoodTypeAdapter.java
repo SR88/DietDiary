@@ -91,7 +91,7 @@ public class FoodTypeAdapter extends RecyclerView.Adapter<FoodTypeAdapter.FoodTy
         return foodTypes.get(position);
     }
 
-    public void setFoodTypes(List<FoodType> foodTypes){
+    public void setFoodTypes(List<FoodType> foodTypes){  // todo
         this.foodTypes = foodTypes;
         notifyDataSetChanged();
     }

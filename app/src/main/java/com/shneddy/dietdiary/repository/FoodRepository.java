@@ -9,6 +9,7 @@ import com.shneddy.dietdiary.dao.FoodTypeDAO;
 import com.shneddy.dietdiary.database.FoodDiaryDatabase;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.DiaryEntry;
+import com.shneddy.dietdiary.entity.FoodAndTypeData;
 import com.shneddy.dietdiary.entity.FoodType;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class FoodRepository {
     private LiveData<List<FoodType>> allFoodTypes;
     private LiveData<List<Food>> allFoods;
     private LiveData<List<DiaryEntry>> allFoodDiary;
+    private LiveData<List<FoodAndTypeData>> allFoodsAndTypes;
 
     public FoodRepository(Application application) {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
@@ -34,6 +36,7 @@ public class FoodRepository {
         foodTypeDAO = database.foodTypeDAO();
         allFoodTypes = foodTypeDAO.getAllFoodTypes();
 
+        allFoodsAndTypes = foodDAO.foodsAndTypesList();
     }
 
     public void insert(Food food){
@@ -54,6 +57,10 @@ public class FoodRepository {
 
     public LiveData<List<Food>> getAllFoods(){
         return allFoods;
+    }
+
+    public LiveData<List<FoodAndTypeData>> getAllFoodsAndTypes(){
+        return allFoodsAndTypes;
     }
 
     private static class InsertFoodsAsyncTask extends AsyncTask<Food, Void, Void>{

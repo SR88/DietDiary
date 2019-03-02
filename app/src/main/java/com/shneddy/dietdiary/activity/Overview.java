@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -82,7 +83,7 @@ public class Overview extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                if (direction == ItemTouchHelper.LEFT){
+                if (direction == ItemTouchHelper.LEFT) {
                     viewModel.deleteFoodType(foodTypeAdapter
                             .getFoodTypeAt(viewHolder.getAdapterPosition()));
                     Toast.makeText(Overview.this, "Food Type was deleted.",
@@ -99,7 +100,6 @@ public class Overview extends AppCompatActivity {
                 }
 
             }
-
 
 
             @Override
@@ -163,24 +163,28 @@ public class Overview extends AppCompatActivity {
 
         if (requestCode == ADD_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
 
+
+            String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
+            String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
+
+            FoodType foodType = new FoodType(foodTypeName, foodTypeDescription);
+            viewModel.insertFoodType(foodType);
+
+            Toast.makeText(this, "Food Type saved.", Toast.LENGTH_SHORT).show();
+        }
+
+        if (requestCode == EDIT_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(EditorFoodType.EXTRA_FOODTYPE_ID, -1);
-            if (id != -1){
-                String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
-                String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
+            if (id != -1) {
+                Log.d("Overview: Previous ID: ", String.valueOf(data.getIntExtra(EditorFoodType.EXTRA_FOODTYPE_ID, -1)));
+
+                String updateFoodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
+                String updateFoodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
 
 
-                FoodType updateFood = new FoodType(foodTypeName, foodTypeDescription);
+                FoodType updateFood = new FoodType(updateFoodTypeName, updateFoodTypeDescription);
                 updateFood.setId(id);
                 viewModel.updateFoodType(updateFood);
-            } else {
-
-                String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
-                String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
-
-                FoodType foodType = new FoodType(foodTypeName, foodTypeDescription);
-                viewModel.insertFoodType(foodType);
-
-                Toast.makeText(this, "Food Type saved.", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "Food Type canceled.", Toast.LENGTH_SHORT).show();
