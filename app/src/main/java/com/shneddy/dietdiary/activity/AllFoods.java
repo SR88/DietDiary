@@ -31,7 +31,14 @@ import java.util.List;
 
 public class AllFoods extends AppCompatActivity {
 
-    public static final String FOOD_ID = "package com.shneddy.dietdiary.activity;";
+    public static final String FOOD_ID =
+            "package com.shneddy.dietdiary.activity.ID";
+    public static final String FOOD_NAME =
+            "package com.shneddy.dietdiary.activity.NAME";
+    public static final String FOOD_SUGAR =
+            "package com.shneddy.dietdiary.activity.SUGAR";
+    public static final String FOOD_FOODTYPE =
+            "package com.shneddy.dietdiary.activity.FOODTYPE_ID";
     public static final int ADD_FOOD_REQUEST = 1;
     public static final int EDIT_FOOD_REQUEST = 2;
     private ViewModel viewModel;
@@ -162,33 +169,33 @@ public class AllFoods extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // if new food created
-        if (requestCode == ADD_FOOD_REQUEST && resultCode == RESULT_OK){
-            String foodName = data.getStringExtra(EditorFood.EXTRA_FOOD_FOOD_NAME);
-            double gramsSugar = data.getDoubleExtra(EditorFood.EXTRA_FOOD_SUGARS, 5.5);
-            int foodType = data.getIntExtra(EditorFood.EXTRA_FOOD_FOODTYPE_ID,-1);
-
-            Food newFood = new Food(foodName, gramsSugar, foodType);
-            viewModel.insertFood(newFood);
-        }
-
-        // if edit complete
-        if (requestCode == EDIT_FOOD_REQUEST && resultCode == RESULT_OK){
-            int id = data.getIntExtra(EditorFood.EXTRA_FOOD_ID,-1);
-
-            if (id != -1) {
-                String foodName = data.getStringExtra(EditorFood.EXTRA_FOOD_FOOD_NAME);
-                double gramsSugar = data.getDoubleExtra(EditorFood.EXTRA_FOOD_SUGARS, 5.5);
-                int foodType = data.getIntExtra(EditorFood.EXTRA_FOOD_FOODTYPE_ID,-1);
-
-                Food updateFood = new Food(foodName, gramsSugar, foodType);
-                updateFood.setId(id);
-                viewModel.updateFood(updateFood);
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        // if new food created
+//        if (requestCode == ADD_FOOD_REQUEST && resultCode == RESULT_OK){
+//            String foodName = data.getStringExtra(EditorFood.EXTRA_FOOD_FOOD_NAME);
+//            double gramsSugar = data.getDoubleExtra(EditorFood.EXTRA_FOOD_SUGARS, 5.5);
+//            int foodType = data.getIntExtra(EditorFood.EXTRA_FOOD_FOODTYPE_ID,-1);
+//
+//            Food newFood = new Food(foodName, gramsSugar, foodType);
+//            viewModel.insertFood(newFood);
+//        }
+//
+//        // if edit complete
+//        if (requestCode == EDIT_FOOD_REQUEST && resultCode == RESULT_OK){
+//            int id = data.getIntExtra(EditorFood.EXTRA_FOOD_ID,-1);
+//
+//            if (id != -1) {
+//                String foodName = data.getStringExtra(EditorFood.EXTRA_FOOD_FOOD_NAME);
+//                double gramsSugar = data.getDoubleExtra(EditorFood.EXTRA_FOOD_SUGARS, 5.5);
+//                int foodType = data.getIntExtra(EditorFood.EXTRA_FOOD_FOODTYPE_ID,-1);
+//
+//                Food updateFood = new Food(foodName, gramsSugar, foodType);
+//                updateFood.setId(id);
+//                viewModel.updateFood(updateFood);
+//            }
+//        }
+//    }
 }

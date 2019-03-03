@@ -2,16 +2,25 @@ package com.shneddy.dietdiary.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.shneddy.dietdiary.R;
 import com.shneddy.dietdiary.ViewModel;
+import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodType;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +36,11 @@ public class EditorFood extends AppCompatActivity {
     public static final String  EXTRA_FOOD_ID =
             "package com.shneddy.dietdiary.activity.FOOD_ID";
 
-    private int previousId;
+    private int previousId, editSelectedFoodType;
     private List<FoodType> foodTypeList = new ArrayList<>();
-    ViewModel vmFoodType;
+    ViewModel viewModel;
+    private Spinner spinner;
+    private EditText etName, etSugar;
 
     BaseAdapter baseAdapter = new BaseAdapter() {
         @Override
@@ -77,13 +88,17 @@ public class EditorFood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor_food);
 
-        vmFoodType = ViewModelProviders.of(this).get(ViewModel.class);
-        foodTypeList = vmFoodType.getAllFoodTypesList();
+        setTitle("New Food");
+        this.etName = findViewById(R.id.edittext_foodname);
+        this.etSugar = findViewById(R.id.edittext_gramssugar);
+        this.spinner = findViewById(R.id.spinner_foodtype);
 
-        Spinner spinner = findViewById(R.id.spinner_foodtype);
+        viewModel = ViewModelProviders.of(this).get(ViewModel.class);
+        foodTypeList = viewModel.getAllFoodTypesList();
+
         spinner.setAdapter(baseAdapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner.setOnItemSelectedListener(new AdapterView
+                .OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 baseAdapter.notifyDataSetChanged();
@@ -95,6 +110,78 @@ public class EditorFood extends AppCompatActivity {
             }
         });
 
+        // Check to see if this is an edit request
+        Intent intent = getIntent();
+        if(intent.hasExtra(AllFoods.FOOD_ID)){
+            setTitle("Edit your Food");
+            previousId = intent.getIntExtra(AllFoods.FOOD_ID, -1);
+            etName.setText(intent.getStringExtra(AllFoods.FOOD_NAME));
+            etSugar.setText(String.valueOf(intent
+                    .getDoubleExtra(AllFoods.FOOD_SUGAR, 5.5)));
+            int foodTypeId = intent.getIntExtra(AllFoods.FOOD_FOODTYPE,-1);
+            if (foodTypeId != -1){
+                for (FoodType f : foodTypeList){
+                    if (f.getId() == foodTypeId){
+                        editSelectedFoodType = foodTypeList.indexOf(f);
+                    }
+                }
+                spinner.setSelection(editSelectedFoodType);
+            }
+        }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_basic_save, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_save:
+                saveFood();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void saveFood() {
+        String name = etName.getText().toString();
+        Double sugars = Double.parseDouble(etSugar.getText().toString());
+        String error = "";
+
+        if (name.trim().isEmpty()){
+            error += "Please make sure you have a name for your food. \n";
+        }
+        if (sugars == null) {
+            error += "Please fill in a sugar value.";
+        }
+        if (error.length() > 1){
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            // if we need to update a food
+            if (previousId != -1){
+                Food updatedFood = new Food(name, sugars, getSpinnerVal());
+                viewModel.updateFood(updatedFood);
+                setResult(RESULT_OK);
+                finish();
+            // if we need to insert new a food
+            } else {
+                Food newFood = new Food(name, sugars, getSpinnerVal());
+                viewModel.insertFood(newFood);
+                setResult(RESULT_OK);
+                finish();
+            }
+        }
+
+    }
+
+    private int getSpinnerVal() {
+        FoodType foodtype = (FoodType) spinner.getSelectedItem();
+        return foodtype.getId();
     }
 }

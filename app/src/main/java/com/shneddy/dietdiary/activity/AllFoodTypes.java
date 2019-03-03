@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,9 +26,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static android.widget.Toast.LENGTH_SHORT;
-
-public class Overview extends AppCompatActivity {
+public class AllFoodTypes extends AppCompatActivity {
 
     public static final String FOODTYPE_ID = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_ID";
     public static final String FOODTYPE_NAME = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_NAME";
@@ -42,7 +38,7 @@ public class Overview extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_overview);
+        setContentView(R.layout.activity_all_foodtypes);
 
         setTitle("Food Types/Categories");
 
@@ -50,7 +46,7 @@ public class Overview extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Overview.this, EditorFoodType.class);
+                Intent intent = new Intent(AllFoodTypes.this, EditorFoodType.class);
                 startActivityForResult(intent, ADD_FOODTYPE_REQUEST);
             }
         });
@@ -84,14 +80,14 @@ public class Overview extends AppCompatActivity {
                 if (direction == ItemTouchHelper.LEFT) {
                     viewModel.deleteFoodType(foodTypeAdapter
                             .getFoodTypeAt(viewHolder.getAdapterPosition()));
-                    Toast.makeText(Overview.this, "Food Type was deleted.",
+                    Toast.makeText(AllFoodTypes.this, "Food Type was deleted.",
                             Toast.LENGTH_SHORT).show();
                 }
 
                 if (direction == ItemTouchHelper.RIGHT) {
                     FoodType editedFood = foodTypeAdapter
                             .getFoodTypeAt(viewHolder.getAdapterPosition());
-                    Intent intent = new Intent(Overview.this, EditorFoodType.class);
+                    Intent intent = new Intent(AllFoodTypes.this, EditorFoodType.class);
                     intent.putExtra(FOODTYPE_ID, editedFood.getId());
                     intent.putExtra(FOODTYPE_NAME, editedFood.getType());
                     intent.putExtra(FOODTYPE_DESCRIPTION, editedFood.getDescription());
