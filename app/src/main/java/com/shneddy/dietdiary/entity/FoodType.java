@@ -42,10 +42,6 @@ public class FoodType {
 
     @Override
     public String toString() {
-        return "FoodType{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return type;
     }
 }

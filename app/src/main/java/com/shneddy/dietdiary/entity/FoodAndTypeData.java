@@ -47,4 +47,15 @@ public class FoodAndTypeData {
     public void setFoodTypeId(int foodTypeId) {
         this.foodTypeId = foodTypeId;
     }
+
+    @Override
+    public String toString() {
+        return "FoodAndTypeData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gramsSugar=" + gramsSugar +
+                ", type='" + type + '\'' +
+                ", foodTypeId=" + foodTypeId +
+                '}';
+    }
 }

@@ -30,7 +30,7 @@ import java.util.List;
 
 public class AllFoods extends AppCompatActivity {
 
-
+    public static final String FOOD_ID = "package com.shneddy.dietdiary.activity;";
     public static final int ADD_FOOD_REQUEST = 1;
     public static final int EDIT_FOOD_REQUEST = 2;
     private ViewModel viewModel;
@@ -81,8 +81,12 @@ public class AllFoods extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                /*
+                 *  Delete a food
+                 */
                 if (direction == ItemTouchHelper.LEFT) {
-                    FoodAndTypeData itemToDelete = complexFoodAndTypeAdapter.getFoodAndTypeAt(viewHolder.getAdapterPosition());
+                    FoodAndTypeData itemToDelete = complexFoodAndTypeAdapter
+                            .getFoodAndTypeAt(viewHolder.getAdapterPosition());
 
                     Food foodToDelete = new Food("", 2.5, 1); // dummy data
                     foodToDelete.setId(itemToDelete.getId()); // the important part ROOM's @Delete annotation keys off
@@ -92,24 +96,25 @@ public class AllFoods extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
 
+                /*
+                 *  Edit a food
+                 */
                 if (direction == ItemTouchHelper.RIGHT) {
-                    FoodAndTypeData editedFood = complexFoodAndTypeAdapter.getFoodAndTypeAt(viewHolder.getAdapterPosition());
+                    FoodAndTypeData editedFood = complexFoodAndTypeAdapter
+                            .getFoodAndTypeAt(viewHolder.getAdapterPosition());
                     Intent intent = new Intent(AllFoods.this, EditorFood.class);
-//                    intent.putExtra(FOODTYPE_ID, editedFood.getId());
-//                    intent.putExtra(FOODTYPE_NAME, editedFood.getType());
-//                    intent.putExtra(FOODTYPE_DESCRIPTION, editedFood.getDescription());
-//                    startActivityForResult(intent, EDIT_FOODTYPE_REQUEST);
+                    intent.putExtra(FOOD_ID, editedFood.getId());
+                    startActivityForResult(intent, EDIT_FOOD_REQUEST);
                 }
 
             }
-
 
             @Override
             public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                         RecyclerView.ViewHolder viewHolder, float dX, float dY,
                                         int actionState, boolean isCurrentlyActive) {
 
-                View foregroundView = ((FoodTypeAdapter.FoodTypeHolder) viewHolder).viewForeground;
+                View foregroundView = ((ComplexFoodAndTypeAdapter.FoodAndTypeHolder) viewHolder).viewForeground;
 
                 getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState,
                         isCurrentlyActive);
@@ -118,7 +123,7 @@ public class AllFoods extends AppCompatActivity {
             @Override
             public void clearView(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder) {
-                final View foregroundView = ((FoodTypeAdapter.FoodTypeHolder) viewHolder)
+                final View foregroundView = ((ComplexFoodAndTypeAdapter.FoodAndTypeHolder) viewHolder)
                         .viewForeground;
                 getDefaultUIUtil().clearView(foregroundView);
             }
@@ -127,16 +132,16 @@ public class AllFoods extends AppCompatActivity {
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                     @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY,
                                     int actionState, boolean isCurrentlyActive) {
-                final View foregroundView = ((FoodTypeAdapter.FoodTypeHolder) viewHolder)
+                final View foregroundView = ((ComplexFoodAndTypeAdapter.FoodAndTypeHolder) viewHolder)
                         .viewForeground;
 
-                View backgroundView = ((FoodTypeAdapter.FoodTypeHolder) viewHolder)
+                View backgroundView = ((ComplexFoodAndTypeAdapter.FoodAndTypeHolder) viewHolder)
                         .viewBackground;
 
-                TextView textViewDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_delete);
-                TextView textViewEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_edit);
-                ImageView iconDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_delete);
-                ImageView iconEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_edit);
+                TextView textViewDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_delete_food);
+                TextView textViewEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_edit_food);
+                ImageView iconDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_delete_food);
+                ImageView iconEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_edit_food);
 
                 if (dX > 0) {
                     backgroundView.setBackgroundColor(Color.parseColor("#f7af42"));

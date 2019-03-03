@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--<activity android:name=".activity.Overview">-->
-        <activity android:name=".activity.AllFoods">
+        <activity android:name=".activity.EditorFood">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,8 +21,8 @@
         <activity
             android:name=".activity.EditorFoodType"
             android:parentActivityName=".activity.Overview" />
-        <activity android:name=".activity.EditorFood" />
-        <!--<activity android:name=".activity.AllFoods"></activity>-->
+        <!--<activity android:name=".activity.EditorFood" />-->
+        <activity android:name=".activity.AllFoods"></activity>
     </application>
 
 </manifest>
