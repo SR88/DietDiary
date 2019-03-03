@@ -66,8 +66,6 @@ public class Overview extends AppCompatActivity {
         viewModel.getAllFoodTypes().observe(this, new Observer<List<FoodType>>() {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
-                // update recyclerview
-//                Toast.makeText(Overview.this, "onChanged", Toast.LENGTH_SHORT).show();
                 foodTypeAdapter.setFoodTypes(foodTypes);
             }
         });
@@ -91,7 +89,8 @@ public class Overview extends AppCompatActivity {
                 }
 
                 if (direction == ItemTouchHelper.RIGHT) {
-                    FoodType editedFood = foodTypeAdapter.getFoodTypeAt(viewHolder.getAdapterPosition());
+                    FoodType editedFood = foodTypeAdapter
+                            .getFoodTypeAt(viewHolder.getAdapterPosition());
                     Intent intent = new Intent(Overview.this, EditorFoodType.class);
                     intent.putExtra(FOODTYPE_ID, editedFood.getId());
                     intent.putExtra(FOODTYPE_NAME, editedFood.getType());
@@ -154,7 +153,8 @@ public class Overview extends AppCompatActivity {
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState,
                         isCurrentlyActive);
             }
-        }).attachToRecyclerView(recyclerView);
+        })
+                .attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -162,8 +162,6 @@ public class Overview extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
-
-
             String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
             String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
 
@@ -175,12 +173,11 @@ public class Overview extends AppCompatActivity {
 
         if (requestCode == EDIT_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(EditorFoodType.EXTRA_FOODTYPE_ID, -1);
+
             if (id != -1) {
-                Log.d("Overview: Previous ID: ", String.valueOf(data.getIntExtra(EditorFoodType.EXTRA_FOODTYPE_ID, -1)));
-
                 String updateFoodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
-                String updateFoodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
-
+                String updateFoodTypeDescription = data.getStringExtra(EditorFoodType
+                        .EXTRA_FOODTYPE_DESCRIPTION);
 
                 FoodType updateFood = new FoodType(updateFoodTypeName, updateFoodTypeDescription);
                 updateFood.setId(id);

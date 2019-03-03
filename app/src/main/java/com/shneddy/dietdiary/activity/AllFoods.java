@@ -1,6 +1,7 @@
 package com.shneddy.dietdiary.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -81,9 +82,7 @@ public class AllFoods extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                /*
-                 *  Delete a food
-                 */
+                // Delete food
                 if (direction == ItemTouchHelper.LEFT) {
                     FoodAndTypeData itemToDelete = complexFoodAndTypeAdapter
                             .getFoodAndTypeAt(viewHolder.getAdapterPosition());
@@ -96,9 +95,7 @@ public class AllFoods extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
 
-                /*
-                 *  Edit a food
-                 */
+                // Edit a food
                 if (direction == ItemTouchHelper.RIGHT) {
                     FoodAndTypeData editedFood = complexFoodAndTypeAdapter
                             .getFoodAndTypeAt(viewHolder.getAdapterPosition());
@@ -161,9 +158,37 @@ public class AllFoods extends AppCompatActivity {
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState,
                         isCurrentlyActive);
             }
-        }).attachToRecyclerView(recyclerView);
-
+        })
+                .attachToRecyclerView(recyclerView);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        // if new food created
+        if (requestCode == ADD_FOOD_REQUEST && resultCode == RESULT_OK){
+            String foodName = data.getStringExtra(EditorFood.EXTRA_FOOD_FOOD_NAME);
+            double gramsSugar = data.getDoubleExtra(EditorFood.EXTRA_FOOD_SUGARS, 5.5);
+            int foodType = data.getIntExtra(EditorFood.EXTRA_FOOD_FOODTYPE_ID,-1);
+
+            Food newFood = new Food(foodName, gramsSugar, foodType);
+            viewModel.insertFood(newFood);
+        }
+
+        // if edit complete
+        if (requestCode == EDIT_FOOD_REQUEST && resultCode == RESULT_OK){
+            int id = data.getIntExtra(EditorFood.EXTRA_FOOD_ID,-1);
+
+            if (id != -1) {
+                String foodName = data.getStringExtra(EditorFood.EXTRA_FOOD_FOOD_NAME);
+                double gramsSugar = data.getDoubleExtra(EditorFood.EXTRA_FOOD_SUGARS, 5.5);
+                int foodType = data.getIntExtra(EditorFood.EXTRA_FOOD_FOODTYPE_ID,-1);
+
+                Food updateFood = new Food(foodName, gramsSugar, foodType);
+                updateFood.setId(id);
+                viewModel.updateFood(updateFood);
+            }
+        }
+    }
 }

@@ -8,41 +8,51 @@
     android:padding="16dp"
     tools:context=".activity.EditorFood">
 
-    <!--<EditText-->
-        <!--android:id="@+id/edittext_foodname"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ems="10"-->
-        <!--android:hint="Name of this foodList"-->
-        <!--android:inputType="textPersonName"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-    <Spinner
-        android:id="@+id/spinner_foodtype"
+    <EditText
+        android:id="@+id/edittext_foodname"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Name of this foodList"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edittext_gramssugar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Grams sugar in this foodList"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_foodname" />
+
+    <TextView
+        android:id="@+id/textview_foodeditor_promptfoodtype"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
 
 
-        />
-        <!--app:layout_constraintTop_toBottomOf="@id/edittext_foodname" />-->
+        android:text="Food Type"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_gramssugar" />
 
-    <!--<EditText-->
-        <!--android:id="@+id/edittext_gramssugar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:ems="10"-->
-        <!--android:hint="Grams sugar in this foodList"-->
-        <!--android:inputType="numberDecimal"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/spinner_foodtype" />-->
+    <Spinner
+        android:id="@+id/spinner_foodtype"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_foodeditor_promptfoodtype" />
 
-    <!--<Spinner-->
-        <!--android:id="@+id/spinner"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
