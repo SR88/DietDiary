@@ -8,8 +8,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shneddy.dietdiary.R;
+import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodAndType;
 import com.shneddy.dietdiary.entity.FoodAndTypeData;
+import com.shneddy.dietdiary.entity.FoodType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +19,13 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+// https://stackoverflow.com/questions/44961723/how-to-represent-nested-one-to-many-relationship-in-android-room
+
+
 public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodAndTypeAdapter.FoodAndTypeHolder> {
 
     private List<FoodAndType> list = new ArrayList<>();
+    private List<Food> foodList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -34,12 +40,13 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
     @Override
     public void onBindViewHolder(@NonNull FoodAndTypeHolder holder, int position) {
         FoodAndType currentFoodAndType = list.get(position);
-        holder.name.setText(currentFoodAndType.foodList.get(0).getName());
+        holder.name.setText(currentFoodAndType.foodList.get(iteration).getName());
         holder.sugars.setText("Grams sugar per serving: " + String.valueOf(currentFoodAndType
-                .foodList.get(0).getGramsSugar()));
-        if (Integer.valueOf(currentFoodAndType.foodList.get(0).getFoodTypeId()) != null) {
-            holder.foodType.setText(String.valueOf(currentFoodAndType.foodList.get(0).getFoodTypeId()));
+                .foodList.get(iteration).getGramsSugar()));
+        if (Integer.valueOf(currentFoodAndType.foodList.get(iteration).getFoodTypeId()) != null) {
+            holder.foodType.setText(String.valueOf(currentFoodAndType.foodList.get(iteration).getFoodTypeId()));
         }
+        iteration +=1;
     }
 
     @Override
@@ -53,7 +60,6 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
     }
 
     public ComplexFoodAndTypeAdapter() {
-
         setHasStableIds(true);
     }
 
@@ -64,6 +70,12 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
     public void setFoodAndTypes(List<FoodAndType> foodtypes) {
         this.list = foodtypes;
         notifyDataSetChanged();
+
+        for (FoodAndType foodAndType : list) {
+
+
+
+        }
     }
 
 
@@ -81,3 +93,18 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
         }
     }
 }
+
+
+//    List<FaD> MegaData = new ArrayList<>();
+//for(fanddata f : list){
+//
+//        FaD fad = new Fad();
+//        fad.setFTId(f.getFTId);
+//
+//        for(f.flist x : f.list){
+//        fad.setName(x.getName);
+//        fad.setSug(x.getSug);
+//        fad.setId(x.getId);
+//        }
+//        MegaData.add(fad);
+//        }
