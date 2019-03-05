@@ -41,6 +41,7 @@ public class EditorFood extends AppCompatActivity {
     ViewModel viewModel;
     private Spinner spinner;
     private EditText etName, etSugar;
+    private Intent intent;
 
     BaseAdapter baseAdapter = new BaseAdapter() {
         @Override
@@ -88,6 +89,8 @@ public class EditorFood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor_food);
 
+        intent = getIntent();
+
         setTitle("New Food");
         this.etName = findViewById(R.id.edittext_foodname);
         this.etSugar = findViewById(R.id.edittext_gramssugar);
@@ -111,14 +114,17 @@ public class EditorFood extends AppCompatActivity {
         });
 
         // Check to see if this is an edit request
-        Intent intent = getIntent();
+
+        // Create new food
         if(intent.hasExtra(AllFoods.FOOD_ID)){
+            previousId = Integer.parseInt(intent.getStringExtra(AllFoods.FOOD_ID));
             setTitle("Edit your Food");
-            previousId = intent.getIntExtra(AllFoods.FOOD_ID, -1);
             etName.setText(intent.getStringExtra(AllFoods.FOOD_NAME));
+            Log.d("Editor Food", String.valueOf(previousId));
+            Log.d("Editor Food", etName.toString());
             etSugar.setText(String.valueOf(intent
                     .getDoubleExtra(AllFoods.FOOD_SUGAR, 5.5)));
-            int foodTypeId = intent.getIntExtra(AllFoods.FOOD_FOODTYPE,-1);
+            int foodTypeId = intent.getIntExtra(AllFoods.FOOD_FOODTYPE,0);
             if (foodTypeId != -1){
                 for (FoodType f : foodTypeList){
                     if (f.getId() == foodTypeId){
@@ -163,21 +169,13 @@ public class EditorFood extends AppCompatActivity {
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
             return;
         } else {
-            // if we need to update a food
-            if (previousId != -1){
-                Food updatedFood = new Food(name, sugars, getSpinnerVal());
-                viewModel.updateFood(updatedFood);
-                setResult(RESULT_OK);
-                finish();
-            // if we need to insert new a food
-            } else {
-                Food newFood = new Food(name, sugars, getSpinnerVal());
-                viewModel.insertFood(newFood);
-                setResult(RESULT_OK);
-                finish();
-            }
+            Intent dataReturn = new Intent();
+            dataReturn.putExtra(EXTRA_FOOD_FOOD_NAME, name);
+            dataReturn.putExtra(EXTRA_FOOD_SUGARS, sugars);
+            dataReturn.putExtra(EXTRA_FOOD_FOODTYPE_ID, getSpinnerVal());
+            setResult(RESULT_OK, dataReturn);
+            finish();
         }
-
     }
 
     private int getSpinnerVal() {

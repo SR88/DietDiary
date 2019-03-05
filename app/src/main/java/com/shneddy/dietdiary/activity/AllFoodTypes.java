@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -88,10 +89,11 @@ public class AllFoodTypes extends AppCompatActivity {
                     FoodType editedFood = foodTypeAdapter
                             .getFoodTypeAt(viewHolder.getAdapterPosition());
                     Intent intent = new Intent(AllFoodTypes.this, EditorFoodType.class);
+                    Log.d("All foods to edit ID", String.valueOf(editedFood.getId()));
                     intent.putExtra(FOODTYPE_ID, editedFood.getId());
                     intent.putExtra(FOODTYPE_NAME, editedFood.getType());
                     intent.putExtra(FOODTYPE_DESCRIPTION, editedFood.getDescription());
-                    startActivityForResult(intent, EDIT_FOODTYPE_REQUEST);
+//                    startActivityForResult(intent, EDIT_FOODTYPE_REQUEST);
                 }
 
             }
@@ -179,9 +181,6 @@ public class AllFoodTypes extends AppCompatActivity {
                 updateFood.setId(id);
                 viewModel.updateFoodType(updateFood);
             }
-        } else {
-            Toast.makeText(this, "Food Type canceled.", Toast.LENGTH_SHORT).show();
         }
-
     }
 }

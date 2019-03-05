@@ -1,7 +1,9 @@
 package com.shneddy.dietdiary.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(
@@ -9,10 +11,11 @@ import androidx.room.PrimaryKey;
                 @ForeignKey(entity = FoodType.class,
                         parentColumns = "id",
                         childColumns = "foodTypeId"
-                ))
+                ), indices = @Index(value = "id", unique = true))
 public class Food {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     private int id;
     private String name;
     private double gramsSugar;
@@ -27,6 +30,8 @@ public class Food {
     public void setId(int id) {
         this.id = id;
     }
+
+
 
     public int getId() {
         return id;
