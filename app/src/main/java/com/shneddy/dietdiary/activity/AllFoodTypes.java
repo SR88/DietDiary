@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,9 +27,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static android.widget.Toast.LENGTH_SHORT;
-
-public class Overview extends AppCompatActivity {
+public class AllFoodTypes extends AppCompatActivity {
 
     public static final String FOODTYPE_ID = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_ID";
     public static final String FOODTYPE_NAME = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_NAME";
@@ -42,7 +39,7 @@ public class Overview extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_overview);
+        setContentView(R.layout.activity_all_foodtypes);
 
         setTitle("Food Types/Categories");
 
@@ -50,7 +47,7 @@ public class Overview extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Overview.this, EditorFoodType.class);
+                Intent intent = new Intent(AllFoodTypes.this, EditorFoodType.class);
                 startActivityForResult(intent, ADD_FOODTYPE_REQUEST);
             }
         });
@@ -66,8 +63,6 @@ public class Overview extends AppCompatActivity {
         viewModel.getAllFoodTypes().observe(this, new Observer<List<FoodType>>() {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
-                // update recyclerview
-//                Toast.makeText(Overview.this, "onChanged", Toast.LENGTH_SHORT).show();
                 foodTypeAdapter.setFoodTypes(foodTypes);
             }
         });
@@ -86,17 +81,19 @@ public class Overview extends AppCompatActivity {
                 if (direction == ItemTouchHelper.LEFT) {
                     viewModel.deleteFoodType(foodTypeAdapter
                             .getFoodTypeAt(viewHolder.getAdapterPosition()));
-                    Toast.makeText(Overview.this, "Food Type was deleted.",
+                    Toast.makeText(AllFoodTypes.this, "Food Type was deleted.",
                             Toast.LENGTH_SHORT).show();
                 }
 
                 if (direction == ItemTouchHelper.RIGHT) {
-                    FoodType editedFood = foodTypeAdapter.getFoodTypeAt(viewHolder.getAdapterPosition());
-                    Intent intent = new Intent(Overview.this, EditorFoodType.class);
+                    FoodType editedFood = foodTypeAdapter
+                            .getFoodTypeAt(viewHolder.getAdapterPosition());
+                    Intent intent = new Intent(AllFoodTypes.this, EditorFoodType.class);
+                    Log.d("All foods to edit ID", String.valueOf(editedFood.getId()));
                     intent.putExtra(FOODTYPE_ID, editedFood.getId());
                     intent.putExtra(FOODTYPE_NAME, editedFood.getType());
                     intent.putExtra(FOODTYPE_DESCRIPTION, editedFood.getDescription());
-                    startActivityForResult(intent, EDIT_FOODTYPE_REQUEST);
+//                    startActivityForResult(intent, EDIT_FOODTYPE_REQUEST);
                 }
 
             }
@@ -154,7 +151,8 @@ public class Overview extends AppCompatActivity {
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState,
                         isCurrentlyActive);
             }
-        }).attachToRecyclerView(recyclerView);
+        })
+                .attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -162,8 +160,6 @@ public class Overview extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
-
-
             String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
             String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
 
@@ -175,20 +171,16 @@ public class Overview extends AppCompatActivity {
 
         if (requestCode == EDIT_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(EditorFoodType.EXTRA_FOODTYPE_ID, -1);
+
             if (id != -1) {
-                Log.d("Overview: Previous ID: ", String.valueOf(data.getIntExtra(EditorFoodType.EXTRA_FOODTYPE_ID, -1)));
-
                 String updateFoodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
-                String updateFoodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
-
+                String updateFoodTypeDescription = data.getStringExtra(EditorFoodType
+                        .EXTRA_FOODTYPE_DESCRIPTION);
 
                 FoodType updateFood = new FoodType(updateFoodTypeName, updateFoodTypeDescription);
                 updateFood.setId(id);
                 viewModel.updateFoodType(updateFood);
             }
-        } else {
-            Toast.makeText(this, "Food Type canceled.", Toast.LENGTH_SHORT).show();
         }
-
     }
 }

@@ -33,10 +33,10 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
     @Override
     public void onBindViewHolder(@NonNull FoodAndTypeHolder holder, int position) {
         FoodAndTypeData currentFoodAndType = list.get(position);
-        holder.name.setText(currentFoodAndType.getFoodName());
-        holder.sugars.setText("Sugars: " + String.valueOf(currentFoodAndType.getSugars()));
-        if (currentFoodAndType.getFoodType() != null){
-            holder.foodType.setText(currentFoodAndType.getFoodType());
+        holder.name.setText(currentFoodAndType.getName());
+        holder.sugars.setText("Grams sugar per serving: " + String.valueOf(currentFoodAndType.getGramsSugar()));
+        if (currentFoodAndType.getType() != null){
+            holder.foodType.setText(currentFoodAndType.getType());
         }
     }
 

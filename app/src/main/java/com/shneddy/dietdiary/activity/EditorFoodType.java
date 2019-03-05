@@ -3,15 +3,12 @@ package com.shneddy.dietdiary.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.shneddy.dietdiary.R;
-import com.shneddy.dietdiary.ViewModel;
-import com.shneddy.dietdiary.dao.FoodTypeDAO;
 
 public class EditorFoodType extends AppCompatActivity {
     public static final String EXTRA_FOODTYPE =
@@ -34,11 +31,11 @@ public class EditorFoodType extends AppCompatActivity {
         editTextName = findViewById(R.id.edittext_name);
         editTextDescription = findViewById(R.id.edittext_description);
 
-        if (getIntent().hasExtra(Overview.FOODTYPE_ID)){
+        if (getIntent().hasExtra(AllFoodTypes.FOODTYPE_ID)){
             setTitle("Edit your Food Type");
-            editTextName.setText(intent.getStringExtra(Overview.FOODTYPE_NAME));
-            editTextDescription.setText(intent.getStringExtra(Overview.FOODTYPE_DESCRIPTION));
-            previousId = intent.getIntExtra(Overview.FOODTYPE_ID, -1);
+            editTextName.setText(intent.getStringExtra(AllFoodTypes.FOODTYPE_NAME));
+            editTextDescription.setText(intent.getStringExtra(AllFoodTypes.FOODTYPE_DESCRIPTION));
+            previousId = Integer.parseInt(intent.getStringExtra(AllFoodTypes.FOODTYPE_ID));
 //            Log.d("FoodType Editor: Previous ID: ", String.valueOf(previousId));
         } else {
             setTitle("Create a Food Type");
@@ -77,7 +74,6 @@ public class EditorFoodType extends AppCompatActivity {
         data.putExtra(EXTRA_FOODTYPE, name);
         data.putExtra(EXTRA_FOODTYPE_DESCRIPTION, description);
         data.putExtra(EXTRA_FOODTYPE_ID, previousId);
-//        Log.d("FoodType Editor: Previous ID: ", String.valueOf(previousId));
 
         setResult(RESULT_OK, data);
         finish();
