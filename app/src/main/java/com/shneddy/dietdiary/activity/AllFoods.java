@@ -26,6 +26,7 @@ import com.shneddy.dietdiary.adapters.ComplexFoodAndTypeAdapter;
 import com.shneddy.dietdiary.adapters.FoodTypeAdapter;
 import com.shneddy.dietdiary.dao.FoodDAO;
 import com.shneddy.dietdiary.entity.Food;
+import com.shneddy.dietdiary.entity.FoodAndType;
 import com.shneddy.dietdiary.entity.FoodAndTypeData;
 import com.shneddy.dietdiary.entity.FoodType;
 import com.shneddy.dietdiary.repository.FoodRepository;
@@ -65,11 +66,11 @@ public class AllFoods extends AppCompatActivity {
         foodModel = ViewModelProviders.of(this).get(ViewModel.class);
 
         viewModel = ViewModelProviders.of(this).get(ViewModel.class);
-        viewModel.getAllFoodsAndTypes().observe(this, new Observer<List<FoodAndTypeData>>() {
+        viewModel.getAllFoodsAndTypes().observe(this, new Observer<List<FoodAndType>>() {
             @Override
-            public void onChanged(List<FoodAndTypeData> foodAndTypeData) {
-                complexFoodAndTypeAdapter.setFoodAndTypes(foodAndTypeData);
-                for (FoodAndTypeData f : foodAndTypeData){
+            public void onChanged(List<FoodAndType> foodAndTypes) {
+                complexFoodAndTypeAdapter.setFoodAndTypes(foodAndTypes);
+                for (FoodAndType f : foodAndTypes){
                     Log.d("All Foods ", f.toString());
                 }
             }
@@ -100,11 +101,11 @@ public class AllFoods extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 // Delete food
                 if (direction == ItemTouchHelper.LEFT) {
-                    FoodAndTypeData itemToDelete = complexFoodAndTypeAdapter
+                    FoodAndType itemToDelete = complexFoodAndTypeAdapter
                             .getFoodAndTypeAt(viewHolder.getAdapterPosition());
 
                     Food foodToDelete = new Food("", 2.5, 1); // dummy data
-                    foodToDelete.setId(itemToDelete.getId()); // the important part ROOM's @Delete annotation keys off
+                    foodToDelete.setId(itemToDelete.foodList.get(0).getId()); // the important part ROOM's @Delete annotation keys off
 
                     viewModel.deleteFood(foodToDelete);
                     Toast.makeText(AllFoods.this, "Food was deleted.",
@@ -113,11 +114,11 @@ public class AllFoods extends AppCompatActivity {
 
                 // Edit a food
                 if (direction == ItemTouchHelper.RIGHT) {
-                    FoodAndTypeData editedFood = complexFoodAndTypeAdapter
+                    FoodAndType editedFood = complexFoodAndTypeAdapter
                             .getFoodAndTypeAt(viewHolder.getAdapterPosition());
                     Intent intent = new Intent(AllFoods.this, EditorFood.class);
-                    Log.d("Edit ALL FOOD SCREEN ", String.valueOf(editedFood.getId()));
-                    intent.putExtra(FOOD_ID, String.valueOf(editedFood.getId()));
+                    Log.d("Edit ALL FOOD SCREEN ", String.valueOf(editedFood.foodList.get(0).getId()));
+                    intent.putExtra(FOOD_ID, String.valueOf(editedFood.foodList.get(0).getId()));
                     startActivityForResult(intent, EDIT_FOOD_REQUEST);
                 }
 

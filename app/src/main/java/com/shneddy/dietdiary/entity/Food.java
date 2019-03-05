@@ -61,6 +61,9 @@ public class Food {
         return foodTypeId;
     }
 
+    public Food getFood(){
+        return this;
+    }
 
     @Override
     public String toString() {

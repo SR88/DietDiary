@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.Food;
+import com.shneddy.dietdiary.entity.FoodAndType;
 import com.shneddy.dietdiary.entity.FoodAndTypeData;
 import com.shneddy.dietdiary.entity.FoodType;
 import com.shneddy.dietdiary.repository.DiaryEntryRepository;
@@ -25,7 +26,7 @@ public class ViewModel extends AndroidViewModel {
     private LiveData<List<DiaryEntry>> allFoodDiaries;
     private LiveData<List<FoodType>> allFoodTypes;
     private List<FoodType> allFoodTypesList;
-    private LiveData<List<FoodAndTypeData>> allFoodsAndType;
+    private LiveData<List<FoodAndType>> allFoodsAndType;
 
     /*
         constructor
@@ -69,7 +70,7 @@ public class ViewModel extends AndroidViewModel {
         return allFoods;
     }
 
-    public LiveData<List<FoodAndTypeData>> getAllFoodsAndTypes() {
+    public LiveData<List<FoodAndType>> getAllFoodsAndTypes() {
         return allFoodsAndType;
     }
 

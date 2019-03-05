@@ -2,6 +2,7 @@ package com.shneddy.dietdiary.entity;
 
 public class FoodAndTypeData {
 
+
     public int id;
     public String name;
     public double gramsSugar;

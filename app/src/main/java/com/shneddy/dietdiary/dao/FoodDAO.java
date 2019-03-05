@@ -1,6 +1,7 @@
 package com.shneddy.dietdiary.dao;
 
 import com.shneddy.dietdiary.entity.Food;
+import com.shneddy.dietdiary.entity.FoodAndType;
 import com.shneddy.dietdiary.entity.FoodAndTypeData;
 
 import java.util.List;
@@ -38,5 +39,5 @@ public interface FoodDAO {
 
     @Query("SELECT FOOD.id, FOOD.name, FOOD.gramsSugar, FOOD.foodTypeId, FOOD_TYPE.id, " +
             "FOOD_TYPE.type FROM FOOD LEFT OUTER JOIN FOOD_TYPE ON FOOD.foodTypeId = FOOD_TYPE.id")
-    LiveData<List<FoodAndTypeData>> foodsAndTypesList();
+    LiveData<List<FoodAndType>> foodsAndTypesList();
 }

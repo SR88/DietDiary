@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shneddy.dietdiary.R;
+import com.shneddy.dietdiary.entity.FoodAndType;
 import com.shneddy.dietdiary.entity.FoodAndTypeData;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodAndTypeAdapter.FoodAndTypeHolder> {
 
-    private List<FoodAndTypeData> list = new ArrayList<>();
+    private List<FoodAndType> list = new ArrayList<>();
 
     @NonNull
     @Override
@@ -29,14 +30,15 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
         return new FoodAndTypeHolder(itemView);
     }
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     public void onBindViewHolder(@NonNull FoodAndTypeHolder holder, int position) {
-        FoodAndTypeData currentFoodAndType = list.get(position);
-        holder.name.setText(currentFoodAndType.getName());
-        holder.sugars.setText("Grams sugar per serving: " + String.valueOf(currentFoodAndType.getGramsSugar()));
-        if (currentFoodAndType.getType() != null){
-            holder.foodType.setText(currentFoodAndType.getType());
+        FoodAndType currentFoodAndType = list.get(position);
+        holder.name.setText(currentFoodAndType.foodList.get(0).getName());
+        holder.sugars.setText("Grams sugar per serving: " + String.valueOf(currentFoodAndType
+                .foodList.get(0).getGramsSugar()));
+        if (Integer.valueOf(currentFoodAndType.foodList.get(0).getFoodTypeId()) != null) {
+            holder.foodType.setText(String.valueOf(currentFoodAndType.foodList.get(0).getFoodTypeId()));
         }
     }
 
@@ -45,17 +47,27 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
         return list.size();
     }
 
-    public FoodAndTypeData getFoodAndTypeAt(int position){
+    @Override
+    public long getItemId(int position) {
+        return list.get(position).foodList.get(0).getId();
+    }
+
+    public ComplexFoodAndTypeAdapter() {
+
+        setHasStableIds(true);
+    }
+
+    public FoodAndType getFoodAndTypeAt(int position) {
         return list.get(position);
     }
 
-    public void setFoodAndTypes(List<FoodAndTypeData> foodtypes){
+    public void setFoodAndTypes(List<FoodAndType> foodtypes) {
         this.list = foodtypes;
         notifyDataSetChanged();
     }
 
 
-    public class FoodAndTypeHolder extends RecyclerView.ViewHolder{
+    public class FoodAndTypeHolder extends RecyclerView.ViewHolder {
         private TextView name, sugars, foodType;
         public RelativeLayout viewBackground, viewForeground;
 

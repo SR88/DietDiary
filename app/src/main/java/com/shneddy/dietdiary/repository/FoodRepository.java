@@ -9,6 +9,7 @@ import com.shneddy.dietdiary.dao.FoodTypeDAO;
 import com.shneddy.dietdiary.database.FoodDiaryDatabase;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.DiaryEntry;
+import com.shneddy.dietdiary.entity.FoodAndType;
 import com.shneddy.dietdiary.entity.FoodAndTypeData;
 import com.shneddy.dietdiary.entity.FoodType;
 
@@ -23,7 +24,7 @@ public class FoodRepository {
     private LiveData<List<FoodType>> allFoodTypes;
     private LiveData<List<Food>> allFoods;
     private LiveData<List<DiaryEntry>> allFoodDiary;
-    private LiveData<List<FoodAndTypeData>> allFoodsAndTypes;
+    private LiveData<List<FoodAndType>> allFoodsAndTypes;
 
     public FoodRepository(Application application) {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
@@ -59,7 +60,7 @@ public class FoodRepository {
         return allFoods;
     }
 
-    public LiveData<List<FoodAndTypeData>> getAllFoodsAndTypes(){
+    public LiveData<List<FoodAndType>> getAllFoodsAndTypes(){
         return allFoodsAndTypes;
     }
 
