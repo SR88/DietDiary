@@ -16,6 +16,7 @@ import com.shneddy.dietdiary.entity.FoodType;
 import java.util.List;
 import androidx.lifecycle.LiveData;
 
+
 public class FoodRepository {
 
     private FoodDAO foodDAO;

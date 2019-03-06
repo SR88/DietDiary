@@ -20,6 +20,7 @@ public class Food {
     private String name;
     private double gramsSugar;
     private int foodTypeId;
+//    private String foodTypeName;
 
     public Food(String name, double gramsSugar, int foodTypeId) {
         this.name = name;
@@ -64,6 +65,8 @@ public class Food {
     public Food getFood(){
         return this;
     }
+
+
 
     @Override
     public String toString() {

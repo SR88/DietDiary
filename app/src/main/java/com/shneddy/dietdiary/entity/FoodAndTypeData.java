@@ -8,6 +8,15 @@ public class FoodAndTypeData {
     public double gramsSugar;
     public String type;
     public int foodTypeId;
+    public String foodType;
+
+    public String getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(String foodType) {
+        this.foodType = foodType;
+    }
 
     public int getId() {
         return id;
@@ -57,6 +66,7 @@ public class FoodAndTypeData {
                 ", gramsSugar=" + gramsSugar +
                 ", type='" + type + '\'' +
                 ", foodTypeId=" + foodTypeId +
+                ", foodType='" + foodType + '\'' +
                 '}';
     }
 }

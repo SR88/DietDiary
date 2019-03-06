@@ -31,6 +31,7 @@ import com.shneddy.dietdiary.entity.FoodAndTypeData;
 import com.shneddy.dietdiary.entity.FoodType;
 import com.shneddy.dietdiary.repository.FoodRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllFoods extends AppCompatActivity {
@@ -46,7 +47,6 @@ public class AllFoods extends AppCompatActivity {
     public static final int ADD_FOOD_REQUEST = 1;
     public static final int EDIT_FOOD_REQUEST = 2;
     private ViewModel viewModel;
-    private ViewModel foodModel;
 
 
     @Override
@@ -63,16 +63,14 @@ public class AllFoods extends AppCompatActivity {
         final ComplexFoodAndTypeAdapter complexFoodAndTypeAdapter = new ComplexFoodAndTypeAdapter();
         recyclerView.setAdapter(complexFoodAndTypeAdapter);
 
-        foodModel = ViewModelProviders.of(this).get(ViewModel.class);
-
-        viewModel = ViewModelProviders.of(this).get(ViewModel.class);
+        viewModel = ViewModelProviders.of(AllFoods.this).get(ViewModel.class);
         viewModel.getAllFoodsAndTypes().observe(this, new Observer<List<FoodAndType>>() {
             @Override
             public void onChanged(List<FoodAndType> foodAndTypes) {
-                complexFoodAndTypeAdapter.setFoodAndTypes(foodAndTypes);
-                for (FoodAndType f : foodAndTypes){
-                    Log.d("All Foods ", f.toString());
+                if (foodAndTypes.size() > 1){
+                    foodAndTypes = foodAndTypes.subList(0,1);
                 }
+                complexFoodAndTypeAdapter.setFoodAndTypes(foodAndTypes);
             }
         });
 
@@ -101,11 +99,12 @@ public class AllFoods extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 // Delete food
                 if (direction == ItemTouchHelper.LEFT) {
-                    FoodAndType itemToDelete = complexFoodAndTypeAdapter
-                            .getFoodAndTypeAt(viewHolder.getAdapterPosition());
+//                    FoodAndType itemToDelete = complexFoodAndTypeAdapter
+//                            .getFoodAndTypeAt(viewHolder.getAdapterPosition());
+                    FoodAndTypeData item = complexFoodAndTypeAdapter.getFoodAndTypeAt(viewHolder.getAdapterPosition());
 
                     Food foodToDelete = new Food("", 2.5, 1); // dummy data
-                    foodToDelete.setId(itemToDelete.foodList.get(0).getId()); // the important part ROOM's @Delete annotation keys off
+                    foodToDelete.setId(item.getId()); // the important part ROOM's @Delete annotation keys off
 
                     viewModel.deleteFood(foodToDelete);
                     Toast.makeText(AllFoods.this, "Food was deleted.",
@@ -114,11 +113,13 @@ public class AllFoods extends AppCompatActivity {
 
                 // Edit a food
                 if (direction == ItemTouchHelper.RIGHT) {
-                    FoodAndType editedFood = complexFoodAndTypeAdapter
-                            .getFoodAndTypeAt(viewHolder.getAdapterPosition());
+//                    FoodAndType editedFood = complexFoodAndTypeAdapter
+//                            .getFoodAndTypeAt(viewHolder.getAdapterPosition());
+                    FoodAndTypeData item = complexFoodAndTypeAdapter.getFoodAndTypeAt(viewHolder.getAdapterPosition());
+
                     Intent intent = new Intent(AllFoods.this, EditorFood.class);
-                    Log.d("Edit ALL FOOD SCREEN ", String.valueOf(editedFood.foodList.get(0).getId()));
-                    intent.putExtra(FOOD_ID, String.valueOf(editedFood.foodList.get(0).getId()));
+//                    Log.d("Edit ALL FOOD SCREEN ", String.valueOf(editedFood.foodList.get(0).getId()));
+                    intent.putExtra(FOOD_ID, String.valueOf(item.getId()));
                     startActivityForResult(intent, EDIT_FOOD_REQUEST);
                 }
 
@@ -193,7 +194,7 @@ public class AllFoods extends AppCompatActivity {
             Food newFood = new Food(foodName, gramsSugar, foodType);
 
 
-            foodModel.insertFood(newFood);
+            viewModel.insertFood(newFood);
 
         }
 
@@ -208,7 +209,7 @@ public class AllFoods extends AppCompatActivity {
 
                 Food updateFood = new Food(foodName, gramsSugar, foodType);
                 updateFood.setId(id);
-                foodModel.updateFood(updateFood);
+                viewModel.updateFood(updateFood);
             }
         }
     }
