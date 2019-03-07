@@ -17,11 +17,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     def lifecycle_version = "2.0.0"
-
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     //     AndroidX libraries use this lightweight import for Lifecycle
@@ -32,7 +35,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
-
     // for room and test of room
     def room_version = "2.1.0-alpha04"
     implementation "androidx.room:room-runtime:$room_version"
@@ -40,29 +42,23 @@ dependencies {
     // For Kotlin use kapt instead of annotationProcessor
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
-
-    testImplementation "org.mockito:mockito-core:2.11.0"
-    androidTestImplementation "org.mockito:mockito-android:2.11.0"
-    testImplementation "androidx.arch.core:core-testing:2.0.0-rc01"
-    androidTestImplementation "androidx.arch.core:core-testing:2.0.0-rc01"
-
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0' // testing
+    testImplementation 'org.mockito:mockito-core:2.11.0'
+    androidTestImplementation 'org.mockito:mockito-android:2.11.0'
+    testImplementation 'androidx.arch.core:core-testing:2.0.0-rc01'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.0.0-rc01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    // testing
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
-
-
-    implementation "androidx.arch.core:core-common:2.0.0-rc01"
-    implementation "androidx.arch.core:core-runtime:2.0.0-rc01"
-    api "androidx.lifecycle:lifecycle-common:2.0.0-rc01"
-
-//    testImplementation(project(":lifecycle:lifecycle-runtime"))
-//    testImplementation(project(":arch:core-testing"))
-//    testImplementation "androidx.test.runner.AndroidJUnit4"
-//    testImplementation(MOCKITO_CORE)
-
-
+    implementation 'androidx.arch.core:core-common:2.0.0-rc01'
+    implementation 'androidx.arch.core:core-runtime:2.0.0-rc01'
+    api 'androidx.lifecycle:lifecycle-common:2.0.0-rc01'
+    //    testImplementation(project(":lifecycle:lifecycle-runtime"))
+    //    testImplementation(project(":arch:core-testing"))
+    //    testImplementation "androidx.test.runner.AndroidJUnit4"
+    //    testImplementation(MOCKITO_CORE)
     implementation 'com.google.android.material:material:1.0.0-rc01'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

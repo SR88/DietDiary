@@ -10,8 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <activity android:name=".activity.MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,22 +17,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.EditorFoodType"
+        <activity
+            android:name=".activity.EditorFoodType"
             android:parentActivityName=".activity.AllFoodTypes" />
-
-        <activity android:name=".activity.EditorFood"
-             android:parentActivityName=".activity.AllFoods"/>
-
-        <activity android:name=".activity.AllFoods"
-            android:parentActivityName=".activity.MainMenu"/>
-
-        <activity android:name=".activity.AllEntries"
-            android:parentActivityName=".activity.MainMenu"/>
-
-        <activity android:name=".activity.AllFoodTypes"
-            android:parentActivityName=".activity.MainMenu"/>
-
+        <activity
+            android:name=".activity.EditorFood"
+            android:parentActivityName=".activity.AllFoods" />
+        <activity
+            android:name=".activity.AllFoods"
+            android:parentActivityName=".activity.MainMenu" />
+        <activity
+            android:name=".activity.AllEntries"
+            android:parentActivityName=".activity.MainMenu" />
+        <activity
+            android:name=".activity.AllFoodTypes"
+            android:parentActivityName=".activity.MainMenu" />
+        <activity android:name=".activity.EditorEntries"></activity>
     </application>
 
 </manifest>

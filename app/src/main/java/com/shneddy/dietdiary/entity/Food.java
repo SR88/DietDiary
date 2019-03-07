@@ -1,8 +1,10 @@
 package com.shneddy.dietdiary.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -21,6 +23,10 @@ public class Food {
     private double gramsSugar;
     private int foodTypeId;
 //    private String foodTypeName;
+
+    @Ignore
+    FoodType foodType;
+
 
     public Food(String name, double gramsSugar, int foodTypeId) {
         this.name = name;
@@ -66,7 +72,13 @@ public class Food {
         return this;
     }
 
+    public FoodType getFoodType() {
+        return foodType;
+    }
 
+    public void setFoodType(FoodType foodType) {
+        this.foodType = foodType;
+    }
 
     @Override
     public String toString() {

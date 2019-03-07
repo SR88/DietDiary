@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodAndTypeAdapter.FoodAndTypeHolder> {
 
     private List<FoodAndType> list = new ArrayList<>();
-//    private List<Food> foodList = new ArrayList<>();
+    private List<Food> foodList = new ArrayList<>();
     private List<FoodAndTypeData> foodAndTypeDataList = new ArrayList<>();
 
     @NonNull
@@ -41,13 +41,6 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
 
     @Override
     public void onBindViewHolder(@NonNull FoodAndTypeHolder holder, int position) {
-//        FoodAndType currentFoodAndType = list.get(position);
-//        holder.name.setText(currentFoodAndType.foodList.get(iteration).getName());
-//        holder.sugars.setText("Grams sugar per serving: " + String.valueOf(currentFoodAndType
-//                .foodList.get(iteration).getGramsSugar()));
-//        if (Integer.valueOf(currentFoodAndType.foodList.get(iteration).getFoodTypeId()) != null) {
-//            holder.foodType.setText(String.valueOf(currentFoodAndType.foodList.get(iteration).getFoodTypeId()));
-//        }
         FoodAndTypeData data = foodAndTypeDataList.get(position);
         holder.name.setText(data.getName());
         holder.sugars.setText(String.valueOf(data.getGramsSugar()));
@@ -56,29 +49,21 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
 
     @Override
     public int getItemCount() {
-//        return list.size();
         return foodAndTypeDataList.size();
     }
 
     @Override
     public long getItemId(int position) {
-//        return list.get(position).foodList.get(0).getId();
         return foodAndTypeDataList.get(position).getId();
     }
 
-    public ComplexFoodAndTypeAdapter() {
-        setHasStableIds(true);
-    }
-
     public FoodAndTypeData getFoodAndTypeAt(int position) {
-//        return list.get(position);
         return foodAndTypeDataList.get(position);
     }
 
     public void setFoodAndTypes(List<FoodAndType> foodtypes) {
         this.list = foodtypes;
         notifyDataSetChanged();
-        foodAndTypeDataList.clear();
 
         int id;
         String foodType;
@@ -99,26 +84,15 @@ public class ComplexFoodAndTypeAdapter extends RecyclerView.Adapter<ComplexFoodA
             }
 
         }
-        for (int i = 0; i > foodAndTypeDataList.size(); i ++) {
-            Log.d("Complex Adapter foodanddatatype list", foodAndTypeDataList.get(i).toString());
-        }
+//        for (int i = 0; i > foodAndTypeDataList.size(); i ++) {
+//            Log.d("Complex Adapter foodanddatatype list", foodAndTypeDataList.get(i).toString());
+//        }
     }
 
-
-    //    List<FaD> MegaData = new ArrayList<>();
-//for(fanddata f : list){
-//
-//        FaD fad = new Fad();
-//        fad.setFTId(f.getFTId);
-//
-//        for(f.flist x : f.list){
-//        fad.setName(x.getName);
-//        fad.setSug(x.getSug);
-//        fad.setId(x.getId);
-//        }
-//        MegaData.add(fad);
-//        }
-
+    public void setFoods(List<Food> foods) {
+        foodList = foods;
+        notifyDataSetChanged();
+    }
 
     public class FoodAndTypeHolder extends RecyclerView.ViewHolder {
         private TextView name, sugars, foodType;

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.shneddy.dietdiary.dao.DiaryEntryDAO;
 import com.shneddy.dietdiary.dao.FoodDAO;
 import com.shneddy.dietdiary.dao.FoodTypeDAO;
+import com.shneddy.dietdiary.dao.TypeAndFoodDAO;
 import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodType;
@@ -21,6 +22,7 @@ public abstract class FoodDiaryDatabase extends RoomDatabase {
     public abstract FoodDAO foodDAO();
     public abstract DiaryEntryDAO entryDAO();
     public abstract FoodTypeDAO foodTypeDAO();
+    public abstract TypeAndFoodDAO typeAndFoodDAO();
 
 
     public static synchronized FoodDiaryDatabase getInstance(Context context){
