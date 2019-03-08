@@ -3,11 +3,13 @@ package com.shneddy.dietdiary.database;
 import android.content.Context;
 
 import com.shneddy.dietdiary.dao.DiaryEntryDAO;
+import com.shneddy.dietdiary.dao.FoodAndEntryDAO;
 import com.shneddy.dietdiary.dao.FoodDAO;
 import com.shneddy.dietdiary.dao.FoodTypeDAO;
 import com.shneddy.dietdiary.dao.TypeAndFoodDAO;
 import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.Food;
+import com.shneddy.dietdiary.entity.FoodAndEntry;
 import com.shneddy.dietdiary.entity.FoodType;
 
 import androidx.room.Database;
@@ -23,7 +25,7 @@ public abstract class FoodDiaryDatabase extends RoomDatabase {
     public abstract DiaryEntryDAO entryDAO();
     public abstract FoodTypeDAO foodTypeDAO();
     public abstract TypeAndFoodDAO typeAndFoodDAO();
-
+    public abstract FoodAndEntryDAO foodAndEntryDAO();
 
     public static synchronized FoodDiaryDatabase getInstance(Context context){
         if (instance == null){
@@ -34,5 +36,4 @@ public abstract class FoodDiaryDatabase extends RoomDatabase {
         }
         return instance;
     }
-
 }

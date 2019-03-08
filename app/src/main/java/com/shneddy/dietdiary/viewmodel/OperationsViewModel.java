@@ -1,11 +1,10 @@
-package com.shneddy.dietdiary;
+package com.shneddy.dietdiary.viewmodel;
 
 import android.app.Application;
 
 import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodAndType;
-import com.shneddy.dietdiary.entity.FoodAndTypeData;
 import com.shneddy.dietdiary.entity.FoodType;
 import com.shneddy.dietdiary.repository.DiaryEntryRepository;
 import com.shneddy.dietdiary.repository.FoodRepository;
@@ -16,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-public class ViewModel extends AndroidViewModel {
+public class OperationsViewModel extends AndroidViewModel {
 
     private FoodRepository foodRepository;
     private DiaryEntryRepository diaryEntryRepository;
@@ -31,7 +30,7 @@ public class ViewModel extends AndroidViewModel {
     /*
         constructor
      */
-    public ViewModel(@NonNull Application application) {
+    public OperationsViewModel(@NonNull Application application) {
         super(application);
         diaryEntryRepository = new DiaryEntryRepository(application);
         foodRepository = new FoodRepository(application);

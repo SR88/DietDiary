@@ -2,7 +2,6 @@ package com.shneddy.dietdiary.dao;
 
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodAndType;
-import com.shneddy.dietdiary.entity.FoodAndTypeData;
 
 import java.util.List;
 

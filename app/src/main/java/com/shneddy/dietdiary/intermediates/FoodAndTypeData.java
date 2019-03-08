@@ -1,4 +1,4 @@
-package com.shneddy.dietdiary.entity;
+package com.shneddy.dietdiary.intermediates;
 
 public class FoodAndTypeData {
 

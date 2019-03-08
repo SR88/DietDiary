@@ -1,4 +1,4 @@
-package com.shneddy.dietdiary;
+package com.shneddy.dietdiary.viewmodel;
 
 import android.app.Application;
 
@@ -11,19 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-public class TestJoinVM extends AndroidViewModel {
+public class TypeAndFoodViewModel extends AndroidViewModel {
 
     private TypeAndFoodRepository typeAndFoodRepository;
     private LiveData<List<TypeAndFood>> mAllTypeAndFoodList;
+    private List<TypeAndFood> mListTypesAndFoods;
 
-
-    public TestJoinVM(@NonNull Application application) {
+    public TypeAndFoodViewModel(@NonNull Application application) {
         super(application);
         typeAndFoodRepository = new TypeAndFoodRepository(application);
         mAllTypeAndFoodList = typeAndFoodRepository.getTypeAndFoodLiveData();
+
     }
 
     public LiveData<List<TypeAndFood>> getTypeAndFoods(){
         return mAllTypeAndFoodList;
+    }
+
+    public List<TypeAndFood> getByIdList(int id){
+        return mListTypesAndFoods = typeAndFoodRepository.getTypeAndFoodById(id);
     }
 }

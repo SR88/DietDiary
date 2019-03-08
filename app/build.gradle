@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.shneddy.dietdiary"
-        minSdkVersion 28
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -25,7 +25,7 @@ android {
 
 dependencies {
     def lifecycle_version = "2.0.0"
-    // ViewModel and LiveData
+    // OperationsViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     //     AndroidX libraries use this lightweight import for Lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"

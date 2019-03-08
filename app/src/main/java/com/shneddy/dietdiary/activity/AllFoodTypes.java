@@ -1,5 +1,6 @@
 package com.shneddy.dietdiary.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,15 +12,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.shneddy.dietdiary.viewmodel.OperationsViewModel;
 import com.shneddy.dietdiary.R;
-import com.shneddy.dietdiary.ViewModel;
+import com.shneddy.dietdiary.viewmodel.TypeAndFoodViewModel;
 import com.shneddy.dietdiary.adapters.FoodTypeAdapter;
 import com.shneddy.dietdiary.entity.FoodType;
+import com.shneddy.dietdiary.entity.TypeAndFood;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -34,7 +38,9 @@ public class AllFoodTypes extends AppCompatActivity {
     public static final String FOODTYPE_DESCRIPTION = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_DESCRIPTION";
     public static final int ADD_FOODTYPE_REQUEST = 1;
     public static final int EDIT_FOODTYPE_REQUEST = 2;
-    private ViewModel viewModel;
+    private OperationsViewModel operationsViewModel;
+    private TypeAndFoodViewModel joinVM;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +65,11 @@ public class AllFoodTypes extends AppCompatActivity {
         final FoodTypeAdapter foodTypeAdapter = new FoodTypeAdapter();
         recyclerView.setAdapter(foodTypeAdapter);
 
-        viewModel = ViewModelProviders.of(this).get(ViewModel.class);
-        viewModel.getAllFoodTypes().observe(this, new Observer<List<FoodType>>() {
+
+        joinVM = ViewModelProviders.of(this).get(TypeAndFoodViewModel.class);
+
+        operationsViewModel = ViewModelProviders.of(this).get(OperationsViewModel.class);
+        operationsViewModel.getAllFoodTypes().observe(this, new Observer<List<FoodType>>() {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
                 foodTypeAdapter.setFoodTypes(foodTypes);
@@ -79,11 +88,36 @@ public class AllFoodTypes extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT) {
-                    viewModel.deleteFoodType(foodTypeAdapter
-                            .getFoodTypeAt(viewHolder.getAdapterPosition()));
-                    Toast.makeText(AllFoodTypes.this, "Food Type was deleted.",
-                            Toast.LENGTH_SHORT).show();
+
+                    FoodType tempFood = foodTypeAdapter.getFoodTypeAt(viewHolder.getAdapterPosition());
+                    List<TypeAndFood> checkList = joinVM.getByIdList(tempFood.getId());
+
+                    if(checkList.get(0).relFoodList.size() > 0){
+                        // todo create popup and cascade delete if true
+                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AllFoodTypes.this);
+                        alertBuilder.setMessage("There are Foods attached to this Food Type. If you choose to delete this Food Type, the Foods associated with this type and their entries in your diary will also be deleted!")
+                                .setCancelable(true)
+                                .setPositiveButton("Delete Food Type", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        deleteFoodType(checkList.get(0).foodType.getId());
+                                    }
+                                })
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        foodTypeAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                    }
+                                });
+                        AlertDialog alertDialog = alertBuilder.create();
+                        alertDialog.setTitle("Attached Foods Detected!");
+                        alertDialog.show();
+                    } else {
+                        deleteFoodType(checkList.get(0).foodType.getId());
+                    }
                 }
+
 
                 if (direction == ItemTouchHelper.RIGHT) {
                     FoodType editedFood = foodTypeAdapter
@@ -155,6 +189,14 @@ public class AllFoodTypes extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
+    private void deleteFoodType(int id) {
+        FoodType deleteFoodType = new FoodType("dummy data", "dummy data");
+        deleteFoodType.setId(id); // the only thing that room cares about when deleting
+        operationsViewModel.deleteFoodType(deleteFoodType);
+        Toast.makeText(AllFoodTypes.this, "Food Type was deleted.",
+                Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -164,7 +206,7 @@ public class AllFoodTypes extends AppCompatActivity {
             String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
 
             FoodType foodType = new FoodType(foodTypeName, foodTypeDescription);
-            viewModel.insertFoodType(foodType);
+            operationsViewModel.insertFoodType(foodType);
 
             Toast.makeText(this, "Food Type saved.", Toast.LENGTH_SHORT).show();
         }
@@ -179,7 +221,7 @@ public class AllFoodTypes extends AppCompatActivity {
 
                 FoodType updateFood = new FoodType(updateFoodTypeName, updateFoodTypeDescription);
                 updateFood.setId(id);
-                viewModel.updateFoodType(updateFood);
+                operationsViewModel.updateFoodType(updateFood);
             }
         }
     }

@@ -16,5 +16,6 @@ public interface TypeAndFoodDAO {
     @Query("Select * from food_type")
     LiveData<List<TypeAndFood>> getTypeAndFoodsList();
 
-
+    @Query("Select * from food_type where food_type.id = :id")
+    List<TypeAndFood> getFoodAndTypeById(int id);
 }

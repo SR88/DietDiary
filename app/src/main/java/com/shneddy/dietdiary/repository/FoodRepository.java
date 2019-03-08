@@ -10,7 +10,6 @@ import com.shneddy.dietdiary.database.FoodDiaryDatabase;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.FoodAndType;
-import com.shneddy.dietdiary.entity.FoodAndTypeData;
 import com.shneddy.dietdiary.entity.FoodType;
 
 import java.util.List;

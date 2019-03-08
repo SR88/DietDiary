@@ -13,8 +13,8 @@ import androidx.lifecycle.LiveData;
 public class TypeAndFoodRepository {
 
     TypeAndFoodDAO typeAndFoodDAO;
-// private LiveData<List<FoodType>> allFoodTypes;
     private LiveData<List<TypeAndFood>> listLiveData;
+    private List<TypeAndFood> typeAndFoodByIdList;
 
     public TypeAndFoodRepository(Application application) {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
@@ -25,4 +25,9 @@ public class TypeAndFoodRepository {
     public LiveData<List<TypeAndFood>> getTypeAndFoodLiveData(){
         return listLiveData;
     }
+
+    public List<TypeAndFood> getTypeAndFoodById(int id) {
+        return typeAndFoodByIdList = typeAndFoodDAO.getFoodAndTypeById(id);
+    }
+
 }

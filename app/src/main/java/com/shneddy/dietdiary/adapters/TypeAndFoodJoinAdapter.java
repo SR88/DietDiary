@@ -7,11 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shneddy.dietdiary.R;
-import com.shneddy.dietdiary.entity.Food;
-import com.shneddy.dietdiary.entity.FoodAndType;
-import com.shneddy.dietdiary.entity.FoodAndTypeData;
-import com.shneddy.dietdiary.entity.FoodType;
-import com.shneddy.dietdiary.entity.TypeAndFood;
+import com.shneddy.dietdiary.intermediates.FoodAndTypeData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +15,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ShitAdapter extends RecyclerView.Adapter<ShitAdapter.TypeFoodHolder>{
+public class TypeAndFoodJoinAdapter extends RecyclerView.Adapter<TypeAndFoodJoinAdapter.TypeFoodHolder>{
 
     private List<FoodAndTypeData> flatList = new ArrayList<>();
 
@@ -43,6 +39,15 @@ public class ShitAdapter extends RecyclerView.Adapter<ShitAdapter.TypeFoodHolder
     @Override
     public int getItemCount() {
         return flatList.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return flatList.get(position).getId();
+    }
+
+    public FoodAndTypeData getFoodAndType(int pos){
+        return flatList.get(pos);
     }
 
     public void setList(List<FoodAndTypeData> typeAndFoods) {

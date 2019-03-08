@@ -4,31 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(
         foreignKeys =
                 @ForeignKey(entity = FoodType.class,
                         parentColumns = "id",
-                        childColumns = "foodTypeId"
-                ), indices = @Index(value = "id", unique = true))
+                        childColumns = "foodTypeId",
+                        onDelete = CASCADE))
 public class Food {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
     private String name;
+    @NonNull
     private double gramsSugar;
+    @NonNull
     private int foodTypeId;
-//    private String foodTypeName;
 
-    @Ignore
-    FoodType foodType;
-
-
-    public Food(String name, double gramsSugar, int foodTypeId) {
+    public Food(String name, @NonNull double gramsSugar, @NonNull int foodTypeId) {
         this.name = name;
         this.gramsSugar = gramsSugar;
         this.foodTypeId = foodTypeId;
@@ -37,8 +35,6 @@ public class Food {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public int getId() {
         return id;
@@ -70,14 +66,6 @@ public class Food {
 
     public Food getFood(){
         return this;
-    }
-
-    public FoodType getFoodType() {
-        return foodType;
-    }
-
-    public void setFoodType(FoodType foodType) {
-        this.foodType = foodType;
     }
 
     @Override

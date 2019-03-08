@@ -18,9 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shneddy.dietdiary.viewmodel.OperationsViewModel;
 import com.shneddy.dietdiary.R;
-import com.shneddy.dietdiary.ViewModel;
-import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodType;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class EditorFood extends AppCompatActivity {
 
     private int previousId, editSelectedFoodType;
     private List<FoodType> foodTypeList = new ArrayList<>();
-    ViewModel viewModel;
+    OperationsViewModel operationsViewModel;
     private Spinner spinner;
     private EditText etName, etSugar;
     private Intent intent;
@@ -96,8 +95,8 @@ public class EditorFood extends AppCompatActivity {
         this.etSugar = findViewById(R.id.edittext_gramssugar);
         this.spinner = findViewById(R.id.spinner_foodtype);
 
-        viewModel = ViewModelProviders.of(this).get(ViewModel.class);
-        foodTypeList = viewModel.getAllFoodTypesList();
+        operationsViewModel = ViewModelProviders.of(this).get(OperationsViewModel.class);
+        foodTypeList = operationsViewModel.getAllFoodTypesList();
 
         spinner.setAdapter(baseAdapter);
         spinner.setOnItemSelectedListener(new AdapterView
@@ -109,7 +108,7 @@ public class EditorFood extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("Editor Food: ", "NOThING");
+                Log.d("Editor Food: ", "NOTHING");
             }
         });
 
@@ -117,11 +116,9 @@ public class EditorFood extends AppCompatActivity {
 
         // Create new food
         if(intent.hasExtra(AllFoods.FOOD_ID)){
-            previousId = Integer.parseInt(intent.getStringExtra(AllFoods.FOOD_ID));
             setTitle("Edit your Food");
+            previousId = intent.getIntExtra(AllFoods.FOOD_ID, -1);
             etName.setText(intent.getStringExtra(AllFoods.FOOD_NAME));
-            Log.d("Editor Food", String.valueOf(previousId));
-            Log.d("Editor Food", etName.toString());
             etSugar.setText(String.valueOf(intent
                     .getDoubleExtra(AllFoods.FOOD_SUGAR, 5.5)));
             int foodTypeId = intent.getIntExtra(AllFoods.FOOD_FOODTYPE,0);
@@ -170,6 +167,9 @@ public class EditorFood extends AppCompatActivity {
             return;
         } else {
             Intent dataReturn = new Intent();
+            if (previousId > 0){
+                dataReturn.putExtra(EXTRA_FOOD_ID, previousId);
+            }
             dataReturn.putExtra(EXTRA_FOOD_FOOD_NAME, name);
             dataReturn.putExtra(EXTRA_FOOD_SUGARS, sugars);
             dataReturn.putExtra(EXTRA_FOOD_FOODTYPE_ID, getSpinnerVal());
