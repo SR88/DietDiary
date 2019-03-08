@@ -58,7 +58,7 @@ public class AllFoods extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview_allfoods);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
 
         final TypeAndFoodJoinAdapter typeAndFoodJoinAdapter = new TypeAndFoodJoinAdapter();
         recyclerView.setAdapter(typeAndFoodJoinAdapter);

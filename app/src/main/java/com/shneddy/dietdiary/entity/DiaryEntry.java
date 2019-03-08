@@ -6,19 +6,20 @@ import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = @ForeignKey(entity = Food.class, parentColumns = "id", childColumns = "foodId", onDelete = CASCADE))
+@Entity(foreignKeys = {@ForeignKey(entity = Food.class, parentColumns = "id", childColumns = "foodId", onDelete = CASCADE),
+        @ForeignKey(entity = Diem.class, parentColumns = "id", childColumns = "diemId", onDelete = CASCADE)})
 public class DiaryEntry {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int foodId;
     private double portionSize;
-    private String date;
+    private int diemId;
 
-    public DiaryEntry(int foodId, double portionSize, String date) {
+    public DiaryEntry(int foodId, double portionSize, int diemId) {
         this.foodId = foodId;
         this.portionSize = portionSize;
-        this.date = date;
+        this.diemId = diemId;
     }
 
     public int getFoodId() {
@@ -41,12 +42,12 @@ public class DiaryEntry {
         this.foodId = foodId;
     }
 
-    public String getDate() {
-        return date;
+    public int getDiemId() {
+        return diemId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDiemId(int diemId) {
+        this.diemId = diemId;
     }
 
     public void setPortionSize(double portionSize) {
@@ -59,7 +60,7 @@ public class DiaryEntry {
                 "id=" + id +
                 ", foodId=" + foodId +
                 ", portionSize=" + portionSize +
-                ", date='" + date + '\'' +
+                ", diemId=" + diemId +
                 '}';
     }
 }

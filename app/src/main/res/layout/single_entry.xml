@@ -1,6 +1,4 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
@@ -8,14 +6,13 @@
     android:layout_marginEnd="8dp">
 
     <RelativeLayout
-        android:id="@+id/layout_single_food_background"
+        android:id="@+id/layout_single_entry_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f74242"
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/icon_delete_food"
+            android:id="@+id/icon_delete_entry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -24,18 +21,18 @@
             android:src="@drawable/ic_delete_black_24dp" />
 
         <TextView
-            android:id="@+id/textview_delete_food"
+            android:id="@+id/textview_delete_entry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:layout_toStartOf="@+id/icon_delete_food"
+            android:layout_toStartOf="@+id/icon_delete_entry"
             android:text="Delete"
             android:textAllCaps="true"
             android:textColor="#FFFFFF" />
 
         <ImageView
-            android:id="@+id/icon_edit_food"
+            android:id="@+id/icon_edit_entry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -44,21 +41,19 @@
             android:src="@drawable/ic_edit_black_24dp" />
 
         <TextView
-            android:id="@+id/textview_edit_food"
+            android:id="@+id/textview_edit_entry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:layout_toEndOf="@+id/icon_edit_food"
+            android:layout_toEndOf="@+id/icon_edit_entry"
             android:text="Edit"
             android:textAllCaps="true"
             android:textColor="#FFFFFF" />
 
-
     </RelativeLayout>
 
     <RelativeLayout
-
         android:id="@+id/layout_single_food_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,35 +61,32 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/textview_food_name"
+            android:id="@+id/textView_entries_sugars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="26g"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:id="@+id/textView_entries_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Food Name Here"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:text="Dec. 31 2019"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/textview_food_foodtype"
+            android:id="@+id/textView_entries_infoods"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textview_food_name"
+            android:layout_below="@id/textView_entries_sugars"
             android:layout_alignParentRight="true"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Food Type" />
-
-        <TextView
-            android:id="@+id/textview_food_grams_sugar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textview_food_name"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/textview_food_foodtype"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Grams Sugar" />
+            android:text="of sugar in 12 foods"
+            android:textAlignment="textEnd" />
 
     </RelativeLayout>
 

@@ -3,10 +3,12 @@ package com.shneddy.dietdiary.viewmodel;
 import android.app.Application;
 
 import com.shneddy.dietdiary.entity.DiaryEntry;
+import com.shneddy.dietdiary.entity.Diem;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodAndType;
 import com.shneddy.dietdiary.entity.FoodType;
 import com.shneddy.dietdiary.repository.DiaryEntryRepository;
+import com.shneddy.dietdiary.repository.DiemRepository;
 import com.shneddy.dietdiary.repository.FoodRepository;
 import com.shneddy.dietdiary.repository.FoodTypeRepository;
 
@@ -20,12 +22,14 @@ public class OperationsViewModel extends AndroidViewModel {
     private FoodRepository foodRepository;
     private DiaryEntryRepository diaryEntryRepository;
     private FoodTypeRepository foodTypeRepository;
+    private DiemRepository diemRepository;
 
     private LiveData<List<Food>> allFoods;
     private LiveData<List<DiaryEntry>> allFoodDiaries;
     private LiveData<List<FoodType>> allFoodTypes;
     private List<FoodType> allFoodTypesList;
     private LiveData<List<FoodAndType>> allFoodsAndType;
+    private List<Diem> listDiemByDate;
 
     /*
         constructor
@@ -35,14 +39,13 @@ public class OperationsViewModel extends AndroidViewModel {
         diaryEntryRepository = new DiaryEntryRepository(application);
         foodRepository = new FoodRepository(application);
         foodTypeRepository = new FoodTypeRepository(application);
-
+        diemRepository = new DiemRepository(application);
 
         allFoods = foodRepository.getAllFoods();
         allFoodsAndType = foodRepository.getAllFoodsAndTypes();
         allFoodDiaries = diaryEntryRepository.getAllFoodEntries();
         allFoodTypes = foodTypeRepository.getAllFoodTypes();
         allFoodTypesList = foodTypeRepository.getAllFoodTypesList();
-
     }
 
 
@@ -122,4 +125,22 @@ public class OperationsViewModel extends AndroidViewModel {
     public List<FoodType> getAllFoodTypesList() {return allFoodTypesList; }
 
 
+    /*
+        Diem Methods
+     */
+    public void insertDiem(Diem diem){
+        diemRepository.insert(diem);
+    }
+
+    public void updateDiem(Diem diem){
+        diemRepository.update(diem);
+    }
+
+    public void deleteDiem(Diem diem){
+        diemRepository.delete(diem);
+    }
+
+    public List<Diem> getDiemByDate(String date){
+        return listDiemByDate = diemRepository.getByDate(date);
+    }
 }
