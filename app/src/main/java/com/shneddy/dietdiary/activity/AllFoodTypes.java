@@ -93,7 +93,7 @@ public class AllFoodTypes extends AppCompatActivity {
                     intent.putExtra(FOODTYPE_ID, editedFood.getId());
                     intent.putExtra(FOODTYPE_NAME, editedFood.getType());
                     intent.putExtra(FOODTYPE_DESCRIPTION, editedFood.getDescription());
-//                    startActivityForResult(intent, EDIT_FOODTYPE_REQUEST);
+                    startActivityForResult(intent, EDIT_FOODTYPE_REQUEST);
                 }
 
             }

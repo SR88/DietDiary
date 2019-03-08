@@ -36,7 +36,7 @@ public class ShitAdapter extends RecyclerView.Adapter<ShitAdapter.TypeFoodHolder
     public void onBindViewHolder(@NonNull TypeFoodHolder holder, int position) {
         FoodAndTypeData data = flatList.get(position);
         holder.name.setText(data.getName());
-        holder.sugars.setText(String.valueOf(data.getGramsSugar()));
+        holder.sugars.setText(String.valueOf(data.getGramsSugar()) + " grams sugar per serving.");
         holder.foodType.setText(data.getFoodType());
     }
 
