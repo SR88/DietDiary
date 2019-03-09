@@ -56,7 +56,7 @@ public class AllFoods extends AppCompatActivity {
 
         setTitle("All Of Your Foods");
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview_allfoods);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview_allconsumptions);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(false);
 
@@ -91,7 +91,7 @@ public class AllFoods extends AppCompatActivity {
 
 
         // Floating action button to add new food
-        FloatingActionButton fab = findViewById(R.id.fab_add_food);
+        FloatingActionButton fab = findViewById(R.id.fab_add_consumption);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.Diem;
+import com.shneddy.dietdiary.entity.DiemAndEntry;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodAndType;
 import com.shneddy.dietdiary.entity.FoodType;
@@ -30,6 +31,8 @@ public class OperationsViewModel extends AndroidViewModel {
     private List<FoodType> allFoodTypesList;
     private LiveData<List<FoodAndType>> allFoodsAndType;
     private List<Diem> listDiemByDate;
+    private List<DiemAndEntry> listDiemById;
+    private LiveData<List<Diem>> allDiems;
 
     /*
         constructor
@@ -46,6 +49,7 @@ public class OperationsViewModel extends AndroidViewModel {
         allFoodDiaries = diaryEntryRepository.getAllFoodEntries();
         allFoodTypes = foodTypeRepository.getAllFoodTypes();
         allFoodTypesList = foodTypeRepository.getAllFoodTypesList();
+        allDiems = diemRepository.getLiveDataDiems();
     }
 
 
@@ -142,5 +146,13 @@ public class OperationsViewModel extends AndroidViewModel {
 
     public List<Diem> getDiemByDate(String date){
         return listDiemByDate = diemRepository.getByDate(date);
+    }
+
+    public List<DiemAndEntry> getDiemById(int id){
+        return listDiemById = diemRepository.getById(id);
+    }
+
+    public LiveData<List<Diem>> getAllDiems() {
+        return allDiems;
     }
 }

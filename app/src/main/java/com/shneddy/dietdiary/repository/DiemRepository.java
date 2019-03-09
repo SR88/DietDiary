@@ -6,23 +6,42 @@ import android.os.AsyncTask;
 import com.shneddy.dietdiary.dao.DiemDAO;
 import com.shneddy.dietdiary.database.FoodDiaryDatabase;
 import com.shneddy.dietdiary.entity.Diem;
+import com.shneddy.dietdiary.entity.DiemAndEntry;
 
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
 
 public class DiemRepository {
 
     private DiemDAO dao;
     private List<Diem> listDiemByDate;
+    private LiveData<List<Diem>> joinedData;
+    private LiveData<List<Diem>> liveDataDiems;
+    private List<DiemAndEntry> listDiemById;
 
     public DiemRepository(Application app) {
         FoodDiaryDatabase db = FoodDiaryDatabase.getInstance(app);
         dao = db.diemDAO();
+        joinedData = dao.getJoinedTables();
+        liveDataDiems = dao.getLiveDataDiem();
     }
 
     public List<Diem> getByDate(String stringDate){
         return listDiemByDate = dao.getByDateString(stringDate);
     }
 
+    public List<DiemAndEntry> getById(int id){
+        return listDiemById = dao.joinGetById(id);
+    }
+
+    public LiveData<List<Diem>> getLiveDataDiems(){
+        return liveDataDiems;
+    }
+
+    public LiveData<List<Diem>> getJoinedData(){
+        return joinedData;
+    }
 
     public void insert(Diem diem){
         new InsertDiemAsyncTask(dao).execute(diem);

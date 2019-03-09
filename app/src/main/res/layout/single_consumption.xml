@@ -7,7 +7,6 @@
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginTop="6dp">
-
     <RelativeLayout
         android:id="@+id/layout_single_consumption_background"
         android:layout_width="match_parent"
@@ -59,34 +58,41 @@
     </RelativeLayout>
 
     <RelativeLayout
-
-        android:id="@+id/layout_single_foodtype_foreground"
+        android:id="@+id/layout_single_consumption_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/background_light"
-        android:padding="8dp"
-        >
+        android:padding="8dp">
 
         <TextView
-            android:id="@+id/textview_foodtypename"
+            android:id="@+id/textView_consumptions_sugars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="26g"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <TextView
+            android:id="@+id/textView_consumption_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Food Type Here"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:text="KitKat"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/textview_foodtypedescription"
+            android:id="@+id/textView_consumption_infoods"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textview_foodtypename"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Description goes here." />
-
+            android:layout_below="@id/textView_consumptions_sugars"
+            android:layout_alignParentRight="true"
+            android:text="in x serving(s)"
+            android:textAlignment="textEnd" />
 
     </RelativeLayout>
+
 
 </androidx.cardview.widget.CardView>

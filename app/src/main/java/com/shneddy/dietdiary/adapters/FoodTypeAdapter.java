@@ -3,8 +3,6 @@ package com.shneddy.dietdiary.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -62,7 +60,7 @@ public class FoodTypeAdapter extends RecyclerView.Adapter<FoodTypeAdapter.FoodTy
             super(itemView);
             name = itemView.findViewById(R.id.textview_foodtypename);
             description = itemView.findViewById(R.id.textview_foodtypedescription);
-            viewBackground = itemView.findViewById(R.id.layout_single_foodtype_background);
+            viewBackground = itemView.findViewById(R.id.layout_single_consumption_background);
             viewForeground = itemView.findViewById(R.id.layout_single_foodtype_foreground);
 
         }

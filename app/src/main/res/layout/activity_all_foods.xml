@@ -7,7 +7,7 @@
     tools:context=".activity.AllFoods">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_allfoods"
+        android:id="@+id/recyclerview_allconsumptions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/single_food"
@@ -15,7 +15,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_food"
+        android:id="@+id/fab_add_consumption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"

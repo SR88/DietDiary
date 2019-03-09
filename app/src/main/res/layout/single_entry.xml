@@ -6,7 +6,7 @@
     android:layout_marginEnd="8dp">
 
     <RelativeLayout
-        android:id="@+id/layout_single_entry_background"
+        android:id="@+id/layout_single_diem_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp">
@@ -21,7 +21,7 @@
             android:src="@drawable/ic_delete_black_24dp" />
 
         <TextView
-            android:id="@+id/textview_delete_entry"
+            android:id="@+id/textview_delete_consumption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -32,7 +32,7 @@
             android:textColor="#FFFFFF" />
 
         <ImageView
-            android:id="@+id/icon_edit_entry"
+            android:id="@+id/icon_edit_consumption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -41,12 +41,12 @@
             android:src="@drawable/ic_edit_black_24dp" />
 
         <TextView
-            android:id="@+id/textview_edit_entry"
+            android:id="@+id/textview_edit_consumption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:layout_toEndOf="@+id/icon_edit_entry"
+            android:layout_toEndOf="@+id/icon_edit_consumption"
             android:text="Edit"
             android:textAllCaps="true"
             android:textColor="#FFFFFF" />
@@ -54,22 +54,22 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/layout_single_food_foreground"
+        android:id="@+id/layout_single_consumption_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/background_light"
         android:padding="8dp">
 
-        <TextView
-            android:id="@+id/textView_entries_sugars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="26g"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:layout_alignParentRight="true"/>
+        <!--<TextView-->
+            <!--android:id="@+id/textView_entries_sugars"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="26g"-->
+            <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+            <!--android:layout_alignParentRight="true"/>-->
 
         <TextView
-            android:id="@+id/textView_entries_date"
+            android:id="@+id/textView_consumption_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -79,14 +79,14 @@
             android:text="Dec. 31 2019"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-        <TextView
-            android:id="@+id/textView_entries_infoods"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView_entries_sugars"
-            android:layout_alignParentRight="true"
-            android:text="of sugar in 12 foods"
-            android:textAlignment="textEnd" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView_entries_infoods"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/textView_entries_sugars"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:text="of sugar in 12 foods"-->
+            <!--android:textAlignment="textEnd" />-->
 
     </RelativeLayout>
 

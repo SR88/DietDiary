@@ -1,7 +1,10 @@
 package com.shneddy.dietdiary.entity;
 
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /*
@@ -15,6 +18,17 @@ public class Diem {
     private int id;
     @NonNull
     private String date;
+
+    @Ignore
+    Date diemDate;
+
+    public Date getDiemDate() {
+        return diemDate;
+    }
+
+    public void setDiemDate(Date diemDate) {
+        this.diemDate = diemDate;
+    }
 
     public Diem(@NonNull String date) {
         this.date = date;
