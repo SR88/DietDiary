@@ -54,13 +54,5 @@ public class DiaryEntry {
         this.portionSize = portionSize;
     }
 
-    @Override
-    public String toString() {
-        return "DiaryEntry{" +
-                "id=" + id +
-                ", foodId=" + foodId +
-                ", portionSize=" + portionSize +
-                ", diemId=" + diemId +
-                '}';
-    }
+
 }

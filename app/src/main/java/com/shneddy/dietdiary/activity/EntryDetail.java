@@ -29,7 +29,6 @@ import static com.shneddy.dietdiary.activity.AllEntries.ENTRY_ID;
 public class EntryDetail extends AppCompatActivity {
 
     private OperationsViewModel opsVM;
-    public static final int ADD_CONSUMPTION = 1;
     public static final String DIEM_ID = "EntryDetail.ID";
     int diemId;
     String diemDate;
@@ -70,12 +69,13 @@ public class EntryDetail extends AppCompatActivity {
                     collectiveData.setPortionSize(d.getPortionSize());
                     collectiveData.setName(tempFood.getName());
                     collectiveData.setId(d.getId());
+                    collectiveData.setFoodId(foodId);
                     collectiveData.setCalcSugars(d.getPortionSize() * tempFood.getGramsSugar());
                     intermediateList.add(collectiveData);
                 }
                 adapter.setEntryAndFoodsList(intermediateList);
                 totalSugars.setText(String.valueOf(adapter.getDailyTotal())+"g");
-                totalFoods.setText("consumed in " + adapter.getItemCount() + "food(s)");
+                totalFoods.setText("consumed in " + adapter.getItemCount() + " food(s)");
             }
         });
 
@@ -87,7 +87,7 @@ public class EntryDetail extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(EntryDetail.this, EditorConsumption.class);
                 intent.putExtra(DIEM_ID, diemId);
-                startActivityForResult(intent, ADD_CONSUMPTION);
+                startActivity(intent);
             }
         });
     }

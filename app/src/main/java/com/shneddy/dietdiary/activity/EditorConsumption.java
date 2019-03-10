@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -86,21 +87,24 @@ public class EditorConsumption extends AppCompatActivity {
         this.spinner = findViewById(R.id.spinner_food);
         this.portionSize = findViewById(R.id.editText_consumption_portion);
 
+        intent = getIntent();
+        diemId = intent.getIntExtra(DIEM_ID, -1);
+
         opsVM = ViewModelProviders.of(this).get(OperationsViewModel.class);
         foodList = opsVM.getAllFoodsList();
 
         spinner.setAdapter(baseAdapter);
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner.setOnItemSelectedListener(new AdapterView
+                .OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 baseAdapter.notifyDataSetChanged();
             }
-        });
 
-        intent = getIntent();
-        if(intent.hasExtra(DIEM_ID)) {
-            diemId = intent.getIntExtra(DIEM_ID, -1);
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     @Override
@@ -132,11 +136,21 @@ public class EditorConsumption extends AppCompatActivity {
             return;
         } else {
             DiaryEntry diaryEntry = new DiaryEntry(
-                    null,
+                    getSpinnerVal(),
                     Double.parseDouble(portionSize.getText().toString()),
                     diemId);
-            opsVM.insertFoodDiary();
+
+            Log.d("Editor Consumption ", diaryEntry.toString());
+
+            opsVM.insertFoodDiary(diaryEntry);
+            setResult(RESULT_OK);
+            finish();
         }
+    }
+
+    private int getSpinnerVal(){
+        Food food = (Food) spinner.getSelectedItem();
+        return food.getId();
     }
 
 }
