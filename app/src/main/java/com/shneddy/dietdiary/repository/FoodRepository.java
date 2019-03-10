@@ -26,6 +26,7 @@ public class FoodRepository {
     private LiveData<List<DiaryEntry>> allFoodDiary;
     private LiveData<List<FoodAndType>> allFoodsAndTypes;
     private Food foodById;
+    private List<Food> getAllFoodsList;
 
 
     public FoodRepository(Application application) {
@@ -38,7 +39,7 @@ public class FoodRepository {
 
         foodTypeDAO = database.foodTypeDAO();
         allFoodTypes = foodTypeDAO.getAllFoodTypes();
-
+        getAllFoodsList = foodDAO.getAllFoodsList();
         allFoodsAndTypes = foodDAO.foodsAndTypesList();
     }
 
@@ -60,6 +61,10 @@ public class FoodRepository {
 
     public LiveData<List<Food>> getAllFoods(){
         return allFoods;
+    }
+
+    public List<Food> getGetAllFoodsList(){
+        return getAllFoodsList;
     }
 
     public LiveData<List<FoodAndType>> getAllFoodsAndTypes(){

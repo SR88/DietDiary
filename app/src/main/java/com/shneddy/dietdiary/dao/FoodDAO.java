@@ -42,4 +42,6 @@ public interface FoodDAO {
 
     @Query("Select * from food where id = :id")
     Food getFoodById(int id);
+
+
 }

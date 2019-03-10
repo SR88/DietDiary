@@ -26,6 +26,7 @@ public class OperationsViewModel extends AndroidViewModel {
     private DiemRepository diemRepository;
 
     private LiveData<List<Food>> allFoods;
+    private List<Food> allFoodsList;
 
     private LiveData<List<DiaryEntry>> allFoodDiaries;
     private LiveData<List<DiaryEntry>> allEntriesByDiemId;
@@ -51,6 +52,7 @@ public class OperationsViewModel extends AndroidViewModel {
         diemRepository = new DiemRepository(application);
 
         allFoods = foodRepository.getAllFoods();
+        allFoodsList = foodRepository.getGetAllFoodsList();
         allFoodsAndType = foodRepository.getAllFoodsAndTypes();
         allFoodDiaries = diaryEntryRepository.getAllFoodEntries();
         allFoodTypes = foodTypeRepository.getAllFoodTypes();
@@ -80,6 +82,10 @@ public class OperationsViewModel extends AndroidViewModel {
 
     public LiveData<List<Food>> getAllFoods(){
         return allFoods;
+    }
+
+    public List<Food> getAllFoodsList(){
+        return allFoodsList;
     }
 
     public LiveData<List<FoodAndType>> getAllFoodsAndTypes() {

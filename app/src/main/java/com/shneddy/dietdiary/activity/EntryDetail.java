@@ -30,6 +30,7 @@ public class EntryDetail extends AppCompatActivity {
 
     private OperationsViewModel opsVM;
     public static final int ADD_CONSUMPTION = 1;
+    public static final String DIEM_ID = "EntryDetail.ID";
     int diemId;
     String diemDate;
     TextView totalSugars, totalFoods;
@@ -85,6 +86,7 @@ public class EntryDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EntryDetail.this, EditorConsumption.class);
+                intent.putExtra(DIEM_ID, diemId);
                 startActivityForResult(intent, ADD_CONSUMPTION);
             }
         });
