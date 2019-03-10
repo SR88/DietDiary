@@ -1,5 +1,6 @@
 package com.shneddy.dietdiary.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
     @Override
     public ConsumptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_food, parent, false);
+                .inflate(R.layout.single_consumption, parent, false);
 
         return new ConsumptionHolder(itemView);
     }
@@ -31,6 +32,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
     @Override
     public void onBindViewHolder(@NonNull ConsumptionHolder holder, int position) {
         EntryAndFoodData data = officialList.get(position);
+        Log.d("onBindViewHolder ", data.toString());
         holder.name.setText(data.getName());
         holder.portionSize.setText("in " +String.valueOf(data.getPortionSize()) + " serving(s)");
         holder.sugarsCalc.setText(String.valueOf(data.getCalcSugars()) +"g");
@@ -66,8 +68,8 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         public ConsumptionHolder(@NonNull View itemView) {
             super(itemView);
             sugarsCalc = itemView.findViewById(R.id.textView_consumptions_sugars);
-            name = itemView.findViewById(R.id.textView_consumptions_sugars);
-            portionSize = itemView.findViewById(R.id.textView_consumptions_sugars);
+            name = itemView.findViewById(R.id.textView_consumption_fooditem);
+            portionSize = itemView.findViewById(R.id.textView_consumption_infoods);
             viewBackground = itemView.findViewById(R.id.layout_single_consumption_background);
             viewForeground = itemView.findViewById(R.id.layout_single_consumption_foreground);
         }

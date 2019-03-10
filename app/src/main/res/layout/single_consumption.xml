@@ -34,26 +34,6 @@
             android:layout_marginRight="8dp"
             android:text="Delete" />
 
-        <ImageView
-            android:id="@+id/icon_edit_consumption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:src="@drawable/ic_edit_black_24dp"/>
-
-
-        <TextView
-            android:id="@+id/textview_edit_consumption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAllCaps="true"
-            android:textColor="#FFFFFF"
-            android:layout_toEndOf="@+id/icon_edit_consumption"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:text="Edit" />
 
     </RelativeLayout>
 
@@ -73,15 +53,18 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/textView_consumption_date"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView_consumption_fooditem"
+            android:layout_width="244dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="0dp"
+            android:layout_marginEnd="22dp"
+            android:layout_toStartOf="@+id/textView_consumption_infoods"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="KitKat"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/textView_consumption_infoods"

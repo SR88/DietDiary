@@ -64,6 +64,25 @@ public class AllFoods extends AppCompatActivity {
         recyclerView.setAdapter(typeAndFoodJoinAdapter);
 
         operationsVm = ViewModelProviders.of(this).get(OperationsViewModel.class); // this viewmodel is specifically for operations
+
+        if (operationsVm.getAllFoodTypesList().size() <= 1){
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AllFoods.this);
+            alertBuilder.setMessage("Please access and create a Food Type before creating a Food.")
+                    .setCancelable(false)
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+            AlertDialog alertDialog = alertBuilder.create();
+            alertDialog.setTitle("No Food Types Exist");
+            alertDialog.show();
+        }
+
+
+
         feViewModel = ViewModelProviders.of(this).get(FoodAndEntryViewModel.class); // this viewmodel is specifically for entry data
         tfViewModel = ViewModelProviders.of(this).get(TypeAndFoodViewModel.class);  // this viewmodel is specifically for the list data
         tfViewModel.getTypeAndFoods().observe(this, new Observer<List<TypeAndFood>>() {

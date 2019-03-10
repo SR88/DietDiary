@@ -11,16 +11,6 @@ public class EntryAndFoodData {
     private String date;
     private double calcSugars;
 
-    public double getCalcSugars() {
-        return calcSugars;
-    }
-
-    public void setCalcSugars(double calcSugars) {
-        this.calcSugars = calcSugars;
-    }
-
-    public EntryAndFoodData() {}
-
     public int getId() {
         return id;
     }
@@ -77,6 +67,14 @@ public class EntryAndFoodData {
         this.date = date;
     }
 
+    public double getCalcSugars() {
+        return calcSugars;
+    }
+
+    public void setCalcSugars(double calcSugars) {
+        this.calcSugars = calcSugars;
+    }
+
     @Override
     public String toString() {
         return "EntryAndFoodData{" +
@@ -87,6 +85,7 @@ public class EntryAndFoodData {
                 ", type='" + type + '\'' +
                 ", portionSize=" + portionSize +
                 ", date='" + date + '\'' +
+                ", calcSugars=" + calcSugars +
                 '}';
     }
 }

@@ -16,6 +16,7 @@ public class DiaryEntryRepository {
     private DiaryEntryDAO diaryEntryDAO;
     private LiveData<List<DiaryEntry>> allFoodDiary;
     private List<DiaryEntry> entryList;
+    private List<DiaryEntry> entryListByDiemId;
     private LiveData<List<DiaryEntry>> listLiveDataByDiemId;
 
     public DiaryEntryRepository(Application application) {
@@ -51,6 +52,12 @@ public class DiaryEntryRepository {
     public List<DiaryEntry> getAllEntriesList(){
         return entryList;
     }
+
+    public List<DiaryEntry> getAllEntriesListByDiemId(int id){
+        return entryListByDiemId = diaryEntryDAO.getAllEntriesListByDiemId(id);
+    }
+
+
 
     private static class InsertFoodDiariesAsyncTask extends AsyncTask<DiaryEntry, Void, Void>{
 

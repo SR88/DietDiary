@@ -103,9 +103,9 @@ public class AllEntries extends AppCompatActivity {
                     if(checkList.get(0).relDiaryList.size() > 0){
                         // todo create popup and cascade delete if true
                         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AllEntries.this);
-                        alertBuilder.setMessage("There are Foods attached to this Food Type. If you choose to delete this Food Type, the Foods associated with this type and their entries in your diary will also be deleted!")
+                        alertBuilder.setMessage("There are Entries attached to this Day!\r\rIf you choose to delete this Day, the Entries associated with will also be deleted!")
                                 .setCancelable(true)
-                                .setPositiveButton("Delete Food Type", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Delete Entry", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
@@ -119,7 +119,7 @@ public class AllEntries extends AppCompatActivity {
                                     }
                                 });
                         AlertDialog alertDialog = alertBuilder.create();
-                        alertDialog.setTitle("Attached Foods Detected!");
+                        alertDialog.setTitle("Attached Entries Detected!");
                         alertDialog.show();
                     } else {
                         deleteEntry(checkList.get(0).diem.getId());

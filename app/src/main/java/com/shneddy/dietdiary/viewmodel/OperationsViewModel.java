@@ -30,6 +30,7 @@ public class OperationsViewModel extends AndroidViewModel {
 
     private LiveData<List<DiaryEntry>> allFoodDiaries;
     private LiveData<List<DiaryEntry>> allEntriesByDiemId;
+    private List<DiaryEntry> listEntriesByDiemId;
 
     private LiveData<List<FoodType>> allFoodTypes;
     private List<FoodType> allFoodTypesList;
@@ -121,6 +122,10 @@ public class OperationsViewModel extends AndroidViewModel {
 
     public LiveData<List<DiaryEntry>> getAllEntriesByDiemId(int id) {
         return allEntriesByDiemId = diaryEntryRepository.getEntriesByDiemId(id);
+    }
+
+    public List<DiaryEntry> getListEntriesByDiemId(int id){
+        return listEntriesByDiemId = diaryEntryRepository.getAllEntriesListByDiemId(id);
     }
 
     /*
