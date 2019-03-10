@@ -19,7 +19,6 @@ public class DiemAndMoreViewModel extends AndroidViewModel {
     public DiemAndMoreViewModel(@NonNull Application application) {
         super(application);
         repo = new DiemRepository(application);
-        liveDataList = repo.getJoinedData();
     }
 
     public LiveData<List<Diem>> getLiveDataList(){

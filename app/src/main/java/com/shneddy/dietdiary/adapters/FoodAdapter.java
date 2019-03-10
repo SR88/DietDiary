@@ -61,7 +61,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder>{
             foodType = itemView.findViewById(R.id.textview_food_foodtype);
             viewBackground = itemView.findViewById(R.id.layout_single_food_background);
             viewForeground = itemView.findViewById(R.id.layout_single_food_foreground);
-
         }
     }
 

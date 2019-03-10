@@ -33,6 +33,6 @@ public interface DiemDAO {
     @Query("Select * from diem")
     LiveData<List<Diem>> getLiveDataDiem();
 
-    @Query("Select * from diem join diaryentry on diaryentry.diemId=diem.id inner join food on diaryentry.foodId=food.id")
+    @Query("Select * from diem join diaryentry on diaryentry.diemId=diem.id inner join food on diaryentry.foodId=food.id ")
     LiveData<List<Diem>> getJoinedTables();
 }

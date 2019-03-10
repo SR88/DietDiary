@@ -23,7 +23,6 @@ public class DiemRepository {
     public DiemRepository(Application app) {
         FoodDiaryDatabase db = FoodDiaryDatabase.getInstance(app);
         dao = db.diemDAO();
-        joinedData = dao.getJoinedTables();
         liveDataDiems = dao.getLiveDataDiem();
     }
 
@@ -31,9 +30,15 @@ public class DiemRepository {
         return listDiemByDate = dao.getByDateString(stringDate);
     }
 
-    public List<DiemAndEntry> getById(int id){
+    public LiveData<List<Diem>> getLiveById(){
+        return joinedData = dao.getJoinedTables();
+    }
+
+    public List<DiemAndEntry> getJoinEntryById(int id){
         return listDiemById = dao.joinGetById(id);
     }
+
+
 
     public LiveData<List<Diem>> getLiveDataDiems(){
         return liveDataDiems;

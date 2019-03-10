@@ -26,13 +26,19 @@ public class OperationsViewModel extends AndroidViewModel {
     private DiemRepository diemRepository;
 
     private LiveData<List<Food>> allFoods;
+
     private LiveData<List<DiaryEntry>> allFoodDiaries;
+    private LiveData<List<DiaryEntry>> allEntriesByDiemId;
+
     private LiveData<List<FoodType>> allFoodTypes;
     private List<FoodType> allFoodTypesList;
     private LiveData<List<FoodAndType>> allFoodsAndType;
+
     private List<Diem> listDiemByDate;
     private List<DiemAndEntry> listDiemById;
     private LiveData<List<Diem>> allDiems;
+
+    private Food foodById;
 
     /*
         constructor
@@ -80,6 +86,10 @@ public class OperationsViewModel extends AndroidViewModel {
         return allFoodsAndType;
     }
 
+    public Food getFoodById(int id){
+        return foodById = foodRepository.getFoodById(id);
+    }
+
     /*
         Diary Entry Methods
      */
@@ -101,6 +111,10 @@ public class OperationsViewModel extends AndroidViewModel {
 
     public LiveData<List<DiaryEntry>> getAllFoodDiarys(){
         return allFoodDiaries;
+    }
+
+    public LiveData<List<DiaryEntry>> getAllEntriesByDiemId(int id) {
+        return allEntriesByDiemId = diaryEntryRepository.getEntriesByDiemId(id);
     }
 
     /*
@@ -149,7 +163,7 @@ public class OperationsViewModel extends AndroidViewModel {
     }
 
     public List<DiemAndEntry> getDiemById(int id){
-        return listDiemById = diemRepository.getById(id);
+        return listDiemById = diemRepository.getJoinEntryById(id);
     }
 
     public LiveData<List<Diem>> getAllDiems() {

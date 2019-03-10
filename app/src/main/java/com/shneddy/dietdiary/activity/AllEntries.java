@@ -128,7 +128,7 @@ public class AllEntries extends AppCompatActivity {
                 if (direction == ItemTouchHelper.RIGHT) { // edit
                     Diem editedDiem = adapter
                             .getDiemAt(viewHolder.getAdapterPosition());
-                    Intent intent = new Intent(AllEntries.this, EditorFoodType.class); // todo change where this goes
+                    Intent intent = new Intent(AllEntries.this, EntryDetail.class); // todo change where this goes
                     intent.putExtra(ENTRY_DATE, editedDiem.getDate());
                     intent.putExtra(ENTRY_ID, editedDiem.getId());
                     startActivityForResult(intent, EDIT_FOOD_REQUEST);

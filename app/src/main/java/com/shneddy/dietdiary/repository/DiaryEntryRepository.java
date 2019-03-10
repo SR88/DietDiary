@@ -16,6 +16,7 @@ public class DiaryEntryRepository {
     private DiaryEntryDAO diaryEntryDAO;
     private LiveData<List<DiaryEntry>> allFoodDiary;
     private List<DiaryEntry> entryList;
+    private LiveData<List<DiaryEntry>> listLiveDataByDiemId;
 
     public DiaryEntryRepository(Application application) {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
@@ -41,6 +42,10 @@ public class DiaryEntryRepository {
 
     public LiveData<List<DiaryEntry>> getAllFoodEntries(){
         return allFoodDiary;
+    }
+
+    public LiveData<List<DiaryEntry>> getEntriesByDiemId(int id){
+        return listLiveDataByDiemId = diaryEntryDAO.getEntriesByDiemId(id);
     }
 
     public List<DiaryEntry> getAllEntriesList(){

@@ -9,6 +9,15 @@ public class EntryAndFoodData {
     private String type;
     private double portionSize;
     private String date;
+    private double calcSugars;
+
+    public double getCalcSugars() {
+        return calcSugars;
+    }
+
+    public void setCalcSugars(double calcSugars) {
+        this.calcSugars = calcSugars;
+    }
 
     public EntryAndFoodData() {}
 

@@ -25,6 +25,8 @@ public class FoodRepository {
     private LiveData<List<Food>> allFoods;
     private LiveData<List<DiaryEntry>> allFoodDiary;
     private LiveData<List<FoodAndType>> allFoodsAndTypes;
+    private Food foodById;
+
 
     public FoodRepository(Application application) {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
@@ -62,6 +64,10 @@ public class FoodRepository {
 
     public LiveData<List<FoodAndType>> getAllFoodsAndTypes(){
         return allFoodsAndTypes;
+    }
+
+    public Food getFoodById(int id){
+        return foodById = foodDAO.getFoodById(id);
     }
 
     private static class InsertFoodsAsyncTask extends AsyncTask<Food, Void, Void>{

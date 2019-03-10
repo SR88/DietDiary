@@ -31,4 +31,7 @@ public interface DiaryEntryDAO {
 
     @Query("SELECT * FROM DiaryEntry")
     List<DiaryEntry> getAllEntriesList();
+
+    @Query("Select * from diaryentry where diemId = :id")
+    LiveData<List<DiaryEntry>> getEntriesByDiemId(int id);
 }
