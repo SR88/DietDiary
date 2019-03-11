@@ -47,6 +47,7 @@ public class AllEntries extends AppCompatActivity {
     private String dateString, formattedDate;
     private OperationsViewModel opsVM;
     private DiemAndMoreViewModel diemVM;
+    final DiemAdapter adapter = new DiemAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class AllEntries extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(false);
 
-        final DiemAdapter adapter = new DiemAdapter();
+
         recyclerView.setAdapter(adapter);
 
         opsVM = ViewModelProviders.of(this).get(OperationsViewModel.class);
@@ -259,6 +260,14 @@ public class AllEntries extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.setTitle("Date already exists!");
             dialog.show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            adapter.notifyItemChanged(i);
         }
     }
 }

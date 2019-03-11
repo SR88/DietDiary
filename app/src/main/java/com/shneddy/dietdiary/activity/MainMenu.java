@@ -1,22 +1,18 @@
 package com.shneddy.dietdiary.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.shneddy.dietdiary.R;
 import com.shneddy.dietdiary.entity.DiaryEntry;
 import com.shneddy.dietdiary.entity.Diem;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.intermediates.EntryAndFoodData;
 import com.shneddy.dietdiary.viewmodel.OperationsViewModel;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,7 +22,7 @@ import java.util.List;
 public class MainMenu extends AppCompatActivity {
 
 
-    private Button logs, foods, foodTypes;
+    private Button logs, foods, foodTypes, search;
     private TextView sugarConsume, subtext;
     private OperationsViewModel opsVM;
     private String dateQuery;
@@ -70,6 +66,15 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMenu.this, SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         calculateSugarsToday();
 
     }
@@ -80,6 +85,7 @@ public class MainMenu extends AppCompatActivity {
         this.foodTypes = findViewById(R.id.button_foodtypes);
         this.sugarConsume = findViewById(R.id.textview_main_sugar);
         this.subtext = findViewById(R.id.textview_main_subtext);
+        this.search = findViewById(R.id.button_menu_search);
 
         subtext.setText("Grams sugar consumed\ntoday");
     }

@@ -36,12 +36,15 @@ public interface FoodDAO {
     @Query("SELECT * FROM food")
     List<Food> getAllFoodsList();
 
-    @Query("SELECT FOOD.id, FOOD.name, FOOD.gramsSugar, FOOD.foodTypeId, FOOD_TYPE.id, " +
-            "FOOD_TYPE.type FROM FOOD LEFT OUTER JOIN FOOD_TYPE ON FOOD.foodTypeId = FOOD_TYPE.id")
-    LiveData<List<FoodAndType>> foodsAndTypesList();
+//    @Query("SELECT FOOD.id, FOOD.name, FOOD.gramsSugar, FOOD.foodTypeId, FOOD_TYPE.id, " +
+//            "FOOD_TYPE.type FROM FOOD LEFT OUTER JOIN FOOD_TYPE ON FOOD.foodTypeId = FOOD_TYPE.id")
+//    LiveData<List<FoodAndType>> foodsAndTypesList();
 
     @Query("Select * from food where id = :id")
     Food getFoodById(int id);
+
+    @Query("select * from food where name =:name")
+    LiveData<List<Food>> search(String name);
 
 
 }

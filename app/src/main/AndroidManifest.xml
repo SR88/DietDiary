@@ -34,7 +34,8 @@
             android:parentActivityName=".activity.MainMenu" />
         <activity android:name=".activity.EditorEntries" />
         <activity android:name=".activity.EntryDetail" />
-        <activity android:name=".activity.EditorConsumption"></activity>
+        <activity android:name=".activity.EditorConsumption"/>
+       <activity android:name=".activity.SearchActivity"/>
     </application>
 
 </manifest>

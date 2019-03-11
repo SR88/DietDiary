@@ -25,6 +25,7 @@ public class FoodRepository {
     private LiveData<List<Food>> allFoods;
     private LiveData<List<DiaryEntry>> allFoodDiary;
     private LiveData<List<FoodAndType>> allFoodsAndTypes;
+    private LiveData<List<Food>> liveDataSearch;
     private Food foodById;
     private List<Food> getAllFoodsList;
 
@@ -40,7 +41,7 @@ public class FoodRepository {
         foodTypeDAO = database.foodTypeDAO();
         allFoodTypes = foodTypeDAO.getAllFoodTypes();
         getAllFoodsList = foodDAO.getAllFoodsList();
-        allFoodsAndTypes = foodDAO.foodsAndTypesList();
+//        allFoodsAndTypes = foodDAO.foodsAndTypesList();
     }
 
     public void insert(Food food){
@@ -73,6 +74,10 @@ public class FoodRepository {
 
     public Food getFoodById(int id){
         return foodById = foodDAO.getFoodById(id);
+    }
+
+    public LiveData<List<Food>> search(String search) {
+        return liveDataSearch = foodDAO.search(search);
     }
 
     private static class InsertFoodsAsyncTask extends AsyncTask<Food, Void, Void>{
