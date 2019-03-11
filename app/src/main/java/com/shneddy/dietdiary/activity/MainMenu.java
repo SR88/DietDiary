@@ -106,7 +106,7 @@ public class MainMenu extends AppCompatActivity {
                 }
 
                 sugarConsume.setText(String.valueOf(sugars));
-                subtext.setText("grams sugar consumed in\n" + intermediateList.size() + " foods.");
+                subtext.setText("grams sugar consumed in\n" + intermediateList.size() + " foods today.");
 
             }
 

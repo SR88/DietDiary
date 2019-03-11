@@ -3,12 +3,14 @@ package com.shneddy.dietdiary.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.shneddy.dietdiary.R;
+import com.shneddy.dietdiary.exception.NoValueInputException;
 
 public class EditorFoodType extends AppCompatActivity {
     public static final String EXTRA_FOODTYPE =
@@ -53,29 +55,33 @@ public class EditorFoodType extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.item_save:
-                saveType();
+                try {
+                    saveType();
+                } catch (NoValueInputException e) {
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void saveType() {
+    private void saveType() throws NoValueInputException {
         String name = editTextName.getText().toString();
         String description = editTextDescription.getText().toString();
 
         if (name.trim().isEmpty()) {
-            Toast.makeText(this,"Please make sure to enter in a name for your food type",
-                    Toast.LENGTH_SHORT).show();
-            return;
+            throw new NoValueInputException("Please make sure to enter in a name for your food type");
+        } else {
+
+            Intent data = new Intent();
+            data.putExtra(EXTRA_FOODTYPE, name);
+            data.putExtra(EXTRA_FOODTYPE_DESCRIPTION, description);
+            data.putExtra(EXTRA_FOODTYPE_ID, previousId);
+
+            setResult(RESULT_OK, data);
+            finish();
         }
-
-        Intent data = new Intent();
-        data.putExtra(EXTRA_FOODTYPE, name);
-        data.putExtra(EXTRA_FOODTYPE_DESCRIPTION, description);
-        data.putExtra(EXTRA_FOODTYPE_ID, previousId);
-
-        setResult(RESULT_OK, data);
-        finish();
     }
+
 }
