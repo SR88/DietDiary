@@ -153,7 +153,15 @@ public class EditorFood extends AppCompatActivity {
 
     private void saveFood() {
         String name = etName.getText().toString();
-        Double sugars = Double.parseDouble(etSugar.getText().toString());
+        Double sugars;
+        try {
+            Double.parseDouble(etSugar.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Please enter in a valid decimal number for your sugar value", Toast.LENGTH_LONG).show();
+            return;
+        }
+        sugars = Double.parseDouble(etSugar.getText().toString());
+
         String error = "";
 
         if (name.trim().isEmpty()){

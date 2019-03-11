@@ -21,6 +21,7 @@ import com.shneddy.dietdiary.intermediates.EntryAndFoodData;
 import com.shneddy.dietdiary.viewmodel.DiemAndMoreViewModel;
 import com.shneddy.dietdiary.viewmodel.OperationsViewModel;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,8 +59,8 @@ public class EntryDetail extends AppCompatActivity {
             @Override
             public void onChanged(List<DiaryEntry> diaryEntries) {
                 List<DiaryEntry> unpreppedList = diaryEntries;
-
                 List<EntryAndFoodData> intermediateList = new ArrayList<>();
+                DecimalFormat decimalFormat = new DecimalFormat("####.#");
                 for (DiaryEntry d : unpreppedList){
                     EntryAndFoodData collectiveData = new EntryAndFoodData();
                     int foodId = d.getFoodId();
@@ -74,7 +75,8 @@ public class EntryDetail extends AppCompatActivity {
                     intermediateList.add(collectiveData);
                 }
                 adapter.setEntryAndFoodsList(intermediateList);
-                totalSugars.setText(String.valueOf(adapter.getDailyTotal())+"g");
+
+                totalSugars.setText(String.valueOf(decimalFormat.format(adapter.getDailyTotal()))+"g");
                 totalFoods.setText("consumed in " + adapter.getItemCount() + " food(s)");
             }
         });

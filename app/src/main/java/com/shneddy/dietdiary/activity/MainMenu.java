@@ -14,6 +14,7 @@ import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.intermediates.EntryAndFoodData;
 import com.shneddy.dietdiary.viewmodel.OperationsViewModel;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -110,8 +111,8 @@ public class MainMenu extends AppCompatActivity {
                 for(EntryAndFoodData data : intermediateList){
                     sugars += data.getCalcSugars();
                 }
-
-                sugarConsume.setText(String.valueOf(sugars));
+                DecimalFormat decimalFormat = new DecimalFormat("####.#");
+                sugarConsume.setText(String.valueOf(decimalFormat.format(sugars)));
                 subtext.setText("grams sugar consumed in\n" + intermediateList.size() + " foods today.");
 
             }

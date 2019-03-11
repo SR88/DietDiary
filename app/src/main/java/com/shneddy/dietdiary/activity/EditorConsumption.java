@@ -131,6 +131,13 @@ public class EditorConsumption extends AppCompatActivity {
             error += "Please fill in the portion size consumed";
         }
 
+        try{
+            Double.parseDouble(portionSize.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this,"Please make sure you enter in a proper decimal number", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if(error.length() > 1){
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
             return;

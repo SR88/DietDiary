@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.shneddy.dietdiary.R;
 import com.shneddy.dietdiary.intermediates.EntryAndFoodData;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +32,12 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ConsumptionHolder holder, int position) {
+        DecimalFormat decimalFormat = new DecimalFormat("####.#");
         EntryAndFoodData data = officialList.get(position);
         Log.d("onBindViewHolder ", data.toString());
         holder.name.setText(data.getName());
         holder.portionSize.setText("in " +String.valueOf(data.getPortionSize()) + " serving(s)");
-        holder.sugarsCalc.setText(String.valueOf(data.getCalcSugars()) +"g");
+        holder.sugarsCalc.setText(decimalFormat.format(data.getCalcSugars()) +"g");
     }
 
     @Override
