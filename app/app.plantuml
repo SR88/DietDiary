@@ -1,0 +1,814 @@
+@startuml
+
+title __APP's Class Diagram__\n
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class AllEntries {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class AllFoodTypes {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class AllFoods {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.utils {
+      class BaseMessenger {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    class BuildConfig {
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.adapters {
+      class ConsumptionAdapter {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class DiaryEntry {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      interface DiaryEntryDAO {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    class DiaryEntryDAOTest {
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      class DiaryEntryDAO_Impl {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.repository {
+      class DiaryEntryRepository {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class Diem {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.adapters {
+      class DiemAdapter {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class DiemAndEntry {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class DiemAndMoreViewModel {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      interface DiemDAO {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      class DiemDAO_Impl {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      interface DiemEntryFoodDAO {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.repository {
+      class DiemRepository {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EditorConsumption {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EditorEntries {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EditorFood {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EditorFoodType {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.intermediates {
+      class EntryAndFoodData {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EntryDetail {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class EntryDiemFood {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class Food {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.adapters {
+      class FoodAdapter {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class FoodAndEntry {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      interface FoodAndEntryDAO {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      class FoodAndEntryDAO_Impl {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.adapters {
+      class FoodAndEntryJoinAdapter {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.repository {
+      class FoodAndEntryRepository {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class FoodAndEntryViewModel {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class FoodAndType {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.intermediates {
+      class FoodAndTypeData {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      interface FoodDAO {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    class FoodDAOTest {
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      class FoodDAO_Impl {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.database {
+      abstract class FoodDiaryDatabase {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.database {
+      class FoodDiaryDatabase_Impl {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.utils {
+      class FoodMessenger {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.repository {
+      class FoodRepository {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class FoodType {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.adapters {
+      class FoodTypeAdapter {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      interface FoodTypeDAO {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    class FoodTypeDAOTest {
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      class FoodTypeDAO_Impl {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.repository {
+      class FoodTypeRepository {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class MainMenu {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.exception {
+      class NoItemsAvailableException {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.exception {
+      class NoValueInputException {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class OperationsViewModel {
+      }
+    }
+  }
+  
+
+  package androidx.sqlite.db {
+    package androidx.sqlite.db.framework {
+      class R {
+      }
+    }
+  }
+  
+
+  package com.google.android.material {
+    class R {
+    }
+  }
+  
+
+  package androidx.viewpager {
+    class R {
+    }
+  }
+  
+
+  package androidx.slidingpanelayout {
+    class R {
+    }
+  }
+  
+
+  package androidx.lifecycle {
+    package androidx.lifecycle.service {
+      class R {
+      }
+    }
+  }
+  
+
+  package androidx.lifecycle {
+    package androidx.lifecycle.viewmodel {
+      class R {
+      }
+    }
+  }
+  
+
+  package androidx.lifecycle {
+    package androidx.lifecycle.process {
+      class R {
+      }
+    }
+  }
+  
+
+  package androidx.cursoradapter {
+    class R {
+    }
+  }
+  
+
+  package androidx.cardview {
+    class R {
+    }
+  }
+  
+
+  package androidx.fragment {
+    class R {
+    }
+  }
+  
+
+  package androidx.vectordrawable {
+    class R {
+    }
+  }
+  
+
+  package androidx.legacy.coreui {
+    class R {
+    }
+  }
+  
+
+  package androidx.documentfile {
+    class R {
+    }
+  }
+  
+
+  package androidx.coordinatorlayout {
+    class R {
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    class R {
+    }
+  }
+  
+
+  package androidx.customview {
+    class R {
+    }
+  }
+  
+
+  package androidx.transition {
+    class R {
+    }
+  }
+  
+
+  package androidx.recyclerview {
+    class R {
+    }
+  }
+  
+
+  package androidx.core {
+    class R {
+    }
+  }
+  
+
+  package android.support.constraint {
+    class R {
+    }
+  }
+  
+
+  package androidx.lifecycle {
+    class R {
+    }
+  }
+  
+
+  package androidx.legacy.coreutils {
+    class R {
+    }
+  }
+  
+
+  package androidx.lifecycle {
+    package androidx.lifecycle.livedata {
+      package androidx.lifecycle.livedata.core {
+        class R {
+        }
+      }
+    }
+  }
+  
+
+  package androidx.lifecycle {
+    package androidx.lifecycle.extensions {
+      class R {
+      }
+    }
+  }
+  
+
+  package androidx.room {
+    class R {
+    }
+  }
+  
+
+  package androidx.appcompat {
+    class R {
+    }
+  }
+  
+
+  package androidx.interpolator {
+    class R {
+    }
+  }
+  
+
+  package androidx.versionedparcelable {
+    class R {
+    }
+  }
+  
+
+  package androidx.print {
+    class R {
+    }
+  }
+  
+
+  package androidx.sqlite.db {
+    class R {
+    }
+  }
+  
+
+  package androidx.drawerlayout {
+    class R {
+    }
+  }
+  
+
+  package androidx.swiperefreshlayout {
+    class R {
+    }
+  }
+  
+
+  package androidx.asynclayoutinflater {
+    class R {
+    }
+  }
+  
+
+  package androidx.lifecycle {
+    package androidx.lifecycle.livedata {
+      class R {
+      }
+    }
+  }
+  
+
+  package androidx.arch.core {
+    class R {
+    }
+  }
+  
+
+  package androidx.loader {
+    class R {
+    }
+  }
+  
+
+  package androidx.localbroadcastmanager {
+    class R {
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class SearchActivity {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class SearchViewModel {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.entity {
+      class TypeAndFood {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      interface TypeAndFoodDAO {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.dao {
+      class TypeAndFoodDAO_Impl {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.adapters {
+      class TypeAndFoodJoinAdapter {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.repository {
+      class TypeAndFoodRepository {
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class TypeAndFoodViewModel {
+      }
+    }
+  }
+  
+
+  AllEntries -up-|> AppCompatActivity
+  AllEntries o-- OperationsViewModel : opsVM
+  AllEntries o-- DiemAndMoreViewModel : diemVM
+  AllEntries o-- DiemAdapter : adapter
+  AllFoodTypes -up-|> AppCompatActivity
+  AllFoodTypes o-- OperationsViewModel : operationsViewModel
+  AllFoodTypes o-- TypeAndFoodViewModel : joinVM
+  AllFoods -up-|> AppCompatActivity
+  AllFoods o-- TypeAndFoodViewModel : tfViewModel
+  AllFoods o-- OperationsViewModel : operationsVm
+  AllFoods o-- FoodAndEntryViewModel : feViewModel
+  AllFoods o-- TypeAndFoodJoinAdapter : adapter
+  ConsumptionAdapter -up-|> Adapter
+  DiaryEntryDAOTest o-- FoodDiaryDatabase : database
+  DiaryEntryDAOTest o-- FoodDAO : foodDAO
+  DiaryEntryDAOTest o-- FoodTypeDAO : foodTypeDAO
+  DiaryEntryDAOTest o-- DiaryEntryDAO : entryDAO
+  DiaryEntryDAO_Impl -up-|> DiaryEntryDAO
+  DiaryEntryRepository o-- DiaryEntryDAO : diaryEntryDAO
+  DiemAdapter -up-|> Adapter
+  DiemAndEntry o-- Diem : diem
+  DiemAndMoreViewModel -up-|> AndroidViewModel
+  DiemAndMoreViewModel o-- DiemRepository : repo
+  DiemDAO_Impl -up-|> DiemDAO
+  DiemRepository o-- DiemDAO : dao
+  EditorConsumption -up-|> AppCompatActivity
+  EditorConsumption o-- OperationsViewModel : opsVM
+  EditorEntries -up-|> AppCompatActivity
+  EditorFood -up-|> AppCompatActivity
+  EditorFood o-- OperationsViewModel : operationsViewModel
+  EditorFoodType -up-|> AppCompatActivity
+  EntryDetail -up-|> AppCompatActivity
+  EntryDetail o-- OperationsViewModel : opsVM
+  EntryDetail o-- ConsumptionAdapter : adapter
+  EntryDiemFood o-- Diem : diem
+  FoodAdapter -up-|> Adapter
+  FoodAndEntry o-- Food : food
+  FoodAndEntryDAO_Impl -up-|> FoodAndEntryDAO
+  FoodAndEntryRepository o-- FoodAndEntryDAO : dao
+  FoodAndEntryViewModel -up-|> AndroidViewModel
+  FoodAndEntryViewModel o-- FoodAndEntryRepository : repository
+  FoodAndType o-- FoodType : foodType
+  FoodDAOTest o-- FoodDiaryDatabase : database
+  FoodDAOTest o-- FoodDAO : foodDAO
+  FoodDAOTest o-- FoodTypeDAO : foodTypeDAO
+  FoodDAO_Impl -up-|> FoodDAO
+  FoodDiaryDatabase -up-|> RoomDatabase
+  FoodDiaryDatabase_Impl -up-|> FoodDiaryDatabase
+  FoodDiaryDatabase_Impl o-- FoodDAO : _foodDAO
+  FoodDiaryDatabase_Impl o-- DiaryEntryDAO : _diaryEntryDAO
+  FoodDiaryDatabase_Impl o-- FoodTypeDAO : _foodTypeDAO
+  FoodDiaryDatabase_Impl o-- TypeAndFoodDAO : _typeAndFoodDAO
+  FoodDiaryDatabase_Impl o-- FoodAndEntryDAO : _foodAndEntryDAO
+  FoodDiaryDatabase_Impl o-- DiemDAO : _diemDAO
+  FoodMessenger -up-|> BaseMessenger
+  FoodRepository o-- FoodDAO : foodDAO
+  FoodRepository o-- DiaryEntryDAO : diaryEntryDAO
+  FoodRepository o-- FoodTypeDAO : foodTypeDAO
+  FoodRepository o-- Food : foodById
+  FoodTypeAdapter -up-|> Adapter
+  FoodTypeDAOTest o-- FoodDiaryDatabase : database
+  FoodTypeDAOTest o-- FoodTypeDAO : foodTypeDAO
+  FoodTypeDAO_Impl -up-|> FoodTypeDAO
+  FoodTypeRepository o-- FoodTypeDAO : foodTypeDAO
+  MainMenu -up-|> AppCompatActivity
+  MainMenu o-- OperationsViewModel : opsVM
+  OperationsViewModel -up-|> AndroidViewModel
+  OperationsViewModel o-- FoodRepository : foodRepository
+  OperationsViewModel o-- DiaryEntryRepository : diaryEntryRepository
+  OperationsViewModel o-- FoodTypeRepository : foodTypeRepository
+  OperationsViewModel o-- DiemRepository : diemRepository
+  OperationsViewModel o-- Food : foodById
+  SearchActivity -up-|> AppCompatActivity
+  SearchActivity o-- OperationsViewModel : opsVM
+  SearchViewModel -up-|> AndroidViewModel
+  SearchViewModel o-- FoodRepository : repository
+  TypeAndFood o-- FoodType : foodType
+  TypeAndFoodDAO_Impl -up-|> TypeAndFoodDAO
+  TypeAndFoodJoinAdapter -up-|> Adapter
+  TypeAndFoodRepository o-- TypeAndFoodDAO : typeAndFoodDAO
+  TypeAndFoodViewModel -up-|> AndroidViewModel
+  TypeAndFoodViewModel o-- TypeAndFoodRepository : typeAndFoodRepository
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

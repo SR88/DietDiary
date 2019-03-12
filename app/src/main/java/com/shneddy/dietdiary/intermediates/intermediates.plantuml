@@ -1,0 +1,67 @@
+@startuml
+
+title __INTERMEDIATES's Package Diagram__\n
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.intermediates {
+      class EntryAndFoodData {
+          - id : int
+          - foodId : int
+          - name : String
+          - gramsSugar : double
+          - type : String
+          - portionSize : double
+          - date : String
+          - calcSugars : double
+          - entryId : int
+          + getEntryId()
+          + setEntryId()
+          + getId()
+          + setId()
+          + getFoodId()
+          + setFoodId()
+          + getName()
+          + setName()
+          + getGramsSugar()
+          + setGramsSugar()
+          + getType()
+          + setType()
+          + getPortionSize()
+          + setPortionSize()
+          + getDate()
+          + setDate()
+          + getCalcSugars()
+          + setCalcSugars()
+          + toString()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.intermediates {
+      class FoodAndTypeData {
+          + id : int
+          + name : String
+          + gramsSugar : double
+          + type : String
+          + foodTypeId : int
+          + foodType : String
+          + getFoodType()
+          + setFoodType()
+          + getId()
+          + setId()
+          + getName()
+          + setName()
+          + getGramsSugar()
+          + setGramsSugar()
+          + getType()
+          + setType()
+          + getFoodTypeId()
+          + setFoodTypeId()
+          + toString()
+      }
+    }
+  }
+
+@enduml

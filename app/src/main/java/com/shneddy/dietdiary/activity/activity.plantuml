@@ -1,0 +1,222 @@
+@startuml
+
+title __ACTIVITY's Package Diagram__\n
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class AllEntries {
+          {static} + ENTRY_DATE : String
+          {static} + ENTRY_ID : String
+          {static} + EDIT_FOOD_REQUEST : int
+          {static} - DATE_DILOG : int
+          - mYear : int
+          - mDay : int
+          - mMonth : int
+          - dateString : String
+          - formattedDate : String
+          - datePickerListener : OnDateSetListener
+          # onCreate()
+          - deleteEntry()
+          # onCreateDialog()
+          - setCalendar()
+          - createErrorDialog()
+          # onResume()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class AllFoodTypes {
+          {static} + FOODTYPE_ID : String
+          {static} + FOODTYPE_NAME : String
+          {static} + FOODTYPE_DESCRIPTION : String
+          {static} + ADD_FOODTYPE_REQUEST : int
+          {static} + EDIT_FOODTYPE_REQUEST : int
+          # onCreate()
+          - deleteFoodType()
+          # onActivityResult()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class AllFoods {
+          {static} + FOOD_ID : String
+          {static} + FOOD_NAME : String
+          {static} + FOOD_SUGAR : String
+          {static} + FOOD_FOODTYPE : String
+          {static} + ADD_FOOD_REQUEST : int
+          {static} + EDIT_FOOD_REQUEST : int
+          - flatList : List<FoodAndTypeData>
+          # onCreate()
+          - deleteFood()
+          # onActivityResult()
+          # onResume()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EditorConsumption {
+          - diemId : int
+          - foodList : List<Food>
+          - spinner : Spinner
+          - portionSize : EditText
+          - intent : Intent
+          ~ baseAdapter : BaseAdapter
+          # onCreate()
+          + onCreateOptionsMenu()
+          + onOptionsItemSelected()
+          - saveConsumption()
+          - getSpinnerVal()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EditorEntries {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EditorFood {
+          {static} + EXTRA_FOOD_FOODTYPE_ID : String
+          {static} + EXTRA_FOOD_FOOD_NAME : String
+          {static} + EXTRA_FOOD_SUGARS : String
+          {static} + EXTRA_FOOD_ID : String
+          - previousId : int
+          - editSelectedFoodType : int
+          - foodTypeList : List<FoodType>
+          - spinner : Spinner
+          - etName : EditText
+          - etSugar : EditText
+          - intent : Intent
+          ~ baseAdapter : BaseAdapter
+          # onCreate()
+          + onCreateOptionsMenu()
+          + onOptionsItemSelected()
+          - saveFood()
+          - getSpinnerVal()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EditorFoodType {
+          {static} + EXTRA_FOODTYPE : String
+          {static} + EXTRA_FOODTYPE_DESCRIPTION : String
+          {static} + EXTRA_FOODTYPE_ID : String
+          - editTextName : EditText
+          - editTextDescription : EditText
+          - previousId : int
+          # onCreate()
+          + onCreateOptionsMenu()
+          + onOptionsItemSelected()
+          - saveType()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class EntryDetail {
+          {static} + DIEM_ID : String
+          ~ diemId : int
+          ~ diemDate : String
+          ~ totalSugars : TextView
+          ~ totalFoods : TextView
+          # onCreate()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class MainMenu {
+          - logs : Button
+          - foods : Button
+          - foodTypes : Button
+          - search : Button
+          - sugarConsume : TextView
+          - subtext : TextView
+          - dateQuery : String
+          # onCreate()
+          - setupGUI()
+          - calculateSugarsToday()
+          # onResume()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.activity {
+      class SearchActivity {
+          {static} + FOOD_ID : String
+          {static} + FOOD_NAME : String
+          {static} + FOOD_SUGAR : String
+          {static} + FOOD_FOODTYPE : String
+          {static} + ADD_FOOD_REQUEST : int
+          {static} + EDIT_FOOD_REQUEST : int
+          - searchButton : Button
+          - editText : EditText
+          - rView : RecyclerView
+          # onCreate()
+      }
+    }
+  }
+  
+
+  AllEntries -up-|> AppCompatActivity
+  AllEntries o-- OperationsViewModel : opsVM
+  AllEntries o-- DiemAndMoreViewModel : diemVM
+  AllEntries o-- DiemAdapter : adapter
+  HostCallbacks -up-|> FragmentHostCallback
+  AllFoodTypes -up-|> AppCompatActivity
+  AllFoodTypes o-- OperationsViewModel : operationsViewModel
+  AllFoodTypes o-- TypeAndFoodViewModel : joinVM
+  HostCallbacks -up-|> FragmentHostCallback
+  AllFoods -up-|> AppCompatActivity
+  AllFoods o-- TypeAndFoodViewModel : tfViewModel
+  AllFoods o-- OperationsViewModel : operationsVm
+  AllFoods o-- FoodAndEntryViewModel : feViewModel
+  AllFoods o-- TypeAndFoodJoinAdapter : adapter
+  HostCallbacks -up-|> FragmentHostCallback
+  EditorConsumption -up-|> AppCompatActivity
+  EditorConsumption o-- OperationsViewModel : opsVM
+  HostCallbacks -up-|> FragmentHostCallback
+  EditorEntries -up-|> AppCompatActivity
+  HostCallbacks -up-|> FragmentHostCallback
+  EditorFood -up-|> AppCompatActivity
+  EditorFood o-- OperationsViewModel : operationsViewModel
+  HostCallbacks -up-|> FragmentHostCallback
+  EditorFoodType -up-|> AppCompatActivity
+  HostCallbacks -up-|> FragmentHostCallback
+  EntryDetail -up-|> AppCompatActivity
+  EntryDetail o-- OperationsViewModel : opsVM
+  EntryDetail o-- ConsumptionAdapter : adapter
+  HostCallbacks -up-|> FragmentHostCallback
+  MainMenu -up-|> AppCompatActivity
+  MainMenu o-- OperationsViewModel : opsVM
+  HostCallbacks -up-|> FragmentHostCallback
+  SearchActivity -up-|> AppCompatActivity
+  SearchActivity o-- OperationsViewModel : opsVM
+  HostCallbacks -up-|> FragmentHostCallback
+
+@enduml

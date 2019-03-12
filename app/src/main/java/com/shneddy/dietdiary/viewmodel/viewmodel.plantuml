@@ -1,0 +1,123 @@
+@startuml
+
+title __VIEWMODEL's Package Diagram__\n
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class DiemAndMoreViewModel {
+          - liveDataList : LiveData<List<Diem>>
+          + DiemAndMoreViewModel()
+          + getLiveDataList()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class FoodAndEntryViewModel {
+          - mAllFoodAndEntryLiveData : LiveData<List<FoodAndEntry>>
+          - mListFoodAndEntry : List<FoodAndEntry>
+          + FoodAndEntryViewModel()
+          + getFoodAndEntryLiveData()
+          + getByIdList()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class OperationsViewModel {
+          - allFoods : LiveData<List<Food>>
+          - allFoodsList : List<Food>
+          - searchFoodList : List<Food>
+          - allFoodDiaries : LiveData<List<DiaryEntry>>
+          - allEntriesByDiemId : LiveData<List<DiaryEntry>>
+          - listEntriesByDiemId : List<DiaryEntry>
+          - allFoodTypes : LiveData<List<FoodType>>
+          - allFoodTypesList : List<FoodType>
+          - allFoodsAndType : LiveData<List<FoodAndType>>
+          - listDiemByDate : List<Diem>
+          - listDiemById : List<DiemAndEntry>
+          - allDiems : LiveData<List<Diem>>
+          + OperationsViewModel()
+          + insertFood()
+          + updateFood()
+          + deleteFood()
+          + deleteAllFood()
+          + getAllFoods()
+          + getAllFoodsList()
+          + getAllFoodsAndTypes()
+          + getFoodById()
+          + searchForFoodsByString()
+          + insertFoodDiary()
+          + updateFoodDiary()
+          + deleteFoodDiary()
+          + deleteAllFoodDiary()
+          + getAllFoodDiarys()
+          + getAllEntriesByDiemId()
+          + getListEntriesByDiemId()
+          + insertFoodType()
+          + updateFoodType()
+          + deleteFoodType()
+          + deleteAllFoodTypes()
+          + getAllFoodTypes()
+          + getAllFoodTypesList()
+          + insertDiem()
+          + updateDiem()
+          + deleteDiem()
+          + getDiemByDate()
+          + getDiemById()
+          + getAllDiems()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class SearchViewModel {
+          - query : MutableLiveData<String>
+          + results : LiveData<List<Food>>
+          + SearchViewModel()
+          + search()
+          + getSearchTermString()
+          + setRepository()
+          + setApplication()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.viewmodel {
+      class TypeAndFoodViewModel {
+          - mAllTypeAndFoodList : LiveData<List<TypeAndFood>>
+          - mListTypesAndFoods : List<TypeAndFood>
+          + TypeAndFoodViewModel()
+          + getTypeAndFoods()
+          + getByIdList()
+      }
+    }
+  }
+
+
+  DiemAndMoreViewModel -up-|> AndroidViewModel
+  DiemAndMoreViewModel o-- DiemRepository : repo
+  FoodAndEntryViewModel -up-|> AndroidViewModel
+  FoodAndEntryViewModel o-- FoodAndEntryRepository : repository
+  OperationsViewModel -up-|> AndroidViewModel
+  OperationsViewModel o-- FoodRepository : foodRepository
+  OperationsViewModel o-- DiaryEntryRepository : diaryEntryRepository
+  OperationsViewModel o-- FoodTypeRepository : foodTypeRepository
+  OperationsViewModel o-- DiemRepository : diemRepository
+  OperationsViewModel o-- Food : foodById
+  SearchViewModel -up-|> AndroidViewModel
+  SearchViewModel o-- FoodRepository : repository
+  TypeAndFoodViewModel -up-|> AndroidViewModel
+  TypeAndFoodViewModel o-- TypeAndFoodRepository : typeAndFoodRepository
+
+@enduml
+
+

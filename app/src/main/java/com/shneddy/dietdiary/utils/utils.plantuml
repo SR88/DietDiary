@@ -1,0 +1,28 @@
+@startuml
+
+title __UTILS's Package Diagram__\n
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.utils {
+      class BaseMessenger {
+          - message : String
+          + getMessage()
+          + setMessage()
+      }
+    }
+  }
+  
+
+  package com.shneddy.dietdiary {
+    package com.shneddy.dietdiary.utils {
+      class FoodMessenger {
+          - message : String
+          + getMessage()
+      }
+    }
+  }
+  
+
+  FoodMessenger -up-|> BaseMessenger
+
+@enduml
