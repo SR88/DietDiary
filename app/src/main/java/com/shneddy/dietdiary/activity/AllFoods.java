@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shneddy.dietdiary.entity.FoodAndEntry;
+import com.shneddy.dietdiary.utils.BaseMessenger;
+import com.shneddy.dietdiary.utils.FoodMessenger;
 import com.shneddy.dietdiary.viewmodel.FoodAndEntryViewModel;
 import com.shneddy.dietdiary.viewmodel.OperationsViewModel;
 import com.shneddy.dietdiary.R;
@@ -66,6 +68,7 @@ public class AllFoods extends AppCompatActivity {
 
         operationsVm = ViewModelProviders.of(this).get(OperationsViewModel.class); // this viewmodel is specifically for operations
 
+        BaseMessenger messenger = new FoodMessenger(); // polymorphism example
         if (operationsVm.getAllFoodTypesList().size() <= 1){
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AllFoods.this);
             alertBuilder.setMessage("Please access and create a Food Type before creating a Food.")
@@ -78,7 +81,7 @@ public class AllFoods extends AppCompatActivity {
                         }
                     });
             AlertDialog alertDialog = alertBuilder.create();
-            alertDialog.setTitle("No Food Types Exist");
+            alertDialog.setTitle(messenger.getMessage());
             alertDialog.show();
         }
 

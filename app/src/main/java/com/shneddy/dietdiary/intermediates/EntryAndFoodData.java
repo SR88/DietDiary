@@ -10,6 +10,15 @@ public class EntryAndFoodData {
     private double portionSize;
     private String date;
     private double calcSugars;
+    private int entryId;
+
+    public int getEntryId() {
+        return entryId;
+    }
+
+    public void setEntryId(int entryId) {
+        this.entryId = entryId;
+    }
 
     public int getId() {
         return id;
@@ -86,6 +95,7 @@ public class EntryAndFoodData {
                 ", portionSize=" + portionSize +
                 ", date='" + date + '\'' +
                 ", calcSugars=" + calcSugars +
+                ", entryId=" + entryId +
                 '}';
     }
 }
