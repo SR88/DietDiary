@@ -27,6 +27,7 @@ public class OperationsViewModel extends AndroidViewModel {
 
     private LiveData<List<Food>> allFoods;
     private List<Food> allFoodsList;
+    private List<Food> searchFoodList;
 
     private LiveData<List<DiaryEntry>> allFoodDiaries;
     private LiveData<List<DiaryEntry>> allEntriesByDiemId;
@@ -95,6 +96,10 @@ public class OperationsViewModel extends AndroidViewModel {
 
     public Food getFoodById(int id){
         return foodById = foodRepository.getFoodById(id);
+    }
+
+    public List<Food> searchForFoodsByString(String searchTerm){
+        return searchFoodList = foodRepository.searchForFood(searchTerm);
     }
 
     /*

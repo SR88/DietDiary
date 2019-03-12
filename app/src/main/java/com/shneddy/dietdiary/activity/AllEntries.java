@@ -65,6 +65,27 @@ public class AllEntries extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         opsVM = ViewModelProviders.of(this).get(OperationsViewModel.class);
+
+        if (opsVM.getAllFoodTypesList().size() <= 1){
+            androidx.appcompat.app.AlertDialog.Builder alertBuilder = new androidx.appcompat.app.AlertDialog.Builder(AllEntries.this);
+            alertBuilder.setMessage("Please access and create a Food before attempting to create a Diet Diary entry.")
+                    .setCancelable(false)
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+            androidx.appcompat.app.AlertDialog alertDialog = alertBuilder.create();
+            alertDialog.setTitle("No Foods Exist");
+            alertDialog.show();
+        }
+
+
+
+
+
         opsVM.getAllDiems().observe(this, new Observer<List<Diem>>() {
             @Override
             public void onChanged(List<Diem> diems) {

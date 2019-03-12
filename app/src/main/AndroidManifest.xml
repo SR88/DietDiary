@@ -32,10 +32,18 @@
         <activity
             android:name=".activity.AllFoodTypes"
             android:parentActivityName=".activity.MainMenu" />
-        <activity android:name=".activity.EditorEntries" />
-        <activity android:name=".activity.EntryDetail" />
-        <activity android:name=".activity.EditorConsumption"/>
-       <activity android:name=".activity.SearchActivity"/>
+        <activity
+            android:name=".activity.EditorEntries"
+            android:parentActivityName=".activity.MainMenu"/>
+        <activity
+            android:name=".activity.EntryDetail"
+            android:parentActivityName=".activity.EditorEntries"/>
+        <activity
+            android:name=".activity.EditorConsumption"
+            android:parentActivityName=".activity.EntryDetail"/>
+       <activity
+           android:name=".activity.SearchActivity"
+           android:parentActivityName=".activity.MainMenu"/>
     </application>
 
 </manifest>

@@ -1,12 +1,15 @@
 package com.shneddy.dietdiary.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shneddy.dietdiary.R;
+import com.shneddy.dietdiary.activity.EditorFood;
 import com.shneddy.dietdiary.entity.Food;
 
 import java.util.ArrayList;
@@ -18,13 +21,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder>{
 
     private List<Food> foodList = new ArrayList<>();
+    private AdapterView.OnItemClickListener clickListener;
+
 
     @NonNull
     @Override
     public FoodHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.single_food, parent, false);
-
         return new FoodHolder(itemView);
     }
 
@@ -33,7 +37,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder>{
         Food data = foodList.get(position);
         holder.name.setText(data.getName());
         holder.sugars.setText(String.valueOf(data.getGramsSugar()));
-        holder.foodType.setText(String.valueOf(data.getId()));
+        holder.foodType.setText(" ");
     }
 
     @Override
@@ -45,6 +49,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder>{
         foodList = list;
         notifyDataSetChanged();
     }
+
+
+
 
     public Food getFoodAt(int pos){
         return foodList.get(pos);

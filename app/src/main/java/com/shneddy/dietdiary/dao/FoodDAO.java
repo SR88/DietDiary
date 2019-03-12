@@ -43,8 +43,10 @@ public interface FoodDAO {
     @Query("Select * from food where id = :id")
     Food getFoodById(int id);
 
-    @Query("select * from food where name =:name")
+    @Query("select * from food where lower(name) like (:name)")
     LiveData<List<Food>> search(String name);
 
+    @Query("select * from food where LOWER(name) like :string")
+    List<Food> searchString(String string);
 
 }

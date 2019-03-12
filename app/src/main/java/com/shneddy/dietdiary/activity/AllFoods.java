@@ -47,6 +47,7 @@ public class AllFoods extends AppCompatActivity {
     private OperationsViewModel operationsVm;
     private List<FoodAndTypeData> flatList;
     private FoodAndEntryViewModel feViewModel;
+    private TypeAndFoodJoinAdapter adapter = new TypeAndFoodJoinAdapter();
 
 
     @Override
@@ -60,8 +61,8 @@ public class AllFoods extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(false);
 
-        final TypeAndFoodJoinAdapter typeAndFoodJoinAdapter = new TypeAndFoodJoinAdapter();
-        recyclerView.setAdapter(typeAndFoodJoinAdapter);
+        adapter = new TypeAndFoodJoinAdapter();
+        recyclerView.setAdapter(adapter);
 
         operationsVm = ViewModelProviders.of(this).get(OperationsViewModel.class); // this viewmodel is specifically for operations
 
@@ -104,7 +105,7 @@ public class AllFoods extends AppCompatActivity {
                         }
                     }
                 }
-                typeAndFoodJoinAdapter.setList(flatList);
+                adapter.setList(flatList);
             }
         });
 
@@ -134,7 +135,7 @@ public class AllFoods extends AppCompatActivity {
                 // Delete food
                 if (direction == ItemTouchHelper.LEFT) {
 
-                    FoodAndTypeData item = typeAndFoodJoinAdapter.getFoodAndType(viewHolder.getAdapterPosition());
+                    FoodAndTypeData item = adapter.getFoodAndType(viewHolder.getAdapterPosition());
                     List<FoodAndEntry> checkList = feViewModel.getByIdList(item.getId());
 
                     if (checkList.get(0).relEntryList.size() > 0) {
@@ -152,7 +153,7 @@ public class AllFoods extends AppCompatActivity {
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        typeAndFoodJoinAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                        adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                                     }
                                 });
                         AlertDialog alertDialog = alertBuilder.create();
@@ -165,7 +166,7 @@ public class AllFoods extends AppCompatActivity {
 
                 // Edit a food
                 if (direction == ItemTouchHelper.RIGHT) {
-                    FoodAndTypeData item = typeAndFoodJoinAdapter.getFoodAndType(viewHolder.getAdapterPosition());
+                    FoodAndTypeData item = adapter.getFoodAndType(viewHolder.getAdapterPosition());
 
                     Intent intent = new Intent(AllFoods.this, EditorFood.class);
                     intent.putExtra(FOOD_ID, item.getId());
@@ -274,4 +275,11 @@ public class AllFoods extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            adapter.notifyItemChanged(i);
+        }
+    }
 }

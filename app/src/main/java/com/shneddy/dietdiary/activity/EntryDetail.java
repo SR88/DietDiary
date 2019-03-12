@@ -42,7 +42,7 @@ public class EntryDetail extends AppCompatActivity {
 
         totalFoods = findViewById(R.id.textView_consumptions_infoodstotal);
         totalSugars = findViewById(R.id.textView_consumptions_sugars_total);
-        setTitle("Date"); // todo get date from previous activity
+        setTitle("Consumption in Detail");
 
         Intent intent = getIntent();
         diemId = intent.getIntExtra(ENTRY_ID, -1);

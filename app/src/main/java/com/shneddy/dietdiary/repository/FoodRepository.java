@@ -28,6 +28,7 @@ public class FoodRepository {
     private LiveData<List<Food>> liveDataSearch;
     private Food foodById;
     private List<Food> getAllFoodsList;
+    private List<Food> searchResultsList;
 
 
     public FoodRepository(Application application) {
@@ -78,6 +79,10 @@ public class FoodRepository {
 
     public LiveData<List<Food>> search(String search) {
         return liveDataSearch = foodDAO.search(search);
+    }
+
+    public List<Food> searchForFood(String searchTerm){
+        return searchResultsList = foodDAO.searchString(searchTerm);
     }
 
     private static class InsertFoodsAsyncTask extends AsyncTask<Food, Void, Void>{
