@@ -87,6 +87,7 @@ public class AllFoods extends AppCompatActivity {
 
 
 
+
         feViewModel = ViewModelProviders.of(this).get(FoodAndEntryViewModel.class); // this viewmodel is specifically for entry data
         tfViewModel = ViewModelProviders.of(this).get(TypeAndFoodViewModel.class);  // this viewmodel is specifically for the list data
         tfViewModel.getTypeAndFoods().observe(this, new Observer<List<TypeAndFood>>() {
