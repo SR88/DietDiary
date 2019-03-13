@@ -12,7 +12,7 @@
         android:id="@+id/edittext_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Type of foodList e.g. 'Junk Food'"
+        android:hint="Type of food e.g. 'Junk Food'"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
