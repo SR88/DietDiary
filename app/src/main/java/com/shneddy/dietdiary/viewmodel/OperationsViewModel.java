@@ -185,4 +185,8 @@ public class OperationsViewModel extends AndroidViewModel {
     public LiveData<List<Diem>> getAllDiems() {
         return allDiems;
     }
+
+    public void deleteAllDiem(){
+        diemRepository.deleteAll();
+    }
 }

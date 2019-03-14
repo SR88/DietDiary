@@ -57,6 +57,9 @@ public class DiemRepository {
     public void update(Diem diem){
         new UpdateDiemAsyncTask(dao).execute(diem);
     }
+    public void deleteAll(){
+        new DeleteAllAsyncTask(dao).execute();
+    }
 
     private class InsertDiemAsyncTask extends AsyncTask<Diem, Void, Void> {
         private DiemDAO dao;
@@ -94,6 +97,20 @@ public class DiemRepository {
         @Override
         protected Void doInBackground(Diem... diems) {
             dao.update(diems[0]);
+            return null;
+        }
+    }
+
+    private class DeleteAllAsyncTask extends AsyncTask<Diem, Void, Void> {
+        private DiemDAO dao;
+
+        public DeleteAllAsyncTask(DiemDAO dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Diem... diems) {
+            dao.deleteAllDiem();
             return null;
         }
     }

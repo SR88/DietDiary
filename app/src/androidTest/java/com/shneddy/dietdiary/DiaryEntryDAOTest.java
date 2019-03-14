@@ -3,10 +3,12 @@ package com.shneddy.dietdiary;
 import android.util.Log;
 
 import com.shneddy.dietdiary.dao.DiaryEntryDAO;
+import com.shneddy.dietdiary.dao.DiemDAO;
 import com.shneddy.dietdiary.dao.FoodDAO;
 import com.shneddy.dietdiary.dao.FoodTypeDAO;
 import com.shneddy.dietdiary.database.FoodDiaryDatabase;
 import com.shneddy.dietdiary.entity.DiaryEntry;
+import com.shneddy.dietdiary.entity.Diem;
 import com.shneddy.dietdiary.entity.Food;
 import com.shneddy.dietdiary.entity.FoodType;
 import org.junit.After;
@@ -41,6 +43,7 @@ public class DiaryEntryDAOTest {
     private FoodDAO foodDAO;
     private FoodTypeDAO foodTypeDAO;
     private DiaryEntryDAO entryDAO;
+    private DiemDAO diemDAO;
 
     @Before
     public void setUp() {
@@ -50,6 +53,7 @@ public class DiaryEntryDAOTest {
         foodDAO = database.foodDAO();
         foodTypeDAO = database.foodTypeDAO();
         entryDAO = database.entryDAO();
+        diemDAO = database.diemDAO();
     }
 
     @Test
@@ -57,6 +61,9 @@ public class DiaryEntryDAOTest {
         // inserting food & type first as it is needed as a fk
         FoodType testFoodType = new FoodType("type", "insertFoodTypeTestDescrip");
         foodTypeDAO.insert(testFoodType);
+
+        Diem diem = new Diem("Dec 1 2019");
+        diemDAO.insert(diem);
 
         Food food = new Food("Cupcake",25.9,
                 foodTypeDAO.getAllFoodTypesList().get(0).getId());
@@ -69,7 +76,7 @@ public class DiaryEntryDAOTest {
         DiaryEntry entry = new DiaryEntry(
                 foodDAO.getAllFoodsList().get(0).getId(),
                 .5,
-                date.toString()
+                1
         );
 
         entryDAO.insert(entry);
@@ -78,8 +85,8 @@ public class DiaryEntryDAOTest {
 
         Assert.assertEquals(1, entryDAO.getAllEntriesList().get(0).getId()); // verify right pk
         Assert.assertEquals(1, entryDAO.getAllEntriesList().get(0).getFoodId()); // verify right fk for food
-        Assert.assertTrue(date.toString().equals(entryDAO.getAllEntriesList().get(0)
-                .getDate())); // verify right date
+        Assert.assertEquals(1, entryDAO.getAllEntriesList().get(0)
+                .getDiemId()); // verify right date
         Assert.assertTrue(.5 == entryDAO.getAllEntriesList().get(0).getPortionSize()); // verify right fk for food
     }
 
@@ -89,6 +96,9 @@ public class DiaryEntryDAOTest {
         FoodType testFoodType = new FoodType("type", "insertFoodTypeTestDescrip");
         foodTypeDAO.insert(testFoodType);
 
+        Diem diem = new Diem("Dec 1 2019");
+        diemDAO.insert(diem);
+
         Food food = new Food("Cupcake",25.9,
                 foodTypeDAO.getAllFoodTypesList().get(0).getId());
         foodDAO.insert(food);
@@ -98,23 +108,22 @@ public class DiaryEntryDAOTest {
         DiaryEntry entry = new DiaryEntry(
                 foodDAO.getAllFoodsList().get(0).getId(),
                 .5,
-                date.toString()
+                1
         );
 
         entryDAO.insert(entry);
 
-        String newDate = "11/05/2019";
+
         double newPortion = 1.5;
 
         DiaryEntry updatedEntry = entryDAO.getAllEntriesList().get(0);
-        updatedEntry.setDate(newDate);
         updatedEntry.setPortionSize(newPortion);
 
         entryDAO.update(updatedEntry);
 
         Assert.assertTrue(newPortion == entryDAO.getAllEntriesList().get(0)
                 .getPortionSize()); // test to see if update worked on portion
-        Assert.assertTrue(newDate.equals(entryDAO.getAllEntriesList().get(0).getDate())); // test date change
+
     }
 
     @Test
@@ -122,6 +131,9 @@ public class DiaryEntryDAOTest {
         // inserting food & type first as it is needed as a fk
         FoodType testFoodType = new FoodType("type", "insertFoodTypeTestDescrip");
         foodTypeDAO.insert(testFoodType);
+
+        Diem diem = new Diem("Dec 1 2019");
+        diemDAO.insert(diem);
 
         Food food = new Food("Cupcake",25.9,
                 foodTypeDAO.getAllFoodTypesList().get(0).getId());
@@ -134,7 +146,7 @@ public class DiaryEntryDAOTest {
         DiaryEntry entry = new DiaryEntry(
                 foodDAO.getAllFoodsList().get(0).getId(),
                 .5,
-                date.toString()
+                1
         );
 
         entryDAO.insert(entry);

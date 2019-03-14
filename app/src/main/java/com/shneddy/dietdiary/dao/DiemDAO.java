@@ -24,6 +24,10 @@ public interface DiemDAO {
     @Delete
     void delete(Diem diem);
 
+
+    @Query("DELETE FROM diem")
+    void deleteAllDiem();
+
     @Query("Select * from diem where diem.date = :date")
     List<Diem> getByDateString(String date);
 
