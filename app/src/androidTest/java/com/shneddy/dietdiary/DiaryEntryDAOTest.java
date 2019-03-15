@@ -72,7 +72,6 @@ public class DiaryEntryDAOTest {
         Assert.assertEquals(0, entryDAO.getAllEntriesList().size()); // make sure our table is empty
 
         Date date = new Date();
-        Log.d("Diary Entry Test", date.toString() + " current date");
         DiaryEntry entry = new DiaryEntry(
                 foodDAO.getAllFoodsList().get(0).getId(),
                 .5,
@@ -104,7 +103,6 @@ public class DiaryEntryDAOTest {
         foodDAO.insert(food);
 
         Date date = new Date();
-        Log.d("Diary Entry Test", date.toString() + " current date");
         DiaryEntry entry = new DiaryEntry(
                 foodDAO.getAllFoodsList().get(0).getId(),
                 .5,
@@ -142,7 +140,6 @@ public class DiaryEntryDAOTest {
         Assert.assertEquals(0, entryDAO.getAllEntriesList().size()); // make sure our table is empty
 
         Date date = new Date();
-        Log.d("Diary Entry Test", date.toString() + " current date");
         DiaryEntry entry = new DiaryEntry(
                 foodDAO.getAllFoodsList().get(0).getId(),
                 .5,

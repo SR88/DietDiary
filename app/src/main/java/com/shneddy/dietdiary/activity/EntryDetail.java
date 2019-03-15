@@ -113,7 +113,6 @@ public class EntryDetail extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 // Delete food
                 if (direction == ItemTouchHelper.LEFT) {
-                    Log.d("SWIPED", "SWIPED");
 
                     DiaryEntry item = new DiaryEntry(0, 0.0, 0);
 

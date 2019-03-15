@@ -34,7 +34,6 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
     public void onBindViewHolder(@NonNull ConsumptionHolder holder, int position) {
         DecimalFormat decimalFormat = new DecimalFormat("####.#");
         EntryAndFoodData data = officialList.get(position);
-        Log.d("onBindViewHolder ", data.toString());
         holder.name.setText(data.getName());
         holder.portionSize.setText("in " +String.valueOf(data.getPortionSize()) + " serving(s)");
         holder.sugarsCalc.setText(decimalFormat.format(data.getCalcSugars()) +"g");

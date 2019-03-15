@@ -147,8 +147,6 @@ public class EditorConsumption extends AppCompatActivity {
                     Double.parseDouble(portionSize.getText().toString()),
                     diemId);
 
-            Log.d("Editor Consumption ", diaryEntry.toString());
-
             opsVM.insertFoodDiary(diaryEntry);
             setResult(RESULT_OK);
             finish();

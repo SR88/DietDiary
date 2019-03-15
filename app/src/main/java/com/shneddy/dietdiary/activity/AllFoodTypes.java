@@ -123,7 +123,6 @@ public class AllFoodTypes extends AppCompatActivity {
                     FoodType editedFood = foodTypeAdapter
                             .getFoodTypeAt(viewHolder.getAdapterPosition());
                     Intent intent = new Intent(AllFoodTypes.this, EditorFoodType.class);
-                    Log.d("All foods to edit ID", String.valueOf(editedFood.getId()));
                     intent.putExtra(FOODTYPE_ID, editedFood.getId());
                     intent.putExtra(FOODTYPE_NAME, editedFood.getType());
                     intent.putExtra(FOODTYPE_DESCRIPTION, editedFood.getDescription());

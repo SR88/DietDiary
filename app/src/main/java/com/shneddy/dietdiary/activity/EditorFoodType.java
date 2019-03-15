@@ -38,7 +38,6 @@ public class EditorFoodType extends AppCompatActivity {
             editTextName.setText(intent.getStringExtra(AllFoodTypes.FOODTYPE_NAME));
             editTextDescription.setText(intent.getStringExtra(AllFoodTypes.FOODTYPE_DESCRIPTION));
             previousId = intent.getIntExtra(AllFoodTypes.FOODTYPE_ID, -1);
-//            Log.d("FoodType Editor: Previous ID: ", String.valueOf(previousId));
         } else {
             setTitle("Create a Food Type");
         }

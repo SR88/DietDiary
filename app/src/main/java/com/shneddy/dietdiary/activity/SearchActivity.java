@@ -74,7 +74,6 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (editText.getText().toString().trim().length() > 0) {
 
-                    Log.d("SEARCH", editText.getText().toString());
                     List<Food> list = opsVM.searchForFoodsByString("%" + editText.getText().toString().toLowerCase() + "%");
 
                     adapter.setFoods(list);

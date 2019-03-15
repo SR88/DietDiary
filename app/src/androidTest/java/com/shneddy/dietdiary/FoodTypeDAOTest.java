@@ -53,7 +53,6 @@ public class FoodTypeDAOTest {
         observer = new Observer<List<FoodType>>() {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
-                Log.d("Insert Test", "observer has noticed");
             }
         };
 

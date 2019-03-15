@@ -50,7 +50,6 @@ public class DiemDAOTest {
         observer = new Observer<List<Diem>>() {
             @Override
             public void onChanged(List<Diem> diems) {
-                Log.d("Insert Test", "observer has noticed");
             }
         };
 

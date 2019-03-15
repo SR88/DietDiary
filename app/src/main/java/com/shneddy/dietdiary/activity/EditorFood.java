@@ -108,7 +108,6 @@ public class EditorFood extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("Editor Food: ", "NOTHING");
             }
         });
 
