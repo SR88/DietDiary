@@ -21,7 +21,8 @@ import androidx.test.InstrumentationRegistry;
 
 /**
  *  This test class is the first class in our QA regimen.  All further test classes build on
- *  the fact that these tests verify that FoodTypeDAO works and that the database is responsive.
+ *  the fact that these tests verify that FoodTypeDAO works and that the database is responsive,
+ *  accurate, and precise.
  */
 @SuppressWarnings({"unchecked"})
 @RunWith(JUnit4.class)
@@ -29,7 +30,6 @@ public class FoodTypeDAOTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
-
     @Rule
     public InstantTaskExecutorRule mInstantTaskExecutorRule = new InstantTaskExecutorRule();
 
@@ -45,6 +45,7 @@ public class FoodTypeDAOTest {
         foodTypeDAO = database.foodTypeDAO();
     }
 
+    // This test is to ensure that insertion of a new row into the foodtype table is successful
     @Test
     public void insertFoodType(){
         foodTypeDAO.deleteAllFoodTypes(); // make sure that we have no entries in the table
@@ -67,6 +68,7 @@ public class FoodTypeDAOTest {
         Assert.assertEquals(1, foodTypeDAO.getAllFoodTypesList().get(0).getId());
     }
 
+    // Testing insertion of a new row and testing of a updates to aforementioned row
     @Test
     public void updateFoodType(){
         foodTypeDAO.deleteAllFoodTypes(); // make sure that we have no entries in the table
@@ -86,19 +88,22 @@ public class FoodTypeDAOTest {
                 .get(0).getDescription());  // assert that our updated description is correct
     }
 
+    // Testing insertion of a new row and testing of a deletion aforementioned row
     @Test
     public void deleteFoodType(){
         foodTypeDAO.deleteAllFoodTypes(); // make sure that we have no entries in the table
 
         FoodType testFoodType = new FoodType("type", "deleteFoodTypeTestDescrip");
         foodTypeDAO.insert(testFoodType);
-        Assert.assertEquals(1, foodTypeDAO.getAllFoodTypesList().size()); // assert that our table size is 1 rows big
+        Assert.assertEquals(1, foodTypeDAO.getAllFoodTypesList()
+                .size()); // assert that our table size is 1 rows in size
 
         FoodType foodTypeToDelete = foodTypeDAO.getAllFoodTypesList().get(0);
 
         foodTypeDAO.delete(foodTypeToDelete);
 
-        Assert.assertEquals(0, foodTypeDAO.getAllFoodTypesList().size()); // assert that our table is now 0 rows big
+        Assert.assertEquals(0, foodTypeDAO.getAllFoodTypesList()
+                .size()); // assert that our table is now 0 rows in size
     }
 
     @After
