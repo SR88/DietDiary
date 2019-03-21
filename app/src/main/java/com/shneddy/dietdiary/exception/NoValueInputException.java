@@ -4,6 +4,10 @@ package com.shneddy.dietdiary.exception;
  */
 public class NoValueInputException extends Exception {
 
+    /**
+     * Utilized to create popup messages when the user generates an exception
+     * @param message that will be passed to pop-up
+     */
     public NoValueInputException(String message){
         super(message);
     }

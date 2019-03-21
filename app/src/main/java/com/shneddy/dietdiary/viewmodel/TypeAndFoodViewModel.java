@@ -19,6 +19,10 @@ public class TypeAndFoodViewModel extends AndroidViewModel {
     private LiveData<List<TypeAndFood>> mAllTypeAndFoodList;
     private List<TypeAndFood> mListTypesAndFoods;
 
+    /**
+     * Prepares the viewmodel for useage
+     * @param application needed to perform the operations inside of this class
+     */
     public TypeAndFoodViewModel(@NonNull Application application) {
         super(application);
         typeAndFoodRepository = new TypeAndFoodRepository(application);
@@ -26,10 +30,19 @@ public class TypeAndFoodViewModel extends AndroidViewModel {
 
     }
 
+    /**
+     * returns a livedata list of a JOIN between foodtypes and foods
+     * @return livedata list of an inner join
+     */
     public LiveData<List<TypeAndFood>> getTypeAndFoods(){
         return mAllTypeAndFoodList;
     }
 
+    /**
+     * Return JOIN set results of Food and FoodType by an id fk and pk
+     * @param id used as a clause for the JOIN query
+     * @return list of foodandtype
+     */
     public List<TypeAndFood> getByIdList(int id){
         return mListTypesAndFoods = typeAndFoodRepository.getTypeAndFoodById(id);
     }

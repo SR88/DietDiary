@@ -29,12 +29,21 @@ public class DiaryEntry {
     private double portionSize;
     private int diemId;
 
+    /**
+     * Constructor used by programmer and Room to create, update, delete records in the sqlite db
+     * @param foodId foreign key
+     * @param portionSize double used to calculate total sugars eat
+     * @param diemId foreign key
+     */
     public DiaryEntry(int foodId, double portionSize, int diemId) {
         this.foodId = foodId;
         this.portionSize = portionSize;
         this.diemId = diemId;
     }
 
+    /*
+        GETTERS AND SETTERS BELOW
+     */
     public int getFoodId() {
         return foodId;
     }

@@ -14,6 +14,16 @@ public class EntryAndFoodData {
     private double calcSugars;
     private int entryId;
 
+    /**
+     * This is utilized to create an intermediate or joining object class that can be utilized by
+     * recycler list items
+     */
+    public EntryAndFoodData() {
+    }
+
+    /*
+        GETTERS AND SETTERS BELOW
+     */
     public int getEntryId() {
         return entryId;
     }

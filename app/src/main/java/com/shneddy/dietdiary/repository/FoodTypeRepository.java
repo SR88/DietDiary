@@ -19,6 +19,10 @@ public class FoodTypeRepository {
     private LiveData<List<FoodType>> allFoodTypes;
     private List<FoodType> allFoodTypesList;
 
+    /**
+     * Constructor for repository
+     * @param application context which is required to operate Room
+     */
     public FoodTypeRepository(Application application) {
         FoodDiaryDatabase database = FoodDiaryDatabase.getInstance(application);
         foodTypeDAO = database.foodTypeDAO();
@@ -26,28 +30,54 @@ public class FoodTypeRepository {
         allFoodTypesList = foodTypeDAO.getAllFoodTypesList();
     }
 
+    /**
+     * Inserts food type asynchronously into the db
+     * @param foodType to be inserted in db
+     */
     public void insert(FoodType foodType){
         new InsertFoodTypesAsyncTask(foodTypeDAO).execute(foodType);
     }
 
+    /**
+     * updates a food type record asynchronously in the db
+     * @param foodType to be updated in db
+     */
     public void update(FoodType foodType){
         new UpdateFoodTypesAsyncTask(foodTypeDAO).execute(foodType);
     }
 
+    /**
+     * deletes a food type record asynchronously in the db
+     * @param foodType to be deleted from db
+     */
     public void delete(FoodType foodType){
         new DeleteFoodTypesAsyncTask(foodTypeDAO).execute(foodType);
     }
 
+    /**
+     * deletes all food type records from the database asynchronously
+     */
     public void deleteAll(){
         new DeleteAllFoodTypesAsyncTask(foodTypeDAO).execute();
     }
 
+    /**
+     * returns list of foodtypes in livedata form
+     * @return livedata which is returned
+     */
     public LiveData<List<FoodType>> getAllFoodTypes(){
         return allFoodTypes;
     }
 
+    /**
+     * returns only list of food types
+     * @return list of foodtypes
+     */
     public List<FoodType> getAllFoodTypesList() {return allFoodTypesList; }
 
+    /**
+     * This static class performs the actual work of doing the insert asynchronously.
+     */
     private static class InsertFoodTypesAsyncTask extends AsyncTask<FoodType, Void, Void> {
 
         private FoodTypeDAO foodTypeDAO;
@@ -62,6 +92,10 @@ public class FoodTypeRepository {
             return null;
         }
     }
+
+    /**
+     * This static class performs the actual work of updating asynchronously
+     */
     private static class UpdateFoodTypesAsyncTask extends AsyncTask<FoodType, Void, Void>{
 
         private FoodTypeDAO foodTypeDAO;
@@ -76,6 +110,10 @@ public class FoodTypeRepository {
             return null;
         }
     }
+
+    /**
+     * This static class performs the actual work of deletion asynchronously
+     */
     private static class DeleteFoodTypesAsyncTask extends AsyncTask<FoodType, Void, Void>{
 
         private FoodTypeDAO foodTypeDAO;
@@ -90,6 +128,10 @@ public class FoodTypeRepository {
             return null;
         }
     }
+
+    /**
+     * This static class performs the actual work of deleting all asynchronously
+     */
     private static class DeleteAllFoodTypesAsyncTask extends AsyncTask<Void, Void, Void>{
 
         private FoodTypeDAO foodTypeDAO;

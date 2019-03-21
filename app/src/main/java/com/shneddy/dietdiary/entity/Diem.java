@@ -27,16 +27,23 @@ public class Diem {
     @Ignore
     Date diemDate;
 
+    /**
+     * Constructor used by engineer and Room to create records in db
+     * @param date
+     */
+    public Diem(@NonNull String date) {
+        this.date = date;
+    }
+
+    /*
+        GETTERS AND SETTERS BELOW
+     */
     public Date getDiemDate() {
         return diemDate;
     }
 
     public void setDiemDate(Date diemDate) {
         this.diemDate = diemDate;
-    }
-
-    public Diem(@NonNull String date) {
-        this.date = date;
     }
 
     public int getId() {

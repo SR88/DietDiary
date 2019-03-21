@@ -9,6 +9,9 @@ import androidx.room.Relation;
 /**
  * Created By Seth Sneddon Feb 2019
  */
+/**
+ *  THIS CLASS IS UTILIZED IN JOIN OPERATION OF FOOD AND FOOD TYPE
+ */
 public class FoodAndType {
     @Embedded
     public FoodType foodType;

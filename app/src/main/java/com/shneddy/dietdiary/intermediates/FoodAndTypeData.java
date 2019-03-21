@@ -12,6 +12,16 @@ public class FoodAndTypeData {
     public int foodTypeId;
     public String foodType;
 
+    /**
+     * This is utilized to create an intermediate or joining object class that can be utilized by
+     * recycler list items
+     */
+    public FoodAndTypeData() {
+    }
+
+    /*
+        GETTERS AND SETTERS BELOW
+     */
     public String getFoodType() {
         return foodType;
     }

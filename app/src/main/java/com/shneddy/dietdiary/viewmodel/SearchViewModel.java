@@ -22,6 +22,10 @@ public class SearchViewModel extends AndroidViewModel {
     public final LiveData<List<Food>> results;
     private FoodRepository repository;
 
+    /**
+     * Sets up view model and gets singleton of database
+     * @param application
+     */
     public SearchViewModel(Application application) {
         super(application);
         repository = new FoodRepository(application);
@@ -30,44 +34,37 @@ public class SearchViewModel extends AndroidViewModel {
         });
     }
 
+    /**
+     * Searches database based on keywords in food names
+     * @param searchTerm key word to search for
+     * @return livedata list of foods matching the searchterm
+     */
     public LiveData<List<Food>> search(String searchTerm){
         if(searchTerm != null) query.setValue(searchTerm);
         return results;
     }
 
+    /*
+        NOT UTILIZED
+     */
     public String getSearchTermString(){
         return query.getValue();
     }
 
+    /**
+     * Sets repository up for this class
+     * @param repository to be utilized in the class
+     */
     public void setRepository(FoodRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * Sets up application variable in this class
+     * @param application
+     */
     public void setApplication(Application application){
         this.repository = new FoodRepository(application);
     }
-
-
-
-    //    SearchViewModel(Application application){
-//        this.repository = new FoodRepository(application);
-//        results = Transformations.switchMap(query, search -> {
-//            return repository.search(search);
-//        });
-//    }
-//
-//    public SearchViewModel() {
-//        results = Transformations.switchMap(query, search -> {
-//            return repository.search(search);
-//        });
-//    }
-//
-//    private void searchFoods(String searchString){
-//        repository.search(searchString);
-//    }
-//
-//    public void setQuery(String query){
-//        this.query.setValue(query);
-//    }
 
 }

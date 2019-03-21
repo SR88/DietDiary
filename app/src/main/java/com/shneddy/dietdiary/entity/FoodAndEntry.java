@@ -7,6 +7,9 @@ import androidx.room.Relation;
 /**
  * Created By Seth Sneddon Feb 2019
  */
+/**
+ *  THIS CLASS IS UTILIZED IN JOIN OPERATION OF FOOD AND DIARY ENTRY
+ */
 public class FoodAndEntry {
     @Embedded
     public Food food;

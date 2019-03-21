@@ -21,11 +21,21 @@ public class FoodType {
     private String type;
     private String description;
 
+    /**
+     * This constructor is used by the engineer and Room to create, update, and delete records
+     * in the sqlite database.
+     *
+     * @param type string value of what the category actually is
+     * @param description for the user to put in clarification if they wish
+     */
     public FoodType(String type, String description) {
         this.type = type;
         this.description = description;
     }
 
+    /*
+        GETTERS AND SETTERS BELOW
+    */
     public void setId(int id) {
         this.id = id;
     }

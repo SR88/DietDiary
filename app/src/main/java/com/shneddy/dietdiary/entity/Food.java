@@ -37,12 +37,23 @@ public class Food {
     @NonNull
     private int foodTypeId;
 
+    /**
+     * This constructor is used by the engineer and Room to create, update, and delete records
+     * in the sqlite database.
+     *
+     * @param name of the food inserted
+     * @param gramsSugar in the food being inserted
+     * @param foodTypeId foreign key of food type this food falls under
+     */
     public Food(String name, @NonNull double gramsSugar, @NonNull int foodTypeId) {
         this.name = name;
         this.gramsSugar = gramsSugar;
         this.foodTypeId = foodTypeId;
     }
 
+    /*
+        GETTERS AND SETTERS BELOW
+    */
     public void setId(int id) {
         this.id = id;
     }
