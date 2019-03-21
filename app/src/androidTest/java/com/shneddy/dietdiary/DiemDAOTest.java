@@ -24,7 +24,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
-
+/**
+ * Created By Seth Sneddon Feb 2019
+ */
 @SuppressWarnings({"unchecked"})
 @RunWith(JUnit4.class)
 public class DiemDAOTest {

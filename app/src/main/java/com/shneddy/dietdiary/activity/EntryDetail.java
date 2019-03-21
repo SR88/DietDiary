@@ -30,7 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.shneddy.dietdiary.activity.AllEntries.ENTRY_ID;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class EntryDetail extends AppCompatActivity {
 
     private OperationsViewModel opsVM;
@@ -40,6 +42,10 @@ public class EntryDetail extends AppCompatActivity {
     TextView totalSugars, totalFoods;
     final ConsumptionAdapter adapter = new ConsumptionAdapter();
 
+    /**
+     * When the screen/activity starts, this method is automatically executed.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +61,12 @@ public class EntryDetail extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview_allconsumptions);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(false);
-
-
         recyclerView.setAdapter(adapter);
 
+
+        /*
+            Sets up data in list view according to data in database for DiaryEntry table
+         */
         opsVM = ViewModelProviders.of(this).get(OperationsViewModel.class);
         opsVM.getAllEntriesByDiemId(diemId).observe(this, new Observer<List<DiaryEntry>>() {
             @Override
@@ -87,7 +95,7 @@ public class EntryDetail extends AppCompatActivity {
         });
 
 
-        // Floating action button to add new food
+        // Floating action button to add new consumption
         FloatingActionButton fab = findViewById(R.id.fab_add_consumption);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +106,10 @@ public class EntryDetail extends AppCompatActivity {
             }
         });
 
-
+        /*
+            The following implemented methods enable all of the UI interactions to swipe to delete
+            or edit an item
+         */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT) {
             @Override
@@ -108,7 +119,7 @@ public class EntryDetail extends AppCompatActivity {
                 return false;
             }
 
-
+            // Swipe to edit or delete depending on the direction
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 // Delete food
@@ -122,7 +133,7 @@ public class EntryDetail extends AppCompatActivity {
                 }
             }
 
-
+            // Sets up the draw over on each item
             @Override
             public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                         RecyclerView.ViewHolder viewHolder, float dX, float dY,
@@ -142,6 +153,10 @@ public class EntryDetail extends AppCompatActivity {
                 getDefaultUIUtil().clearView(foregroundView);
             }
 
+            /*
+                Sets the colors to change in the background of the item that is being swiped
+                based on direction.
+            */
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                     @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY,

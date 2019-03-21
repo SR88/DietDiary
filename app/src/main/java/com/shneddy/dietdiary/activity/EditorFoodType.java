@@ -11,7 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.shneddy.dietdiary.R;
 import com.shneddy.dietdiary.exception.NoValueInputException;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class EditorFoodType extends AppCompatActivity {
     public static final String EXTRA_FOODTYPE =
             "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE";
@@ -23,6 +25,10 @@ public class EditorFoodType extends AppCompatActivity {
     private EditText editTextDescription;
     private int previousId;
 
+    /**
+     * When the screen/activity starts, this method is automatically executed.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,12 @@ public class EditorFoodType extends AppCompatActivity {
         }
     }
 
+    /**
+     * Setups of the menu icon at the top right of the screen to save the item which is being
+     * edited or created
+     * @param menu which menu on the screen
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -50,6 +62,12 @@ public class EditorFoodType extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This directs what the application to do based on which item in the menu at the top right
+     * of the screen is selected.  At this moment there is only the save option
+     * @param item in menu selected
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -65,14 +83,21 @@ public class EditorFoodType extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handles validation of inputs by the user.  It passes the data back to the previous activity
+     * which called this activity to either insert or update the appropriate record.
+     *
+     * THROWS EXCEPTION FOR REQUIREMENT OF CAPSTONE
+     */
     private void saveType() throws NoValueInputException {
         String name = editTextName.getText().toString();
         String description = editTextDescription.getText().toString();
 
+        // create toast message if there is an error
         if (name.trim().isEmpty()) {
             throw new NoValueInputException("Please make sure to enter in a name for your food type");
         } else {
-
+            // return data to appropriate activity
             Intent data = new Intent();
             data.putExtra(EXTRA_FOODTYPE, name);
             data.putExtra(EXTRA_FOODTYPE_DESCRIPTION, description);

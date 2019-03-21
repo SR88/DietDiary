@@ -36,7 +36,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class AllEntries extends AppCompatActivity {
 
     public static final String ENTRY_DATE = "package com.shneddy.dietdiary.activity.DATE";
@@ -49,6 +51,10 @@ public class AllEntries extends AppCompatActivity {
     private DiemAndMoreViewModel diemVM;
     final DiemAdapter adapter = new DiemAdapter();
 
+    /**
+     * When the screen/activity starts, this method is automatically executed.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +72,12 @@ public class AllEntries extends AppCompatActivity {
 
         opsVM = ViewModelProviders.of(this).get(OperationsViewModel.class);
 
-        if (opsVM.getAllFoodTypesList().size() <= 1){
-            androidx.appcompat.app.AlertDialog.Builder alertBuilder = new androidx.appcompat.app.AlertDialog.Builder(AllEntries.this);
-            alertBuilder.setMessage("Please access and create a Food before attempting to create a Diet Diary entry.")
+        // Create exception message for user to create foods before attempting to create diary entries
+        if (opsVM.getAllFoodTypesList().size() < 1){
+            androidx.appcompat.app.AlertDialog.Builder alertBuilder = new androidx.appcompat
+                    .app.AlertDialog.Builder(AllEntries.this);
+            alertBuilder.setMessage("Please access and create a Food before attempting to" +
+                    " create a Diet Diary entry.")
                     .setCancelable(false)
                     .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                         @Override
@@ -81,10 +90,6 @@ public class AllEntries extends AppCompatActivity {
             alertDialog.setTitle("No Foods Exist");
             alertDialog.show();
         }
-
-
-
-
 
         opsVM.getAllDiems().observe(this, new Observer<List<Diem>>() {
             @Override
@@ -104,7 +109,10 @@ public class AllEntries extends AppCompatActivity {
         });
 
 
-
+        /*
+           The following implemented methods enable all of the UI interactions to swipe to delete
+           or edit an item
+         */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -114,6 +122,7 @@ public class AllEntries extends AppCompatActivity {
                 return false;
             }
 
+            // Swipe to edit or delete depending on the direction
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT) { // delete
@@ -125,9 +134,12 @@ public class AllEntries extends AppCompatActivity {
                     if(checkList.get(0).relDiaryList.size() > 0){
                         // todo create popup and cascade delete if true
                         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AllEntries.this);
-                        alertBuilder.setMessage("There are Entries attached to this Day!\r\rIf you choose to delete this Day, the Entries associated with will also be deleted!")
+                        alertBuilder.setMessage("There are Entries attached to this Day!" +
+                                "\r\rIf you choose to delete this Day, the Entries associated" +
+                                "with will also be deleted!")
                                 .setCancelable(true)
-                                .setPositiveButton("Delete Entry", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Delete Entry", new DialogInterface
+                                        .OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
@@ -150,7 +162,7 @@ public class AllEntries extends AppCompatActivity {
                 if (direction == ItemTouchHelper.RIGHT) { // edit
                     Diem editedDiem = adapter
                             .getDiemAt(viewHolder.getAdapterPosition());
-                    Intent intent = new Intent(AllEntries.this, EntryDetail.class); // todo change where this goes
+                    Intent intent = new Intent(AllEntries.this, EntryDetail.class);
                     intent.putExtra(ENTRY_DATE, editedDiem.getDate());
                     intent.putExtra(ENTRY_ID, editedDiem.getId());
                     startActivityForResult(intent, EDIT_FOOD_REQUEST);
@@ -158,7 +170,7 @@ public class AllEntries extends AppCompatActivity {
 
             }
 
-
+            // Sets up the draw over on each item
             @Override
             public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                         RecyclerView.ViewHolder viewHolder, float dX, float dY,
@@ -178,6 +190,10 @@ public class AllEntries extends AppCompatActivity {
                 getDefaultUIUtil().clearView(foregroundView);
             }
 
+            /*
+                Sets the colors to change in the background of the item that is being swiped
+                based on direction.
+            */
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                     @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY,
@@ -188,10 +204,14 @@ public class AllEntries extends AppCompatActivity {
                 View backgroundView = ((DiemAdapter.DiemHolder) viewHolder)
                         .viewBackground;
 
-                TextView textViewDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_delete_consumption);
-                TextView textViewEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_edit_consumption);
-                ImageView iconDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_delete_entry);
-                ImageView iconEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_edit_consumption);
+                TextView textViewDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder
+                        .getAdapterPosition()).itemView.findViewById(R.id.textview_delete_consumption);
+                TextView textViewEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder
+                        .getAdapterPosition()).itemView.findViewById(R.id.textview_edit_consumption);
+                ImageView iconDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder
+                        .getAdapterPosition()).itemView.findViewById(R.id.icon_delete_entry);
+                ImageView iconEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder
+                        .getAdapterPosition()).itemView.findViewById(R.id.icon_edit_consumption);
 
                 if (dX > 0) {
                     backgroundView.setBackgroundColor(Color.parseColor("#f7af42"));
@@ -215,6 +235,10 @@ public class AllEntries extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
+    /**
+     * This deletes an entry date in the database
+     * @param id is the id that should be used to execute the deletion query
+     */
     private void deleteEntry(int id) {
         Diem diemToDelete = new Diem("x");
         diemToDelete.setId(id);
@@ -223,7 +247,11 @@ public class AllEntries extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
-
+    /**
+     * Used to help create the dialog picker for the calendar
+     * @param id
+     * @return
+     */
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == DATE_DILOG){
@@ -232,6 +260,9 @@ public class AllEntries extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Helps set the current date when the calendar is created on the screen
+     */
     private void setCalendar() {
         final Calendar cal = Calendar.getInstance();
         mYear = cal.get(Calendar.YEAR);
@@ -239,7 +270,12 @@ public class AllEntries extends AppCompatActivity {
         mDay = cal.get(Calendar.DAY_OF_MONTH);
     }
 
-    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+    /**
+     * This creates a listener for the calendar that appears on the screen. It tracks the date
+     * the users selects and uses it to create an entry in the database.
+     */
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog
+            .OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             mMonth = month + 1;
@@ -267,10 +303,16 @@ public class AllEntries extends AppCompatActivity {
         }
     };
 
+    /**
+     * Creates an error message if the user tries to create a date that already exists in the
+     * database.
+     * @param i
+     */
     private void createErrorDialog(int i) {
         if (i == 1){
             AlertDialog.Builder builder = new AlertDialog.Builder(AllEntries.this);
-            builder.setMessage("This date already exists in your entries list.\n\nPlease access and use it to add more diet food entries.")
+            builder.setMessage("This date already exists in your entries list." +
+                    "\n\nPlease access and use it to add more diet food entries.")
                     .setCancelable(false)
                     .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                         @Override
@@ -284,6 +326,9 @@ public class AllEntries extends AppCompatActivity {
         }
     }
 
+    /**
+     * Resets all the sliders on all the items in the list
+     */
     @Override
     protected void onResume() {
         super.onResume();

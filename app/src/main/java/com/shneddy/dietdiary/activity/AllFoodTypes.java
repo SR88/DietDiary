@@ -30,7 +30,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class AllFoodTypes extends AppCompatActivity {
 
     public static final String FOODTYPE_ID = "package com.shneddy.dietdiary.activity.EXTRA_FOODTYPE_ID";
@@ -41,7 +43,10 @@ public class AllFoodTypes extends AppCompatActivity {
     private OperationsViewModel operationsViewModel;
     private TypeAndFoodViewModel joinVM;
 
-
+    /**
+     * When the screen/activity starts, this method is automatically executed.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,9 @@ public class AllFoodTypes extends AppCompatActivity {
 
         setTitle("Food Types/Categories");
 
+        /*
+            Start activity to create new food type.
+         */
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +76,9 @@ public class AllFoodTypes extends AppCompatActivity {
 
         joinVM = ViewModelProviders.of(this).get(TypeAndFoodViewModel.class);
 
+        /*
+            Setup list on screen with data from db.
+         */
         operationsViewModel = ViewModelProviders.of(this).get(OperationsViewModel.class);
         operationsViewModel.getAllFoodTypes().observe(this, new Observer<List<FoodType>>() {
             @Override
@@ -76,6 +87,12 @@ public class AllFoodTypes extends AppCompatActivity {
             }
         });
 
+
+
+        /*
+            The following implemented methods enable all of the UI interactions to swipe to delete
+            or edit an item
+         */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -85,29 +102,38 @@ public class AllFoodTypes extends AppCompatActivity {
                 return false;
             }
 
+            // Swipe to edit or delete depending on the direction
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT) {
 
-                    FoodType tempFood = foodTypeAdapter.getFoodTypeAt(viewHolder.getAdapterPosition());
+                    FoodType tempFood = foodTypeAdapter.getFoodTypeAt(viewHolder
+                            .getAdapterPosition());
                     List<TypeAndFood> checkList = joinVM.getByIdList(tempFood.getId());
 
                     if(checkList.get(0).relFoodList.size() > 0){
                         // todo create popup and cascade delete if true
-                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AllFoodTypes.this);
-                        alertBuilder.setMessage("There are Foods attached to this Food Type. If you choose to delete this Food Type, the Foods associated with this type and their entries in your diary will also be deleted!")
+                        AlertDialog.Builder alertBuilder = new AlertDialog
+                                .Builder(AllFoodTypes.this);
+                        alertBuilder.setMessage("There are Foods attached to this Food Type. " +
+                                "If you choose to delete this Food Type, the Foods associated " +
+                                "with this type and their entries in your diary will also be" +
+                                " deleted!")
                                 .setCancelable(true)
-                                .setPositiveButton("Delete Food Type", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Delete Food Type",
+                                        new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                         deleteFoodType(checkList.get(0).foodType.getId());
                                     }
                                 })
-                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                .setNegativeButton("Cancel", new DialogInterface
+                                        .OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        foodTypeAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                        foodTypeAdapter.notifyItemChanged(viewHolder
+                                                .getAdapterPosition());
                                     }
                                 });
                         AlertDialog alertDialog = alertBuilder.create();
@@ -131,7 +157,7 @@ public class AllFoodTypes extends AppCompatActivity {
 
             }
 
-
+            // Sets up the draw over on each item
             @Override
             public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                         RecyclerView.ViewHolder viewHolder, float dX, float dY,
@@ -151,6 +177,10 @@ public class AllFoodTypes extends AppCompatActivity {
                 getDefaultUIUtil().clearView(foregroundView);
             }
 
+            /*
+                Sets the colors to change in the background of the item that is being swiped
+                based on direction.
+             */
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                     @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY,
@@ -161,10 +191,14 @@ public class AllFoodTypes extends AppCompatActivity {
                 View backgroundView = ((FoodTypeAdapter.FoodTypeHolder) viewHolder)
                         .viewBackground;
 
-                TextView textViewDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_delete_consumption);
-                TextView textViewEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.textview_edit_consumption);
-                ImageView iconDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_delete_consumption);
-                ImageView iconEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder.getAdapterPosition()).itemView.findViewById(R.id.icon_edit_consumption);
+                TextView textViewDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder
+                        .getAdapterPosition()).itemView.findViewById(R.id.textview_delete_consumption);
+                TextView textViewEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder
+                        .getAdapterPosition()).itemView.findViewById(R.id.textview_edit_consumption);
+                ImageView iconDelete = recyclerView.findViewHolderForAdapterPosition(viewHolder
+                        .getAdapterPosition()).itemView.findViewById(R.id.icon_delete_consumption);
+                ImageView iconEdit = recyclerView.findViewHolderForAdapterPosition(viewHolder
+                        .getAdapterPosition()).itemView.findViewById(R.id.icon_edit_consumption);
 
                 if (dX > 0) {
                     backgroundView.setBackgroundColor(Color.parseColor("#f7af42"));
@@ -188,6 +222,10 @@ public class AllFoodTypes extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
+    /**
+     * Deletes a foodtype in the database with the id of a particular integer value
+     * @param id integer value of the pk to use to complete the transaction
+     */
     private void deleteFoodType(int id) {
         FoodType deleteFoodType = new FoodType("dummy data", "dummy data");
         deleteFoodType.setId(id); // the only thing that room cares about when deleting
@@ -196,10 +234,18 @@ public class AllFoodTypes extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * This method inserts or updates a food type based on the parameters given from the activity
+     * results
+     * @param requestCode whether it was an insert or edit command
+     * @param resultCode if the activity was successful
+     * @param data data associated with the edited or created food
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // if it was a request to create a new food
         if (requestCode == ADD_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
             String foodTypeName = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE);
             String foodTypeDescription = data.getStringExtra(EditorFoodType.EXTRA_FOODTYPE_DESCRIPTION);
@@ -209,7 +255,7 @@ public class AllFoodTypes extends AppCompatActivity {
 
             Toast.makeText(this, "Food Type saved.", Toast.LENGTH_SHORT).show();
         }
-
+        // if it was a request to edit a food
         if (requestCode == EDIT_FOODTYPE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(EditorFoodType.EXTRA_FOODTYPE_ID, -1);
 

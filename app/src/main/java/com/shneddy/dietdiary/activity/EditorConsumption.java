@@ -27,7 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.shneddy.dietdiary.activity.EntryDetail.DIEM_ID;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class EditorConsumption extends AppCompatActivity {
 
     private int diemId;
@@ -37,6 +39,10 @@ public class EditorConsumption extends AppCompatActivity {
     private EditText portionSize;
     private Intent intent;
 
+    /*
+        This is an adapter for the spinner in the activity.  It allows for the appropriate view
+        to be displayed.
+     */
     BaseAdapter baseAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
@@ -78,6 +84,10 @@ public class EditorConsumption extends AppCompatActivity {
         }
     };
 
+    /**
+     * When the screen/activity starts, this method is automatically executed.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +117,12 @@ public class EditorConsumption extends AppCompatActivity {
         });
     }
 
+    /**
+     * Setups of the menu icon at the top right of the screen to save the item which is being
+     * edited or created
+     * @param menu which menu on the screen
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -114,6 +130,12 @@ public class EditorConsumption extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This directs what the application to do based on which item in the menu at the top right
+     * of the screen is selected.  At this moment there is only the save option
+     * @param item in menu selected
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -125,6 +147,10 @@ public class EditorConsumption extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handles validation of inputs by the user.  If there are no issues with the user's input
+     * it inserts the record.
+     */
     private void saveConsumption() {
         String error = "";
         if(portionSize.getText().toString().length() < 1){
@@ -134,7 +160,8 @@ public class EditorConsumption extends AppCompatActivity {
         try{
             Double.parseDouble(portionSize.getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this,"Please make sure you enter in a proper decimal number", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please make sure you enter in a proper decimal number",
+                    Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -153,6 +180,10 @@ public class EditorConsumption extends AppCompatActivity {
         }
     }
 
+    /**
+     * Gets the value of the spinner's selection.
+     * @return food id pkey
+     */
     private int getSpinnerVal(){
         Food food = (Food) spinner.getSelectedItem();
         return food.getId();

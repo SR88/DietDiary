@@ -9,7 +9,9 @@ import com.shneddy.dietdiary.entity.FoodAndEntry;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
-
+/**
+ * Created By Seth Sneddon Feb 2019
+ */
 public class FoodAndEntryRepository {
 
     FoodAndEntryDAO dao;

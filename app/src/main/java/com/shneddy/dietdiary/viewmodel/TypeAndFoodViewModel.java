@@ -10,7 +10,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
+/**
+ * Created By Seth Sneddon Feb 2019
+ */
 public class TypeAndFoodViewModel extends AndroidViewModel {
 
     private TypeAndFoodRepository typeAndFoodRepository;

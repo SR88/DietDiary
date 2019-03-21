@@ -13,7 +13,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
-
+/**
+ * Created By Seth Sneddon Feb 2019
+ */
 public class SearchViewModel extends AndroidViewModel {
 
     private final MutableLiveData<String> query = new MutableLiveData<>();

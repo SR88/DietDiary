@@ -1,9 +1,19 @@
 package com.shneddy.dietdiary.entity;
 
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
-
-@Entity(tableName = "food_type")
+/**
+ * Created By Seth Sneddon Feb 2019
+ */
+/**
+ *  OBJECT RELATIONAL MAPPING ENTITY OF FOOD TYPE
+ *
+ *  THIS CLASS CONTAINS GETTERS AND SETTERS
+ *
+ *  THIS CLASS EXHIBITS DATA ENCAPSULATIONS/HIDING
+ */
+@Entity(tableName = "food_type", indices = {@Index("id")})
 public class FoodType {
 
     @PrimaryKey(autoGenerate = true)

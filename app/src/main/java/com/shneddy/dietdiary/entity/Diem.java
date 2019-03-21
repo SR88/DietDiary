@@ -7,11 +7,16 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-/*
-    Date Entity
-    Diem is latin for date
+/**
+ * Created By Seth Sneddon Feb 2019
  */
-
+/**
+ *  OBJECT RELATIONAL MAPPING ENTITY OF DIEM
+ *
+ *  THIS CLASS CONTAINS GETTERS AND SETTERS
+ *
+ *  THIS CLASS EXHIBITS DATA ENCAPSULATIONS/HIDING
+ */
 @Entity
 public class Diem {
     @PrimaryKey(autoGenerate = true)

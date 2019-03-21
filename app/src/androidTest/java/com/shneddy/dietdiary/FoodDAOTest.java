@@ -17,8 +17,9 @@ import org.mockito.junit.MockitoRule;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
-
-
+/**
+ * Created By Seth Sneddon Feb 2019
+ */
 /**
  *  This test class builds on the FoodTypeDAOTest class.  This class further fulfills our QA needs.
  */

@@ -17,8 +17,10 @@ import com.shneddy.dietdiary.entity.FoodType;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-
-@Database(entities = {Food.class, FoodType.class, DiaryEntry.class, Diem.class}, version = 1)
+/**
+ * Created By Seth Sneddon Feb 2019
+ */
+@Database(entities = {Food.class, FoodType.class, DiaryEntry.class, Diem.class}, version = 1, exportSchema = false)
 public abstract class FoodDiaryDatabase extends RoomDatabase {
 
     private static FoodDiaryDatabase instance;
@@ -30,6 +32,11 @@ public abstract class FoodDiaryDatabase extends RoomDatabase {
     public abstract FoodAndEntryDAO foodAndEntryDAO();
     public abstract DiemDAO diemDAO();
 
+    /**
+     * setups database for the application
+     * @param context required to setup the database
+     * @return singleton of the database
+     */
     public static synchronized FoodDiaryDatabase getInstance(Context context){
         if (instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),

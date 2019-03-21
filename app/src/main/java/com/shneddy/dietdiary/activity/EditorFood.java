@@ -23,7 +23,9 @@ import com.shneddy.dietdiary.R;
 import com.shneddy.dietdiary.entity.FoodType;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class EditorFood extends AppCompatActivity {
 
     public static final String EXTRA_FOOD_FOODTYPE_ID =
@@ -83,6 +85,10 @@ public class EditorFood extends AppCompatActivity {
         }
     };
 
+    /**
+     * When the screen/activity starts, this method is automatically executed.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,9 +117,10 @@ public class EditorFood extends AppCompatActivity {
             }
         });
 
-        // Check to see if this is an edit request
-
-        // Create new food
+        /*
+            Check to see if this is an edit request, if true, sets the values for the food that
+            is being edited
+        */
         if(intent.hasExtra(AllFoods.FOOD_ID)){
             setTitle("Edit your Food");
             previousId = intent.getIntExtra(AllFoods.FOOD_ID, -1);
@@ -132,6 +139,12 @@ public class EditorFood extends AppCompatActivity {
         }
     }
 
+    /**
+     * Setups of the menu icon at the top right of the screen to save the item which is being
+     * edited or created
+     * @param menu which menu on the screen
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -139,6 +152,12 @@ public class EditorFood extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This directs what the application to do based on which item in the menu at the top right
+     * of the screen is selected.  At this moment there is only the save option
+     * @param item in menu selected
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -150,6 +169,10 @@ public class EditorFood extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handles validation of inputs by the user.  It passes the data back to the previous activity
+     * which called this activity to either insert or update the appropriate record.
+     */
     private void saveFood() {
         String name = etName.getText().toString();
         Double sugars;
@@ -172,7 +195,7 @@ public class EditorFood extends AppCompatActivity {
         if (error.length() > 1){
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
             return;
-        } else {
+        } else { // return data to appropriate activity with valid information
             Intent dataReturn = new Intent();
             if (previousId > 0){
                 dataReturn.putExtra(EXTRA_FOOD_ID, previousId);
@@ -185,6 +208,10 @@ public class EditorFood extends AppCompatActivity {
         }
     }
 
+    /**
+     * Gets the value of the spinner's selection.
+     * @return food id pkey
+     */
     private int getSpinnerVal() {
         FoodType foodtype = (FoodType) spinner.getSelectedItem();
         return foodtype.getId();

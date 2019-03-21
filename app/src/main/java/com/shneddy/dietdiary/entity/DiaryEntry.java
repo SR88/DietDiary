@@ -2,12 +2,25 @@ package com.shneddy.dietdiary.entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+/**
+ * Created By Seth Sneddon Feb 2019
+ */
+
+/**
+ *  OBJECT RELATIONAL MAPPING ENTITY OF DIARY ENTRY
+ *
+ *  THIS CLASS CONTAINS GETTERS AND SETTERS
+ *
+ *  THIS CLASS EXHIBITS DATA ENCAPSULATIONS/HIDING
+ */
 @Entity(foreignKeys = {@ForeignKey(entity = Food.class, parentColumns = "id", childColumns = "foodId", onDelete = CASCADE),
-        @ForeignKey(entity = Diem.class, parentColumns = "id", childColumns = "diemId", onDelete = CASCADE)})
+        @ForeignKey(entity = Diem.class, parentColumns = "id", childColumns = "diemId", onDelete = CASCADE)},
+        indices = {@Index("foodId"), @Index("diemId")})
 public class DiaryEntry {
 
     @PrimaryKey(autoGenerate = true)

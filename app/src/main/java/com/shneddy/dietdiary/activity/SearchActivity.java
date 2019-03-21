@@ -33,7 +33,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class SearchActivity extends AppCompatActivity {
 
 
@@ -52,6 +54,10 @@ public class SearchActivity extends AppCompatActivity {
     private EditText editText;
     private RecyclerView rView;
 
+    /**
+     * When the screen/activity starts, this method is automatically executed.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,20 +75,30 @@ public class SearchActivity extends AppCompatActivity {
         rView.setAdapter(adapter);
 
         opsVM = ViewModelProviders.of(this).get(OperationsViewModel.class);
+
+        /*
+            this listens to the search button and executes a query to the db based off of what is in
+            the search field
+         */
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editText.getText().toString().trim().length() > 0) {
 
-                    List<Food> list = opsVM.searchForFoodsByString("%" + editText.getText().toString().toLowerCase() + "%");
+                    List<Food> list = opsVM.searchForFoodsByString("%" + editText
+                            .getText().toString().toLowerCase() + "%");
 
                     adapter.setFoods(list);
 
+                    // creates a pop up if there is no match for the search
                     if(list.size() < 1){
-                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(SearchActivity.this);
-                        alertBuilder.setMessage("There is no food like this in your Food List.\n\nYou can always create it though!")
+                        AlertDialog.Builder alertBuilder = new AlertDialog
+                                .Builder(SearchActivity.this);
+                        alertBuilder.setMessage("There is no food like this in your Food List." +
+                                "\n\nYou can always create it though!")
                                 .setCancelable(false)
-                                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Okay",
+                                        new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();

@@ -1,5 +1,7 @@
 package com.shneddy.dietdiary.intermediates;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class EntryAndFoodData {
 
     private int id;

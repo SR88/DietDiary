@@ -19,7 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
 public class MainMenu extends AppCompatActivity {
 
 
@@ -28,6 +30,10 @@ public class MainMenu extends AppCompatActivity {
     private OperationsViewModel opsVM;
     private String dateQuery;
 
+    /**
+     * When the screen/activity starts, this method is automatically executed.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,7 @@ public class MainMenu extends AppCompatActivity {
         opsVM = ViewModelProviders.of(this).get(OperationsViewModel.class);
 
 
-
+        // go to all foods list
         foods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +57,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        // go to all food types list
         foodTypes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +66,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        // go to all food diary dates
         logs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +75,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        // go to search activity
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +89,9 @@ public class MainMenu extends AppCompatActivity {
 
     }
 
+    /**
+     * General method that setups the GUI on this screen
+     */
     private void setupGUI() {
         this.logs = findViewById(R.id.button_diary);
         this.foods = findViewById(R.id.button_foods);
@@ -91,6 +103,10 @@ public class MainMenu extends AppCompatActivity {
         subtext.setText("Grams sugar consumed\ntoday");
     }
 
+    /**
+     * Calculates sugars for today's date if applicable record exists in the database.
+     * If record does not exist, it displays 0 foods tracked
+     */
     private void calculateSugarsToday(){
         List<EntryAndFoodData> intermediateList = new ArrayList<>();
         List<Diem> list = opsVM.getDiemByDate(dateQuery);
@@ -123,6 +139,9 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
+    /**
+     * Checks to make sure that today's sugar that is displayed on the main menu is up to date
+     */
     @Override
     protected void onResume() {
         super.onResume();

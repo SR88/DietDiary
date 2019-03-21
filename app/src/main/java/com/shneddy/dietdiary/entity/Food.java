@@ -9,12 +9,23 @@ import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+/**
+ * Created By Seth Sneddon Mar 2019
+ */
+/**
+ *  OBJECT RELATIONAL MAPPING ENTITY OF FOOD
+ *
+ *  THIS CLASS CONTAINS GETTERS AND SETTERS
+ *
+ *  THIS CLASS EXHIBITS DATA ENCAPSULATIONS/HIDING
+ */
 @Entity(
         foreignKeys =
                 @ForeignKey(entity = FoodType.class,
                         parentColumns = "id",
                         childColumns = "foodTypeId",
-                        onDelete = CASCADE))
+                        onDelete = CASCADE),
+        indices = {@Index("foodTypeId"), @Index("id")})
 public class Food {
 
     @PrimaryKey(autoGenerate = true)
