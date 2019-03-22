@@ -71,13 +71,15 @@ public class AllFoods extends AppCompatActivity {
         adapter = new TypeAndFoodJoinAdapter();
         recyclerView.setAdapter(adapter);
 
-        operationsVm = ViewModelProviders.of(this).get(OperationsViewModel.class); // this viewmodel is specifically for operations
+        operationsVm = ViewModelProviders.of(this).get(OperationsViewModel.class); // this
+        // viewmodel is specifically for operations
 
         /**
          * Below is an example of POLYMORPHISM!!!
          */
         BaseMessenger messenger = new FoodMessenger();
-        if (operationsVm.getAllFoodTypesList().size() < 1){ // Check to see if we have any data to work with in the database, if not throw error message
+        if (operationsVm.getAllFoodTypesList().size() < 1){ // Check to see if we have any data to
+            // work with in the database, if not throw error message
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AllFoods.this);
             alertBuilder.setMessage("Please access and create a Food Type before creating a Food.")
                     .setCancelable(false)

@@ -93,7 +93,7 @@ public class EditorFoodType extends AppCompatActivity {
         String name = editTextName.getText().toString();
         String description = editTextDescription.getText().toString();
 
-        // create toast message if there is an error
+        // create toast message if there is a user input validation error
         if (name.trim().isEmpty()) {
             throw new NoValueInputException("Please make sure to enter in a name for your food type");
         } else {
